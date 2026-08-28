@@ -1,0 +1,179 @@
+[
+ {
+  "id": "sd_bay",
+  "name": "San Diego Bay",
+  "band": "inshore",
+  "lat": 32.695,
+  "lon": -117.208,
+  "depth_ft": "5-60",
+  "distance_nm": 0,
+  "waters": "US",
+  "buoys": [
+   "SDBC1"
+  ],
+  "tide_station": "9410170",
+  "structure": "eelgrass flats, rip-rap, bridge pilings, turning basins",
+  "permit": "CA license",
+  "sst_lat": 32.665,
+  "sst_lon": -117.245,
+  "depth_mid_ft": 25
+ },
+ {
+  "id": "mission_bay",
+  "name": "Mission Bay",
+  "band": "inshore",
+  "lat": 32.771,
+  "lon": -117.24,
+  "depth_ft": "4-40",
+  "distance_nm": 0,
+  "waters": "US",
+  "buoys": [
+   "SDBC1"
+  ],
+  "tide_station": "9410170",
+  "structure": "channels, jetties, back-bay flats",
+  "permit": "CA license",
+  "sst_lat": 32.765,
+  "sst_lon": -117.268,
+  "depth_mid_ft": 20
+ },
+ {
+  "id": "surf_zone",
+  "name": "Del Mar to Imperial Beach Surf",
+  "band": "inshore",
+  "lat": 32.96,
+  "lon": -117.27,
+  "depth_ft": "2-25",
+  "distance_nm": 0,
+  "waters": "US",
+  "buoys": [
+   "46225",
+   "46258"
+  ],
+  "tide_station": "9410230",
+  "structure": "sand troughs, river mouths, shallow reef edges",
+  "permit": "CA license",
+  "sst_lat": 32.955,
+  "sst_lon": -117.288,
+  "depth_mid_ft": 10
+ },
+ {
+  "id": "pt_loma_kelp",
+  "name": "Point Loma Kelp",
+  "band": "nearshore",
+  "lat": 32.672,
+  "lon": -117.268,
+  "depth_ft": "30-120",
+  "distance_nm": 2,
+  "waters": "US",
+  "buoys": [
+   "46232",
+   "SDBC1"
+  ],
+  "tide_station": "9410170",
+  "structure": "outer kelp line, hard bottom ledges, pinnacles",
+  "permit": "CA license",
+  "sst_lat": 32.665,
+  "sst_lon": -117.278,
+  "depth_mid_ft": 80
+ },
+ {
+  "id": "la_jolla",
+  "name": "La Jolla Kelp & Canyon",
+  "band": "nearshore",
+  "lat": 32.85,
+  "lon": -117.284,
+  "depth_ft": "25-600",
+  "distance_nm": 1,
+  "waters": "US",
+  "buoys": [
+   "46225",
+   "46258"
+  ],
+  "tide_station": "9410230",
+  "structure": "kelp beds, canyon walls, squid grounds",
+  "permit": "CA license; Matlahuayl SMR closed",
+  "sst_lat": 32.855,
+  "sst_lon": -117.298,
+  "depth_mid_ft": 150
+ },
+ {
+  "id": "nine_mile",
+  "name": "9-Mile Bank & 43-Fathom",
+  "band": "offshore",
+  "lat": 32.62,
+  "lon": -117.42,
+  "depth_ft": "250-900",
+  "distance_nm": 9,
+  "waters": "US",
+  "buoys": [
+   "46232",
+   "46258"
+  ],
+  "tide_station": "9410170",
+  "structure": "high spots, ridge, bait balls on the edge",
+  "permit": "CA license",
+  "sst_lat": 32.62,
+  "sst_lon": -117.42,
+  "depth_mid_ft": 350
+ },
+ {
+  "id": "coronados",
+  "name": "Coronado Islands",
+  "band": "offshore",
+  "lat": 32.418,
+  "lon": -117.298,
+  "depth_ft": "20-400",
+  "distance_nm": 18,
+  "waters": "Mexico",
+  "buoys": [
+   "46232",
+   "46235"
+  ],
+  "tide_station": "9410170",
+  "structure": "islands, kelp stringers, Middle Grounds, North Island rocks",
+  "permit": "Mexican FMM/fishing permit + CA landing rules",
+  "sst_lat": 32.418,
+  "sst_lon": -117.298,
+  "depth_mid_ft": 150
+ },
+ {
+  "id": "outer_banks",
+  "name": "302 / 371 / Hidden Bank",
+  "band": "offshore",
+  "lat": 32.31,
+  "lon": -117.56,
+  "depth_ft": "300-1500",
+  "distance_nm": 32,
+  "waters": "US/Mexico boundary",
+  "buoys": [
+   "46232",
+   "46086"
+  ],
+  "tide_station": "9410170",
+  "structure": "deep banks, temperature breaks, kelp paddies",
+  "permit": "Mexican permit if south of border",
+  "sst_lat": 32.31,
+  "sst_lon": -117.56,
+  "depth_mid_ft": 400
+ },
+ {
+  "id": "cortez_tanner",
+  "name": "Cortez & Tanner Bank",
+  "band": "offshore",
+  "lat": 32.47,
+  "lon": -119.15,
+  "depth_ft": "20-3000",
+  "distance_nm": 95,
+  "waters": "US high seas",
+  "buoys": [
+   "46086"
+  ],
+  "tide_station": "9410170",
+  "structure": "seamount pinnacles, Bishop Rock, current shear",
+  "permit": "CA license; long-range trip",
+  "sst_lat": 32.47,
+  "sst_lon": -119.15,
+  "depth_mid_ft": 300
+ }
+]

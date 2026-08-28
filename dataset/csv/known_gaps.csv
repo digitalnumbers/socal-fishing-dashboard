@@ -1,0 +1,9 @@
+gap
+"Chlorophyll-a: no ERDDAP dataset ID resolved during this build, so the chlorophyll driver has zero weight in every score and is reported as a missing driver rather than imputed."
+"Upwelling index (CUTI): the ERDDAP table endpoint returned HTTP 404, so the upwelling column is present in the schema but empty."
+Front (temperature-break) strength is computed only where the recent MUR regional grid covers the zone; older dates fall back to a null front term rather than an estimate.
+"Trip-level CPFV logbook catch is confidential, so validation relies on 13 days of public dock totals from a single late-summer window - enough for a sanity check, not for a skill score."
+"The inshore SST climatology is 11 years (CO-OPS, 2015-present) while the wave and wind climatology is up to 23 years (NDBC buoys); anomalies from the two baselines are not directly comparable."
+"Species response parameters are literature- and experience-derived priors, not fitted coefficients. They have not been calibrated against catch data because the available catch record is too short."
+"Mexican-water zones (Coronado Islands, Cortez and Tanner banks) carry no permit or closure feed; a Mexican FMM permit and fishing licence are required and must be verified independently."
+This is a static snapshot build: the dashboard reflects the data as of the build timestamp and does not refresh itself.
