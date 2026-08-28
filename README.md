@@ -74,7 +74,9 @@ Days 15-30 deliberately publish no daily wind or swell figures, because no publi
 ```bash
 python pipeline/fetch_extended.py      # CPC GIS outlooks, 40-day tides, 16-day models (slow, >10 min)
 python pipeline/build_extended.py     # extended tables, reusing the near-term scoring engine
-python pipeline/gen_extended_docs.py  # registry + dictionary
+python pipeline/gen_extended_docs.py    # registry + dictionary (this script)
+python pipeline/append_extended_xlsx.py # add the extended sheets to the workbook
+python pipeline/stage_downloads.py      # populate app/downloads for the Data tab
 python pipeline/inject_extended.py    # additive patch of app/data.js
 ```
 <!-- END extended-range -->
