@@ -1,0 +1,80 @@
+field,table,basis,source,notes
+sst_norm_f,extended_outlook,climatology,MUR / CO-OPS day-of-year climatology,"Seasonal average for this day-of-year, +/-7 day window. Not a forecast."
+sst_sd_f,extended_outlook,climatology,same climatology,"Interannual SD, drives the uncertainty band."
+wave_norm_ft,extended_outlook,climatology,NDBC buoy day-of-year climatology,Seasonal average swell height.
+wind_norm_kt,extended_outlook,climatology,NDBC buoy day-of-year climatology,Seasonal average wind speed. Resolved through a fallback chain because most SoCal buoys in this dataset carry wave normals but no wind normals.
+wave_norm_station,extended_outlook,metadata,derived,Which NDBC station supplied wave_norm_ft.
+wind_norm_station,extended_outlook,metadata,derived,Which NDBC station supplied wind_norm_kt.
+wind_norm_is_regional_fallback,extended_outlook,metadata,derived,True when wind climatology came from regional fallback buoy 46086 rather than a zone buoy.
+cpc_temp_cat,extended_outlook,forecast,CPC 8-14 day / week 3-4 / monthly outlook,Probabilistic tercile forecast issued for a specific window. Land-based CONUS product.
+cpc_temp_prob,extended_outlook,forecast,CPC outlook,Probability of the leading tercile.
+cpc_prcp_cat,extended_outlook,forecast,CPC outlook,"Precipitation tercile; carried for context, zero weight in scoring."
+wave_model_ft,extended_outlook,forecast,Open-Meteo Marine 16-day,Deterministic model. Exists only to about lead day 15.
+wind_model_kt,extended_outlook,forecast,Open-Meteo 16-day,Deterministic model. Exists only to about lead day 15.
+pressure_trend_model_24h,extended_outlook,forecast,Open-Meteo 16-day,"Reference only. Deliberately NOT fed to the extended score: it exists only in tier 2, and dropping it at tier 3 renormalized the driver weights and created a false ~19 pt cliff at the day-14/15 boundary. Excluded at both tiers so extended scores stay comparable."
+wave_proj_ft,extended_outlook,blend,model + climatology,"NULL for days 15-30 on purpose, and also NULL inside tier 2 past the marine model horizon (the Open-Meteo swell fields stop several days before its wind fields)."
+wind_proj_kt,extended_outlook,blend,model + climatology,NULL for days 15-30 on purpose.
+wave_basis,extended_outlook,metadata,derived,Per-row text: is this swell value model-blended or climatology only.
+wind_basis,extended_outlook,metadata,derived,Per-row text: is this wind value model-blended or climatology only.
+sst_proj_f,extended_outlook,blend,persistence + ENSO analog + CPC,Weights reported per row.
+sst_anom_proj_f,extended_outlook,blend,persistence + ENSO analog + CPC,Weights reported per row.
+sst_anom_core_f,extended_outlook,blend,persistence + ENSO analog,The anomaly before the CPC nudge. w_persistence + w_enso_analog = 1 by construction.
+cpc_nudge_f,extended_outlook,forecast,CPC tercile signal x product weight,Additive degF adjustment applied on top of sst_anom_core_f. Exactly 0 when CPC says EC/Normal.
+tide_window_widened,extended_outlook,metadata,derived,True on genuine diurnal days where the hi/lo window was widened to bracketing extrema.
+sst_proj_lo_f,extended_outlook,blend,climatological SD x lead multiplier,Widens with lead time.
+sst_proj_hi_f,extended_outlook,blend,climatological SD x lead multiplier,Widens with lead time.
+enso_expected_anom_f,extended_outlook,enso_analog,enso_zone_composite / enso_sensitivity,"Historical mean anomaly for this zone, month and ENSO regime."
+analog_years,extended_outlook,enso_analog,CPC ONI 1950-present,Years with a similar ONI in this calendar window.
+tide_range_ft,extended_outlook,astronomical,CO-OPS harmonic predictions,Exact at any lead time. Not a weather forecast.
+max_exchange_rate_ft_h,extended_outlook,astronomical,CO-OPS harmonic predictions,Exact at any lead time.
+best_water_hour,extended_outlook,astronomical,CO-OPS harmonic predictions,Exact at any lead time.
+first_high_hour,extended_outlook,astronomical,CO-OPS harmonic predictions,Exact at any lead time.
+moon_illum,extended_outlook,astronomical,Meeus lunar phase,Exact at any lead time.
+moon_phase,extended_outlook,astronomical,Meeus lunar phase,Exact at any lead time.
+sunrise_hour,extended_outlook,astronomical,NOAA solar equations,Exact at any lead time.
+sunset_hour,extended_outlook,astronomical,NOAA solar equations,Exact at any lead time.
+score_outlook,extended_scores,blend,same species model as the 7-day forecast,Tier 2 uses blended model conditions; tier 3 uses climatology + ENSO analog.
+score_lo,extended_scores,blend,"SST band re-scored, plus tier widening, then ratcheted","Low edge of the plausible score range. Tier widening +/-3 pts tier 2, +/-7 pts tier 3."
+score_hi,extended_scores,blend,"SST band re-scored, plus tier widening, then ratcheted",High edge of the plausible score range.
+score_band_pts,extended_scores,blend,score_hi - score_lo after the monotone ratchet,Published band width. Never narrows as lead time grows.
+score_band_raw_pts,extended_scores,blend,score_hi - score_lo before the ratchet,Pure SST-sensitivity band. Can narrow at long lead where the score saturates near its ceiling; kept for audit only.
+score_band_is_ratcheted,extended_scores,metadata,build_extended.py,True where the published band was widened to stop it implying more certainty at longer lead.
+score_halfband_lo_pts,extended_scores,blend,monotone (cummax) low half-width,"Non-decreasing in lead by construction, before the 0-100 clip."
+score_halfband_hi_pts,extended_scores,blend,monotone (cummax) high half-width,"Non-decreasing in lead by construction, before the 0-100 clip."
+score_band_hits_ceiling,extended_scores,metadata,build_extended.py,"True where the upper band edge was clipped at the top of the 0-100 scale, so the drawn band is narrower than the modelled uncertainty."
+score_band_hits_floor,extended_scores,metadata,build_extended.py,True where the lower band edge was clipped at the bottom of the scale.
+climatological_score,extended_scores,climatology,climatological_curve.csv,The day-of-year seasonal norm.
+seasonal_norm_score,extended_scores,climatology,score_row(clim_mode=True),Unchanged near-term methodology.
+trend,extended_scores,blend,score_outlook vs climatological_score,"Qualitative label, the primary tier-3 output."
+fishability_outlook,extended_scores,blend,model-blended wind/swell,NULL for days 15-30 on purpose.
+w_persistence,extended_outlook,metadata,exp(-(lead-6)/8),Share of the SST projection carried by the currently observed anomaly. Decays with lead.
+w_enso_analog,extended_outlook,metadata,1 - w_persistence,"Share carried by the ENSO analog composite. Rises with lead, so climate dominates far out."
+w_cpc_outlook,extended_outlook,metadata,lead-dependent constant,"Weight of the CPC nudge. Additive, not a third share, so the two shares always sum to 1."
+model_blend_weight,extended_outlook,metadata,exp(-(lead-6)/7),Weight of the deterministic model in the wind/swell blend. Zero beyond the model horizon.
+sst_basis,extended_outlook,metadata,build_extended.py,Plain-language description of how this row's SST projection was formed.
+sea_state_basis,extended_outlook,metadata,build_extended.py,Why a daily sea state is or is not published for this row.
+sea_state_published,extended_outlook,metadata,build_extended.py,False for the whole days 15-30 tier: no daily wind or swell figure is published there.
+enso_analog_basis,extended_outlook,metadata,build_extended.py,Whether the analog expectation came from the zone ENSO composite or the observed 2023 anomaly.
+sst_climatology_source,extended_outlook,metadata,build_extended.py,"Which baseline supplied sst_norm_f for this zone: shore thermistor inshore, MUR satellite offshore."
+enso_regime,extended_outlook,enso_analog,CPC ONI,"Current ENSO regime label. Observed, not forecast."
+oni,extended_outlook,enso_analog,CPC ONI table,"Latest observed 3-month Oceanic Nino Index. Observed, not forecast."
+cpc_temp_signal_f,extended_outlook,forecast,CPC tercile probability,Signed degF signal before the lead-dependent weight. Exactly 0 for Equal Chances.
+cpc_product,extended_outlook,metadata,build_extended.py,"Which CPC product supplied this row: 814temp, wk34temp, monthly or seasonal."
+cpc_valid_from,extended_outlook,metadata,CPC shapefile attributes,Start of the CPC product's valid period.
+cpc_valid_to,extended_outlook,metadata,CPC shapefile attributes,End of the CPC product's valid period.
+cpc_valid_label,extended_outlook,metadata,CPC shapefile attributes,Human-readable valid period.
+cpc_prcp_prob,extended_outlook,forecast,CPC precipitation tercile,Stored for context only. Rainfall has no term in the species model and is not scored.
+daylight_hours,extended_outlook,astronomical,NOAA solar equations,Exact at any lead time.
+moon_age_days,extended_outlook,astronomical,Meeus lunar phase,Exact at any lead time.
+wave_model_period_s,extended_outlook,forecast,Open-Meteo marine model,Only inside the marine model horizon; NULL beyond it. No climatological period fallback.
+sst_years,extended_outlook,climatology,day-of-year climatology sample,"Distinct years contributing to sst_norm_f. Inshore baseline is 11 years, offshore up to 23."
+term_sst,extended_scores,blend,species response to sst_proj_f,"Driver response, 0-1.35."
+term_season,extended_scores,climatology,species seasonal index,Day-of-year index. Not a forecast.
+term_tide,extended_scores,astronomical,tide range and exchange rate,Exact at any lead time.
+term_moon,extended_scores,astronomical,lunar illumination,Exact at any lead time.
+term_swell,extended_scores,blend,species response to wave_proj_ft,"NULL wherever no wave value exists, in which case the driver is dropped, not imputed."
+anomaly_term,extended_scores,enso_analog,ENSO sensitivity by species,Multiplier applied to the weighted driver mean for the current regime.
+vs_seasonal_norm,extended_scores,blend,score_outlook - climatological_score,"The honest headline for the outlook tier: better or worse than typical, in points."
+fishability_climatological,extended_scores,climatology,climatological wind/swell,"What a typical day in this calendar window allows, available at every lead."
+missing_drivers,extended_scores,metadata,build_extended.py,Drivers dropped for this row. Remaining weights renormalize; nothing is imputed.
+is_extended,extended_scores,metadata,build_extended.py,Always true here. Distinguishes these rows from the unchanged near-term scores_daily table.

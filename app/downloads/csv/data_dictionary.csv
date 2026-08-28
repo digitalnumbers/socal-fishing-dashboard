@@ -1,0 +1,288 @@
+table,field,type,units,definition
+conditions_daily,zone_id,string,—,Fishing zone identifier; joins to dim_zones.
+conditions_daily,date,date,local date,Calendar date in America/Los_Angeles.
+conditions_daily,wave_ft,float,ft,Significant wave height (daily maximum of the marine model).
+conditions_daily,swell_ft,float,ft,Swell-partition wave height.
+conditions_daily,wave_period_s,float,s,Peak wave period.
+conditions_daily,swell_period_s,float,s,Swell-partition period.
+conditions_daily,wave_dir_deg,float,° true,Dominant wave direction (coming from).
+conditions_daily,sst_f_model,float,°F,Open-Meteo marine model SST (mean of daily max and min).
+conditions_daily,wind_kt,float,kt,Daily maximum 10 m wind speed.
+conditions_daily,gust_kt,float,kt,Daily maximum wind gust.
+conditions_daily,wind_dir_deg,float,° true,Dominant wind direction (coming from).
+conditions_daily,pressure_hpa,float,hPa,Mean sea-level pressure.
+conditions_daily,cloud_pct,float,%,Mean cloud cover.
+conditions_daily,air_temp_f,float,°F,Daily maximum 2 m air temperature.
+conditions_daily,precip_mm,float,mm,Daily precipitation total.
+conditions_daily,pressure_trend_24h,float,hPa/24 h,Change in mean sea-level pressure from the previous day.
+conditions_daily,doy,int,1–366,Day of year used to join day-of-year climatologies.
+conditions_daily,month,int,1–12,Calendar month.
+conditions_daily,sst_f_sat,float,°F,MUR 1 km satellite SST at the zone's open-water sampling point.
+conditions_daily,sst_f,float,°F,"Zone sea surface temperature actually used in scoring: shore thermistor inshore, MUR satellite offshore, marine model as last resort."
+conditions_daily,sst_source,string,—,Which feed supplied sst_f for that zone-day.
+conditions_daily,sst_norm,float,°F,Day-of-year climatological mean SST from the matching baseline (±7-day window).
+conditions_daily,sst_sd,float,°F,Standard deviation of the day-of-year SST sample.
+conditions_daily,sst_p10,float,°F,10th percentile of the day-of-year SST sample.
+conditions_daily,sst_p50,float,°F,Median of the day-of-year SST sample.
+conditions_daily,sst_p90,float,°F,90th percentile of the day-of-year SST sample.
+conditions_daily,sst_n,int,days,Number of observations in the day-of-year window.
+conditions_daily,sst_years,int,years,Distinct years contributing to that climatology.
+conditions_daily,tide_station,string,—,NOAA CO-OPS station identifier.
+conditions_daily,tide_high_ft,—,—,Derived column; see build_dataset.py.
+conditions_daily,tide_low_ft,—,—,Derived column; see build_dataset.py.
+conditions_daily,tide_range_ft,float,ft,Highest high minus lowest low predicted tide for the day.
+conditions_daily,tide_exchanges,—,—,Derived column; see build_dataset.py.
+conditions_daily,max_exchange_rate_ft_h,float,ft/h,Largest mean vertical exchange rate between consecutive tide extremes.
+conditions_daily,best_water_hour,float,local h,Midpoint of the strongest tidal exchange of the day.
+conditions_daily,first_high_hour,float,local h,Decimal hour of the first predicted high tide.
+conditions_daily,shore_sst_f,float,°F,CO-OPS shore thermistor daily mean water temperature.
+conditions_daily,shoresst_norm,—,—,Derived column; see build_dataset.py.
+conditions_daily,shoresst_sd,—,—,Derived column; see build_dataset.py.
+conditions_daily,shoresst_p10,—,—,Derived column; see build_dataset.py.
+conditions_daily,shoresst_p50,—,—,Derived column; see build_dataset.py.
+conditions_daily,shoresst_p90,—,—,Derived column; see build_dataset.py.
+conditions_daily,shoresst_years,—,—,Derived column; see build_dataset.py.
+conditions_daily,shore_sst_anom_f,float,°F,Shore thermistor departure from its own day-of-year normal.
+conditions_daily,sst_anom_f,float,°F,sst_f minus sst_norm: the headline 'warmer or colder than normal' figure.
+conditions_daily,sst_pctile,float,0–100,"Percentile of today's SST within the day-of-year distribution, from a normal fit to its mean and SD."
+conditions_daily,sst_trend_7d,float,°F,Change in sst_f over the previous 7 days.
+conditions_daily,primary_buoy,string,—,NDBC buoy used as the zone's wave/wind climatology reference.
+conditions_daily,wave_norm,float,ft,Day-of-year climatological wave height at the reference buoy.
+conditions_daily,wave_p90,—,—,Derived column; see build_dataset.py.
+conditions_daily,wind_norm,float,kt,Day-of-year climatological wind speed at the reference buoy.
+conditions_daily,wind_p90,—,—,Derived column; see build_dataset.py.
+conditions_daily,buoysst_norm,—,—,Derived column; see build_dataset.py.
+conditions_daily,buoysst_years,—,—,Derived column; see build_dataset.py.
+conditions_daily,wave_years,—,—,Derived column; see build_dataset.py.
+conditions_daily,wave_anom_ft,float,ft,wave_ft minus wave_norm.
+conditions_daily,wind_anom_kt,float,kt,wind_kt minus wind_norm.
+conditions_daily,front_f_per_nm,float,°F/nm,Horizontal SST gradient magnitude near the zone from the MUR grid: temperature-break strength.
+conditions_daily,front_mean_f_per_nm,—,—,Derived column; see build_dataset.py.
+conditions_daily,sst_spread_f,float,°F,Range of SST within the sampled neighbourhood around the zone.
+conditions_daily,chl_mg_m3,float,mg/m³,Satellite chlorophyll-a concentration (not resolved in this build).
+conditions_daily,cuti,float,m²/s,Coastal Upwelling Transport Index (not resolved in this build).
+conditions_daily,offshore_minus_nearshore_f,float,°F,SST at San Clemente Basin (46086) minus Point Loma South (46232): a cross-shore gradient proxy.
+conditions_daily,moon_illum,float,0–1,Fraction of the lunar disc illuminated.
+conditions_daily,moon_phase,string,—,Named lunar phase.
+conditions_daily,moon_age_days,float,days,Days since the previous new moon.
+conditions_daily,sunrise_hour,float,local h,Decimal hour of sunrise.
+conditions_daily,sunset_hour,float,local h,Decimal hour of sunset.
+conditions_daily,daylight_hours,float,h,Sunset minus sunrise.
+conditions_daily,oni_latest,float,°C,"Most recent ONI value at build time, attached to every row for convenience."
+conditions_daily,enso_regime,string,—,Detailed regime in force at build time.
+conditions_daily,enso_simple,string,—,Collapsed regime in force at build time.
+conditions_daily,enso_season,—,—,Derived column; see build_dataset.py.
+conditions_daily,is_forecast,bool,—,True when the row is in the forward forecast window.
+scores_daily,date,date,local date,Calendar date in America/Los_Angeles.
+scores_daily,zone_id,string,—,Fishing zone identifier; joins to dim_zones.
+scores_daily,zone,—,—,Derived column; see build_dataset.py.
+scores_daily,band,string,—,"inshore, nearshore or offshore."
+scores_daily,species_id,string,—,Species identifier; joins to dim_species.
+scores_daily,species,string,—,Common name.
+scores_daily,group,string,—,Functional group used for chlorophyll and front handling.
+scores_daily,score,float,0–100,"Opportunity score: weighted geometric mean of driver suitabilities, adjusted for SST anomaly preference and gated by access."
+scores_daily,seasonal_norm_score,float,0–100,The same model run on climatological drivers with neutral tide and moon: what is typical for this date and place.
+scores_daily,vs_norm,float,points,score minus seasonal_norm_score: today's departure from typical.
+scores_daily,core_score,float,0–100,Score before the access gate is applied.
+scores_daily,fishability,float,0–100,"Small-boat access gate from wind, wave height, wave period and run distance."
+scores_daily,access_note,string,—,Plain-language reason the access gate was reduced.
+scores_daily,is_forecast,bool,—,True when the row is in the forward forecast window.
+scores_daily,sst_f,float,°F,"Zone sea surface temperature actually used in scoring: shore thermistor inshore, MUR satellite offshore, marine model as last resort."
+scores_daily,sst_anom_f,float,°F,sst_f minus sst_norm: the headline 'warmer or colder than normal' figure.
+scores_daily,wave_ft,float,ft,Significant wave height (daily maximum of the marine model).
+scores_daily,wind_kt,float,kt,Daily maximum 10 m wind speed.
+scores_daily,tide_range_ft,float,ft,Highest high minus lowest low predicted tide for the day.
+scores_daily,moon_illum,float,0–1,Fraction of the lunar disc illuminated.
+scores_daily,front_f_per_nm,float,°F/nm,Horizontal SST gradient magnitude near the zone from the MUR grid: temperature-break strength.
+scores_daily,term_sst,float,0–1,Temperature suitability from the species trapezoidal response curve.
+scores_daily,term_season,float,0–1,Monthly seasonal presence index for the species.
+scores_daily,term_tide,float,0–1,Tide strength and timing suitability for the species tide preference.
+scores_daily,term_moon,float,0–1,Lunar suitability for the species moon preference.
+scores_daily,term_pressure,float,0–1,Barometric-trend suitability (slow falls score highest).
+scores_daily,term_swell,float,0–1,Swell suitability relative to the species tolerance.
+scores_daily,term_front,float,0–1,Temperature-break strength suitability (pelagics only in practice).
+scores_daily,term_chl,float,0–1,Chlorophyll suitability (null in this build).
+scores_daily,anomaly_term,float,0.35–1.35,ENSO/anomaly multiplier from the species anomaly preference and the SST anomaly.
+scores_daily,contrib_json,json,log units,Per-driver weighted log-odds contribution relative to a neutral 0.5 suitability; drives the 'why' bars.
+scores_daily,missing_drivers,string,—,Weighted drivers that had no data for that row.
+scores_daily,enso_regime,string,—,Detailed regime in force at build time.
+scores_daily,oni,float,°C,"CPC Oceanic Niño Index, 3-month running mean SST anomaly in Niño 3.4."
+scores_daily,annual_percentile,float,0–100,Rank of today's score within that zone-species climatological annual distribution.
+climatological_curve,zone_id,string,—,Fishing zone identifier; joins to dim_zones.
+climatological_curve,species_id,string,—,Species identifier; joins to dim_species.
+climatological_curve,doy,int,1–366,Day of year used to join day-of-year climatologies.
+climatological_curve,month,int,1–12,Calendar month.
+climatological_curve,climatological_score,float,0–100,Score computed entirely from climatological drivers for that day of year.
+climatological_curve,sst_norm_f,float,°F,Climatological SST used to compute the climatological score curve.
+climatological_curve,wave_norm_ft,—,—,Derived column; see build_dataset.py.
+climatological_curve,wind_norm_kt,—,—,Derived column; see build_dataset.py.
+climatological_curve,climatology_source,string,—,Which climatology baseline supplied the SST for the curve.
+sst_climatology,zone_id,string,—,Fishing zone identifier; joins to dim_zones.
+sst_climatology,doy,int,1–366,Day of year used to join day-of-year climatologies.
+sst_climatology,sst_norm,float,°F,Day-of-year climatological mean SST from the matching baseline (±7-day window).
+sst_climatology,sst_sd,float,°F,Standard deviation of the day-of-year SST sample.
+sst_climatology,sst_p10,float,°F,10th percentile of the day-of-year SST sample.
+sst_climatology,sst_p50,float,°F,Median of the day-of-year SST sample.
+sst_climatology,sst_p90,float,°F,90th percentile of the day-of-year SST sample.
+sst_climatology,sst_n,int,days,Number of observations in the day-of-year window.
+sst_climatology,sst_years,int,years,Distinct years contributing to that climatology.
+shore_sst_climatology,tide_station,string,—,NOAA CO-OPS station identifier.
+shore_sst_climatology,doy,int,1–366,Day of year used to join day-of-year climatologies.
+shore_sst_climatology,shoresst_norm,—,—,Derived column; see build_dataset.py.
+shore_sst_climatology,shoresst_sd,—,—,Derived column; see build_dataset.py.
+shore_sst_climatology,shoresst_p10,—,—,Derived column; see build_dataset.py.
+shore_sst_climatology,shoresst_p50,—,—,Derived column; see build_dataset.py.
+shore_sst_climatology,shoresst_p90,—,—,Derived column; see build_dataset.py.
+shore_sst_climatology,shoresst_n,—,—,Derived column; see build_dataset.py.
+shore_sst_climatology,shoresst_years,—,—,Derived column; see build_dataset.py.
+shore_sst_daily,tide_station,string,—,NOAA CO-OPS station identifier.
+shore_sst_daily,date,date,local date,Calendar date in America/Los_Angeles.
+shore_sst_daily,shore_sst_f,float,°F,CO-OPS shore thermistor daily mean water temperature.
+shore_sst_daily,shore_sst_min_f,—,—,Derived column; see build_dataset.py.
+shore_sst_daily,shore_sst_max_f,—,—,Derived column; see build_dataset.py.
+shore_sst_daily,n_obs,int,count,Underlying observations in the aggregate.
+buoy_climatology,station,string,—,NDBC buoy station identifier.
+buoy_climatology,doy,int,1–366,Day of year used to join day-of-year climatologies.
+buoy_climatology,wave_norm,float,ft,Day-of-year climatological wave height at the reference buoy.
+buoy_climatology,wave_sd,—,—,Derived column; see build_dataset.py.
+buoy_climatology,wave_p10,—,—,Derived column; see build_dataset.py.
+buoy_climatology,wave_p50,—,—,Derived column; see build_dataset.py.
+buoy_climatology,wave_p90,—,—,Derived column; see build_dataset.py.
+buoy_climatology,wave_n,—,—,Derived column; see build_dataset.py.
+buoy_climatology,wave_years,—,—,Derived column; see build_dataset.py.
+buoy_climatology,wind_norm,float,kt,Day-of-year climatological wind speed at the reference buoy.
+buoy_climatology,wind_sd,—,—,Derived column; see build_dataset.py.
+buoy_climatology,wind_p10,—,—,Derived column; see build_dataset.py.
+buoy_climatology,wind_p50,—,—,Derived column; see build_dataset.py.
+buoy_climatology,wind_p90,—,—,Derived column; see build_dataset.py.
+buoy_climatology,wind_n,—,—,Derived column; see build_dataset.py.
+buoy_climatology,wind_years,—,—,Derived column; see build_dataset.py.
+buoy_climatology,buoysst_norm,—,—,Derived column; see build_dataset.py.
+buoy_climatology,buoysst_sd,—,—,Derived column; see build_dataset.py.
+buoy_climatology,buoysst_p10,—,—,Derived column; see build_dataset.py.
+buoy_climatology,buoysst_p50,—,—,Derived column; see build_dataset.py.
+buoy_climatology,buoysst_p90,—,—,Derived column; see build_dataset.py.
+buoy_climatology,buoysst_n,—,—,Derived column; see build_dataset.py.
+buoy_climatology,buoysst_years,—,—,Derived column; see build_dataset.py.
+buoy_daily,station,string,—,NDBC buoy station identifier.
+buoy_daily,date,date,local date,Calendar date in America/Los_Angeles.
+buoy_daily,wind_kt,float,kt,Daily maximum 10 m wind speed.
+buoy_daily,wind_kt_max,—,—,Derived column; see build_dataset.py.
+buoy_daily,gust_kt_max,—,—,Derived column; see build_dataset.py.
+buoy_daily,wave_ft,float,ft,Significant wave height (daily maximum of the marine model).
+buoy_daily,wave_ft_max,—,—,Derived column; see build_dataset.py.
+buoy_daily,swell_period_s,float,s,Swell-partition period.
+buoy_daily,swell_dir_deg,—,—,Derived column; see build_dataset.py.
+buoy_daily,pressure_hpa,float,hPa,Mean sea-level pressure.
+buoy_daily,pressure_hpa_min,—,—,Derived column; see build_dataset.py.
+buoy_daily,buoy_sst_f,float,°F,NDBC buoy sea temperature daily mean.
+buoy_daily,air_temp_f,float,°F,Daily maximum 2 m air temperature.
+buoy_daily,wind_dir_deg,float,° true,Dominant wind direction (coming from).
+buoy_daily,pressure_trend_24h,float,hPa/24 h,Change in mean sea-level pressure from the previous day.
+mur_history,zone_id,string,—,Fishing zone identifier; joins to dim_zones.
+mur_history,date,date,local date,Calendar date in America/Los_Angeles.
+mur_history,sst_f,float,°F,"Zone sea surface temperature actually used in scoring: shore thermistor inshore, MUR satellite offshore, marine model as last resort."
+tide_daily,tide_station,string,—,NOAA CO-OPS station identifier.
+tide_daily,date,date,local date,Calendar date in America/Los_Angeles.
+tide_daily,tide_high_ft,—,—,Derived column; see build_dataset.py.
+tide_daily,tide_low_ft,—,—,Derived column; see build_dataset.py.
+tide_daily,tide_range_ft,float,ft,Highest high minus lowest low predicted tide for the day.
+tide_daily,tide_exchanges,—,—,Derived column; see build_dataset.py.
+tide_daily,max_exchange_rate_ft_h,float,ft/h,Largest mean vertical exchange rate between consecutive tide extremes.
+tide_daily,best_water_hour,float,local h,Midpoint of the strongest tidal exchange of the day.
+tide_daily,first_high_hour,float,local h,Decimal hour of the first predicted high tide.
+enso_oni,season,string,—,CPC three-letter overlapping season label (e.g. JJA).
+enso_oni,year,—,—,Derived column; see build_dataset.py.
+enso_oni,sst_c,—,—,Derived column; see build_dataset.py.
+enso_oni,oni,float,°C,"CPC Oceanic Niño Index, 3-month running mean SST anomaly in Niño 3.4."
+enso_oni,month,int,1–12,Calendar month.
+enso_oni,regime,string,—,"Detailed ENSO classification: strong/moderate/weak El Niño, neutral, or La Niña equivalents."
+enso_oni,simple_regime,string,—,"Collapsed ENSO classification: el_nino, neutral or la_nina."
+enso_current,season,string,—,CPC three-letter overlapping season label (e.g. JJA).
+enso_current,year,—,—,Derived column; see build_dataset.py.
+enso_current,oni,float,°C,"CPC Oceanic Niño Index, 3-month running mean SST anomaly in Niño 3.4."
+enso_current,regime,string,—,"Detailed ENSO classification: strong/moderate/weak El Niño, neutral, or La Niña equivalents."
+enso_current,simple_regime,string,—,"Collapsed ENSO classification: el_nino, neutral or la_nina."
+enso_current,trailing_12mo_mean_oni,float,°C,Mean ONI over the last 12 months: regime persistence.
+enso_zone_composite,zone_id,string,—,Fishing zone identifier; joins to dim_zones.
+enso_zone_composite,month,int,1–12,Calendar month.
+enso_zone_composite,simple_regime,string,—,"Collapsed ENSO classification: el_nino, neutral or la_nina."
+enso_zone_composite,mean_anom_f,float,°F,Mean zone SST anomaly observed in that ENSO regime and month.
+enso_zone_composite,sd_anom_f,float,°F,Standard deviation of that composite sample.
+enso_zone_composite,n_days,int,days,Sample size.
+enso_sensitivity,zone_id,string,—,Fishing zone identifier; joins to dim_zones.
+enso_sensitivity,month,int,1–12,Calendar month.
+enso_sensitivity,anom_f_per_oni,float,°F per °C,Regression slope of zone SST anomaly on ONI for that month: local ENSO sensitivity.
+enso_sensitivity,r,float,−1–1,Pearson correlation for that regression.
+enso_sensitivity,n_days,int,days,Sample size.
+catch_reports,date,date,local date,Calendar date in America/Los_Angeles.
+catch_reports,landing,string,—,Sportfishing landing reporting the trip.
+catch_reports,boat,string,—,Vessel name.
+catch_reports,trip_type,string,—,Reported trip length category.
+catch_reports,anglers,int,count,Anglers aboard.
+catch_reports,species_id,string,—,Species identifier; joins to dim_species.
+catch_reports,kept,int,fish,Fish reported kept.
+catch_reports,released,int,fish,Fish reported released.
+catch_reports,zone_hint,string,—,"Zone inferred from the trip description, where stated."
+catch_reports,source_url,string,—,Page the report was read from.
+catch_reports,trip_days,float,days,Trip length in days used to normalize effort.
+catch_reports,cpue,float,fish/angler,Fish kept per angler.
+catch_reports,cpue_per_angler_day,float,fish/angler-day,Fish kept per angler per day of trip length: the validation target.
+catch_daily_cpue,date,date,local date,Calendar date in America/Los_Angeles.
+catch_daily_cpue,species_id,string,—,Species identifier; joins to dim_species.
+catch_daily_cpue,kept,int,fish,Fish reported kept.
+catch_daily_cpue,released,int,fish,Fish reported released.
+catch_daily_cpue,anglers,int,count,Anglers aboard.
+catch_daily_cpue,angler_days,float,angler-days,Anglers × trip length.
+catch_daily_cpue,trips,int,count,Boat trips contributing to the row.
+catch_daily_cpue,cpue,float,fish/angler,Fish kept per angler.
+catch_daily_cpue,cpue_per_angler_day,float,fish/angler-day,Fish kept per angler per day of trip length: the validation target.
+model_validation,species_id,string,—,Species identifier; joins to dim_species.
+model_validation,species,string,—,Common name.
+model_validation,n_days,int,days,Sample size.
+model_validation,spearman_rho,float,−1–1,Rank correlation between daily best score and normalized CPUE.
+model_validation,pearson_r,float,−1–1,Linear correlation of the same pair.
+model_validation,spearman_rho_raw_cpue,float,−1–1,Rank correlation against un-normalized fish per angler.
+model_validation,mean_cpue_per_angler_day,float,fish/angler-day,Mean observed normalized CPUE over the compared days.
+model_validation,mean_score,float,0–100,Mean modeled score over the compared days.
+model_validation,total_fish,int,fish,Fish in the compared sample.
+model_validation,total_anglers,int,anglers,Anglers in the compared sample.
+dim_zones,id,string,—,Zone identifier.
+dim_zones,name,string,—,Human-readable zone name.
+dim_zones,band,string,—,"inshore, nearshore or offshore."
+dim_zones,lat,float,°N,Zone centroid latitude.
+dim_zones,lon,float,°E,Zone centroid longitude.
+dim_zones,depth_ft,—,—,Derived column; see build_dataset.py.
+dim_zones,distance_nm,float,nm,Approximate run from Point Loma.
+dim_zones,waters,string,—,us or mexico.
+dim_zones,buoys,string,—,"Reference NDBC buoys, comma separated."
+dim_zones,tide_station,string,—,NOAA CO-OPS station identifier.
+dim_zones,structure,string,—,Dominant habitat or structure.
+dim_zones,permit,string,—,Permit requirement note.
+dim_zones,sst_lat,float,°N,Latitude of the open-water pixel used for satellite SST.
+dim_zones,sst_lon,float,°E,Longitude of the open-water pixel used for satellite SST.
+dim_zones,depth_mid_ft,float,ft,Representative depth used for the near-bottom temperature approximation.
+dim_species,species_id,string,—,Species identifier; joins to dim_species.
+dim_species,species,string,—,Common name.
+dim_species,group,string,—,Functional group used for chlorophyll and front handling.
+dim_species,temp_reference,string,—,Whether the temperature window applies to surface or near-bottom temperature.
+dim_species,sst_min_f,float,°F,Lower bound of the trapezoidal temperature response.
+dim_species,sst_opt_lo_f,float,°F,Start of the optimum temperature plateau.
+dim_species,sst_opt_hi_f,float,°F,End of the optimum temperature plateau.
+dim_species,sst_max_f,float,°F,Upper bound of the trapezoidal temperature response.
+dim_species,anomaly_pref,float,−1–1,Preference for warm (positive) or cold (negative) SST anomalies.
+dim_species,tide_pref,string,—,Tide regime the species is scored against.
+dim_species,moon_pref,string,—,Lunar regime the species is scored against.
+dim_species,swell_tolerance_ft,float,ft,Wave height at which the swell term begins to fall away sharply.
+dim_species,depth_min_ft,float,ft,Shallow end of the species' usual depth range.
+dim_species,depth_max_ft,float,ft,Deep end of the species' usual depth range.
+dim_species,zones,string,—,Zones in which the species is modeled.
+dim_species,season_index_monthly,string,0–1 × 12,"Monthly seasonal presence index, January first."
+dim_species,weights_json,json,—,Driver weights used in the weighted geometric mean.
+dim_species,notes,string,—,Behavioural notes behind the parameters.
+dim_species,sources,string,—,Reference URLs for the species parameters.
+fronts,zone_id,string,—,Fishing zone identifier; joins to dim_zones.
+fronts,date,date,local date,Calendar date in America/Los_Angeles.
+fronts,front_f_per_nm,float,°F/nm,Horizontal SST gradient magnitude near the zone from the MUR grid: temperature-break strength.
+fronts,front_mean_f_per_nm,—,—,Derived column; see build_dataset.py.
+fronts,sst_spread_f,float,°F,Range of SST within the sampled neighbourhood around the zone.

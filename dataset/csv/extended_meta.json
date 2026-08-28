@@ -1,0 +1,138 @@
+{
+ "built_utc": "2026-08-28T22:27:05.763779+00:00",
+ "today": "2026-08-28",
+ "near_term_last_date": "2026-09-03",
+ "extended_from": "2026-09-04",
+ "extended_to": "2026-09-27",
+ "horizon_days": 30,
+ "extended_rows": 216,
+ "extended_score_rows": 1392,
+ "enso_regime": "El Nino",
+ "oni": 1.39,
+ "analog_years": [
+  1982,
+  1972,
+  1987,
+  2023,
+  1965,
+  1957,
+  1963,
+  1951
+ ],
+ "cpc_products": {
+  "cpc_814_temp": {
+   "product": "cpc_814_temp",
+   "kind": "temperature",
+   "cat": "Above",
+   "prob": 40.0,
+   "signal_f": 0.161,
+   "confidence": 0.1,
+   "issued": "2026-08-28",
+   "valid_from": "2026-09-05",
+   "valid_to": "2026-09-11",
+   "valid_label": "",
+   "shapefile": "cpc/814temp/814temp_20260828.shp"
+  },
+  "cpc_814_prcp": {
+   "product": "cpc_814_prcp",
+   "kind": "precipitation",
+   "cat": "Above",
+   "prob": 40.0,
+   "signal_f": 0.0,
+   "confidence": 0.1,
+   "issued": "2026-08-28",
+   "valid_from": "2026-09-05",
+   "valid_to": "2026-09-11",
+   "valid_label": "",
+   "shapefile": "cpc/814prcp/814prcp_20260828.shp"
+  },
+  "cpc_wk34_temp": {
+   "product": "cpc_wk34_temp",
+   "kind": "temperature",
+   "cat": "Above",
+   "prob": 50.0,
+   "signal_f": 0.275,
+   "confidence": 0.25,
+   "issued": "2026-08-28",
+   "valid_from": "2026-09-12",
+   "valid_to": "2026-09-25",
+   "valid_label": "",
+   "shapefile": "cpc/wk34temp/wk34temp_20260828.shp"
+  },
+  "cpc_wk34_prcp": {
+   "product": "cpc_wk34_prcp",
+   "kind": "precipitation",
+   "cat": "Above",
+   "prob": 40.0,
+   "signal_f": 0.0,
+   "confidence": 0.1,
+   "issued": "2026-08-28",
+   "valid_from": "2026-09-12",
+   "valid_to": "2026-09-25",
+   "valid_label": "",
+   "shapefile": "cpc/wk34prcp/wk34prcp_20260828.shp"
+  },
+  "cpc_month_temp": {
+   "product": "cpc_month_temp",
+   "kind": "temperature",
+   "cat": "Above",
+   "prob": 33.0,
+   "signal_f": 0.0,
+   "confidence": 0.0,
+   "issued": "2026-08-20",
+   "valid_from": "",
+   "valid_to": "",
+   "valid_label": "Sep 2026",
+   "shapefile": "cpc/seastemp/lead14_Sep_temp.shp"
+  },
+  "cpc_season_temp": {
+   "product": "cpc_season_temp",
+   "kind": "temperature",
+   "cat": "Above",
+   "prob": 40.0,
+   "signal_f": 0.06,
+   "confidence": 0.1,
+   "issued": "2026-08-20",
+   "valid_from": "",
+   "valid_to": "",
+   "valid_label": "SON 2026",
+   "shapefile": "cpc/seastemp/lead1_SON_temp.shp"
+  }
+ },
+ "model_horizon_last_date": "2026-09-12",
+ "tiers": [
+  {
+   "tier": 1,
+   "lead_from": 1,
+   "lead_to": 7,
+   "key": "high",
+   "label": "High confidence",
+   "short": "Days 1-7",
+   "basis": "Observed conditions plus deterministic marine and atmospheric forecast",
+   "shows": "Specific daily SST, swell, wind, tide and score",
+   "produced_by": "build_dataset.py (near-term model, unchanged)"
+  },
+  {
+   "tier": 2,
+   "lead_from": 8,
+   "lead_to": 14,
+   "key": "moderate",
+   "label": "Moderate confidence",
+   "short": "Days 8-14",
+   "basis": "Deterministic model blended toward day-of-year climatology, plus the CPC 8-14 day probabilistic outlook, plus exact tide and lunar values",
+   "shows": "Daily score with an uncertainty band, plus wind blended toward climatology. Swell is published only for the first day or two of this tier, because the marine model runs a shorter horizon than the atmospheric one.",
+   "produced_by": "build_extended.py"
+  },
+  {
+   "tier": 3,
+   "lead_from": 15,
+   "lead_to": 30,
+   "key": "outlook",
+   "label": "Outlook / trend only",
+   "short": "Days 15-30",
+   "basis": "Day-of-year climatology weighted with the ENSO-regime historical analog composite, plus the CPC week 3-4 and monthly probabilistic outlooks, plus exact tide and lunar values. No deterministic weather model is skilful at this range.",
+   "shows": "Trend direction versus the seasonal norm and a tide/moon quality signal. Daily wind and swell numbers are deliberately NOT published.",
+   "produced_by": "build_extended.py"
+  }
+ ]
+}

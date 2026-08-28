@@ -21,7 +21,7 @@
 }
 html[data-theme="light"]{
   --bg:#f4f7f9; --bg-2:#eaf0f4; --surface:#ffffff; --surface-2:#f2f6f9; --line:#d3e0e8;
-  --line-soft:#e2ebf0; --text:#0b1f2c; --text-2:#41606f; --text-3:#7794a3;
+  --line-soft:#e2ebf0; --text:#0b1f2c; --text-2:#41606f; --text-3:#557383;
   --teal:#12857c; --teal-dim:#9fd8d2; --amber:#c26d1b; --coral:#c94a47; --sky:#1f83b8;
   --violet:#6f52c9; --good:#0f8f61; --warn:#a97a10; --bad:#c0392b;
   --shadow:0 1px 2px rgba(15,40,55,.08),0 10px 26px -16px rgba(15,40,55,.28);
@@ -194,6 +194,49 @@ footer{border-top:1px solid var(--line-soft);padding:22px 0 40px;color:var(--tex
 .rank .l{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rank .r{font-family:var(--mono);font-weight:600;flex:none}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- extended outlook: confidence tiers ---------- */
+:root{--t1:#41d69b; --t2:#f4c95d; --t3:#9d7fea}
+html[data-theme="light"]{--t1:#0f8f61; --t2:#a97a10; --t3:#6f52c9}
+.cbadge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;
+  font-size:11px;font-weight:600;letter-spacing:.01em;white-space:nowrap;
+  border:1px solid currentColor;background:color-mix(in srgb,currentColor 12%,transparent)}
+.cbadge .cd{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.cbadge.t1{color:var(--t1)} .cbadge.t2{color:var(--t2)} .cbadge.t3{color:var(--t3)}
+.tierleg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:900px){.tierleg{grid-template-columns:1fr}}
+.tiercard{border:1px solid var(--line-soft);border-left:3px solid currentColor;border-radius:var(--r-sm);
+  padding:13px 14px;background:var(--surface-2)}
+.tiercard.t1{color:var(--t1)} .tiercard.t2{color:var(--t2)} .tiercard.t3{color:var(--t3)}
+.tiercard .th{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.tiercard .tt{font-size:13px;font-weight:650}
+.tiercard .tr{font-family:var(--mono);font-size:11px;opacity:.85;flex:none}
+.tiercard .tb{font-size:11.5px;color:var(--text-2);line-height:1.55;margin-top:8px}
+.tiercard .ts{font-size:11.5px;color:var(--text-3);line-height:1.55;margin-top:8px;
+  border-top:1px solid var(--line-soft);padding-top:8px}
+.tiercard .ts b{color:var(--text-2);font-weight:600}
+/* tier stripe under the outlook chart */
+.stripe{display:flex;height:7px;border-radius:4px;overflow:hidden;margin-top:10px;gap:2px}
+.stripe i{display:block;height:100%;border-radius:3px}
+.stripe i.t1{background:var(--t1)} .stripe i.t2{background:var(--t2)} .stripe i.t3{background:var(--t3)}
+.striplab{display:flex;justify-content:space-between;font-size:10.5px;color:var(--text-3);margin-top:5px}
+/* "not published" cells — no fabricated number at long lead */
+td.np,.np{color:var(--text-3);font-style:italic}
+.trend{font-family:var(--mono);font-size:11px;font-weight:600;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.trend.up2{background:color-mix(in srgb,var(--good) 20%,transparent);color:var(--good)}
+.trend.up1{background:color-mix(in srgb,var(--good) 12%,transparent);color:var(--good)}
+.trend.flat{background:color-mix(in srgb,var(--text-3) 16%,transparent);color:var(--text-2)}
+.trend.dn1{background:color-mix(in srgb,var(--bad) 12%,transparent);color:var(--bad)}
+.trend.dn2{background:color-mix(in srgb,var(--bad) 20%,transparent);color:var(--bad)}
+/* provenance basis tags */
+.basis{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  padding:2px 7px;border-radius:5px;white-space:nowrap;border:1px solid currentColor;
+  background:color-mix(in srgb,currentColor 12%,transparent)}
+.basis.forecast{color:var(--sky)} .basis.climatology{color:var(--amber)}
+.basis.astronomical{color:var(--teal)} .basis.enso_analog{color:var(--violet)}
+.basis.blend{color:var(--warn)} .basis.metadata{color:var(--text-3)}
+.sv{display:inline-block;min-width:38px;padding:2px 7px;border-radius:6px;border:1px solid transparent;
+  font-weight:650;font-variant-numeric:tabular-nums;color:var(--text);text-align:center}
 </style>
 </head>
 <body>
@@ -220,6 +263,7 @@ footer{border-top:1px solid var(--line-soft);padding:22px 0 40px;color:var(--tex
   <nav class="tabs wrap" role="tablist">
     <button role="tab" aria-selected="true" data-tab="today">Today</button>
     <button role="tab" aria-selected="false" data-tab="forecast">7-Day Forecast</button>
+    <button role="tab" aria-selected="false" data-tab="outlook">30-Day Outlook</button>
     <button role="tab" aria-selected="false" data-tab="conditions">Conditions vs Normal</button>
     <button role="tab" aria-selected="false" data-tab="species">Species Model</button>
     <button role="tab" aria-selected="false" data-tab="enso">ENSO Regime</button>
@@ -245,6 +289,7 @@ footer{border-top:1px solid var(--line-soft);padding:22px 0 40px;color:var(--tex
 
   <section class="tab on" id="tab-today"></section>
   <section class="tab" id="tab-forecast"></section>
+  <section class="tab" id="tab-outlook"></section>
   <section class="tab" id="tab-conditions"></section>
   <section class="tab" id="tab-species"></section>
   <section class="tab" id="tab-enso"></section>

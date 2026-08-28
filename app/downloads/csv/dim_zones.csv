@@ -1,0 +1,10 @@
+id,name,band,lat,lon,depth_ft,distance_nm,waters,buoys,tide_station,structure,permit,sst_lat,sst_lon,depth_mid_ft
+sd_bay,San Diego Bay,inshore,32.695,-117.208,5-60,0,US,SDBC1,9410170,"eelgrass flats, rip-rap, bridge pilings, turning basins",CA license,32.665,-117.245,25
+mission_bay,Mission Bay,inshore,32.771,-117.24,4-40,0,US,SDBC1,9410170,"channels, jetties, back-bay flats",CA license,32.765,-117.268,20
+surf_zone,Del Mar to Imperial Beach Surf,inshore,32.96,-117.27,2-25,0,US,"46225,46258",9410230,"sand troughs, river mouths, shallow reef edges",CA license,32.955,-117.288,10
+pt_loma_kelp,Point Loma Kelp,nearshore,32.672,-117.268,30-120,2,US,"46232,SDBC1",9410170,"outer kelp line, hard bottom ledges, pinnacles",CA license,32.665,-117.278,80
+la_jolla,La Jolla Kelp & Canyon,nearshore,32.85,-117.284,25-600,1,US,"46225,46258",9410230,"kelp beds, canyon walls, squid grounds",CA license; Matlahuayl SMR closed,32.855,-117.298,150
+nine_mile,9-Mile Bank & 43-Fathom,offshore,32.62,-117.42,250-900,9,US,"46232,46258",9410170,"high spots, ridge, bait balls on the edge",CA license,32.62,-117.42,350
+coronados,Coronado Islands,offshore,32.418,-117.298,20-400,18,Mexico,"46232,46235",9410170,"islands, kelp stringers, Middle Grounds, North Island rocks",Mexican FMM/fishing permit + CA landing rules,32.418,-117.298,150
+outer_banks,302 / 371 / Hidden Bank,offshore,32.31,-117.56,300-1500,32,US/Mexico boundary,"46232,46086",9410170,"deep banks, temperature breaks, kelp paddies",Mexican permit if south of border,32.31,-117.56,400
+cortez_tanner,Cortez & Tanner Bank,offshore,32.47,-119.15,20-3000,95,US high seas,46086,9410170,"seamount pinnacles, Bishop Rock, current shear",CA license; long-range trip,32.47,-119.15,300

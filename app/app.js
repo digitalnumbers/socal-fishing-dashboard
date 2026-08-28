@@ -308,6 +308,341 @@ function renderForecast() {
   });
 }
 
+/* ================================================== 30-DAY OUTLOOK ==================================================
+   Extended range, days 8-30. Everything in this section is deliberately presented at LOWER certainty
+   than the 7-day tab: the near-term model (D.scores, built by build_dataset.py) is untouched and is
+   still the only place daily wind/swell numbers are published beyond the deterministic model horizon.
+   Tier definitions come from the pipeline (D.confidence), not from hardcoded UI strings.            */
+
+const EXT = D.extended || [];
+const EXTS = D.extended_scores || [];
+const TIERS = D.confidence || [];
+const EMETA = D.extended_meta || {};
+const extIdx = {}; EXT.forEach(r => { extIdx[r.zone_id + '|' + r.date] = r; });
+const extScIdx = {}; EXTS.forEach(r => { extScIdx[r.zone_id + '|' + r.species_id + '|' + r.date] = r; });
+const extDates = [...new Set(EXT.map(r => r.date))].sort();
+const ex = (z, d) => extIdx[z + '|' + d];
+const exZone = z => EXT.filter(r => r.zone_id === z).sort((a, b) => a.lead_days - b.lead_days);
+const exs = (z, s, d) => extScIdx[z + '|' + s + '|' + d];
+const tierOf = d => (ex(state.zone, d) || EXT.find(r => r.date === d) || {}).confidence_tier
+  || (d > TODAY ? 1 : 1);
+const tierMeta = t => TIERS.find(x => x.tier === t) || {};
+const TIER_COLOR = t => css(t === 1 ? '--t1' : t === 2 ? '--t2' : '--t3');
+const addDays = (ds, n) => { const t = new Date(ds + 'T12:00:00Z'); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); };
+const TREND_CLASS = {
+  'well above typical': 'up2', 'above typical': 'up1', 'near typical': 'flat',
+  'below typical': 'dn1', 'well below typical': 'dn2'
+};
+const trendTag = t => t ? `<span class="trend ${TREND_CLASS[t] || 'flat'}">${t}</span>` : '—';
+const bandTxt = zid => { const g = exZone(zid); if (!g.length) return 'range unavailable'; const a = g[0], b = g[g.length - 1];
+  const h = r => (r.sst_proj_hi_f - r.sst_proj_f); return `\u00b1${fmt(h(a))} \u00b0F at day ${a.lead_days}, \u00b1${fmt(h(b))} \u00b0F at day ${b.lead_days}`; };
+const cBadge = t => `<span class="cbadge t${t}"><span class="cd"></span>${tierMeta(t).short || 'Days ?'}</span>`;
+
+// Score values as a tinted chip rather than coloured digits. Colouring the glyphs themselves put
+// pale mid-scale greens and yellows at ~1.5:1 against the light-theme card, which is unreadable;
+// this keeps the same colour scale as a background plate and leaves the number at full contrast.
+function svChip(v) {
+  if (v === null || v === undefined || Number.isNaN(v)) return '<span class="np">n/f</span>';
+  return `<span class="sv" style="background:${scoreColor(v, 0.22)};border-color:${scoreColor(v, 0.6)}">${sTxt(v)}</span>`;
+}
+
+function renderOutlook() {
+  const host = $('#tab-outlook'); host.innerHTML = '';
+  const sp = SM[state.species], z = ZM[state.zone];
+  const hasSp = sp && sp.zones.split(',').includes(state.zone);
+
+  /* ---------- 1. confidence tier legend: the primary honesty element ---------- */
+  const c0 = el('div', 'card');
+  c0.appendChild(el('div', 'card-hd', `<div><h3>How far ahead this can actually see</h3>
+    <div class="sub">The 30-day view is three different products stitched together, not one forecast.
+    Certainty falls sharply with lead time — read the tier before reading the number.</div></div>`));
+  c0.appendChild(el('div', 'tierleg', TIERS.map(t => `
+    <div class="tiercard t${t.tier}">
+      <div class="th"><span class="tt">${t.label}</span><span class="tr">${t.short}</span></div>
+      <div class="tb">${t.basis}</div>
+      <div class="ts"><b>Shows:</b> ${t.shows}</div>
+    </div>`).join('')));
+  host.appendChild(c0);
+
+  /* ---------- 2. the 30-day track with widening uncertainty ---------- */
+  const nearDates = D.meta.dates.filter(d => d >= addDays(TODAY, -6));
+  const allDates = [...nearDates, ...extDates];
+  const c1 = el('div', 'card'); c1.style.marginTop = '14px';
+  c1.appendChild(el('div', 'card-hd', `<div><h3>${sp.species} — ${z.name} · 30-day opportunity outlook</h3>
+    <div class="sub">Solid = observed and short-range forecast. Dashed = moderate confidence.
+    Dotted = trend only. The shaded envelope is the range of scores this species would get across the
+    plausible water-temperature range for that day. Its modelled half-width never narrows as lead time
+    grows, but the drawn band can still look tighter where it runs into the top of the 0&#8209;100 scale.</div></div>
+    <div>${cBadge(1)} ${cBadge(2)} ${cBadge(3)}</div>`));
+  c1.appendChild(el('div', 'chart tall', '<canvas id="ch-outlook"></canvas>'));
+  const stripe = el('div', 'stripe');
+  allDates.forEach(d => { const t = d <= addDays(TODAY, 7) ? 1 : tierOf(d); stripe.appendChild(el('i', 't' + t)); });
+  c1.appendChild(stripe);
+  c1.appendChild(el('div', 'striplab', `<span>${dLabel(allDates[0])}</span>
+    <span>today</span><span>${dLabel(allDates[allDates.length - 1])} · +30 d</span>`));
+  host.appendChild(c1);
+
+  if (hasSp) {
+    /* three separate series so each can carry its own dash pattern, with the boundary
+       point duplicated into the neighbouring series so the line reads as continuous */
+    const nearAt = d => sc(state.zone, state.species, d)?.score ?? null;
+    const extAt = (d, t) => { const r = exs(state.zone, state.species, d); return r && r.confidence_tier === t ? r.score_outlook : null; };
+    const lastNear = nearDates[nearDates.length - 1];
+    const firstT3 = extDates.find(d => tierOf(d) === 3);
+    const lastT2 = [...extDates].reverse().find(d => tierOf(d) === 2);
+
+    const s1 = allDates.map(d => nearDates.includes(d) ? nearAt(d) : null);
+    const s2 = allDates.map(d => d === lastNear ? nearAt(d) : extAt(d, 2));
+    const s3 = allDates.map(d => d === lastT2 ? extAt(d, 2) : extAt(d, 3));
+    const lo = allDates.map(d => exs(state.zone, state.species, d)?.score_lo ?? null);
+    const hi = allDates.map(d => exs(state.zone, state.species, d)?.score_hi ?? null);
+    const norm = allDates.map(d => {
+      const r = exs(state.zone, state.species, d);
+      if (r) return r.climatological_score;
+      return sc(state.zone, state.species, d)?.seasonal_norm_score ?? null;
+    });
+
+    mk('ch-outlook', {
+      type: 'line',
+      data: {
+        labels: allDates.map(dLabel),
+        datasets: [
+          {
+            label: 'Uncertainty band', data: hi, borderColor: 'transparent', pointRadius: 0,
+            backgroundColor: 'rgba(157,127,234,.13)', fill: '+1', tension: .35, order: 9
+          },
+          { label: '_lo', data: lo, borderColor: 'transparent', pointRadius: 0, fill: false, tension: .35, order: 9 },
+          {
+            label: 'Typical for date (climatology)', data: norm, borderColor: css('--text-3'),
+            borderDash: [3, 3], borderWidth: 1.5, pointRadius: 0, tension: .35, order: 5
+          },
+          {
+            label: 'Days 1–7 · high confidence', data: s1, borderColor: css('--t1'),
+            backgroundColor: css('--t1'), borderWidth: 2.4, pointRadius: 0, tension: .35, order: 1
+          },
+          {
+            label: 'Days 8–14 · moderate', data: s2, borderColor: css('--t2'),
+            backgroundColor: css('--t2'), borderWidth: 2.2, borderDash: [6, 4], pointRadius: 2.5, tension: .35, order: 2
+          },
+          {
+            label: 'Days 15–30 · outlook only', data: s3, borderColor: css('--t3'),
+            backgroundColor: css('--t3'), borderWidth: 2, borderDash: [2, 4], pointRadius: 2, tension: .35, order: 3
+          }
+        ]
+      },
+      options: baseOpts({
+        plugins: {
+          legend: {
+            labels: {
+              color: css('--text-2'), boxWidth: 10, boxHeight: 10, font: { size: 11 }, usePointStyle: true,
+              filter: it => it.text !== '_lo'
+            }
+          },
+          tooltip: {
+            backgroundColor: css('--surface-2'), borderColor: css('--line'), borderWidth: 1,
+            titleColor: css('--text'), bodyColor: css('--text-2'), padding: 10, cornerRadius: 8,
+            titleFont: { size: 12, weight: '600' }, bodyFont: { size: 11.5 },
+            filter: it => it.dataset.label !== '_lo' && it.parsed.y !== null,
+            callbacks: {
+              afterBody: it => {
+                const d = allDates[it[0].dataIndex], r = exs(state.zone, state.species, d);
+                if (!r) return '';
+                return [`${tierMeta(r.confidence_tier).label} · lead +${r.lead_days} d`,
+                `range ${sTxt(r.score_lo)}–${sTxt(r.score_hi)} · ${r.trend}`];
+              }
+            }
+          }
+        },
+        scales: {
+          x: { grid: { color: css('--line-soft') }, ticks: { color: css('--text-3'), font: { size: 9.5 }, maxRotation: 45, minRotation: 45, autoSkip: true, maxTicksLimit: 18 } },
+          y: {
+            min: 0, max: 100, grid: { color: css('--line-soft') },
+            ticks: { color: css('--text-3'), stepSize: 20 },
+            title: { display: true, text: 'Opportunity score', color: css('--text-3'), font: { size: 10.5 } }
+          }
+        }
+      })
+    });
+  } else {
+    c1.appendChild(el('div', 'callout', `${sp.species} is not modelled in ${z.name}. Pick another zone or species.`));
+  }
+
+  /* ---------- 2b. water temperature projection: the cleanest view of growing uncertainty ----------
+     Unlike the score, SST is unbounded in the range we care about, so its band widens monotonically
+     and honestly shows how much less the model knows at day 30 than at day 8. */
+  const cT = el('div', 'card'); cT.style.marginTop = '14px';
+  cT.appendChild(el('div', 'card-hd', `<div><h3>Projected water temperature — ${z.name}</h3>
+    <div class="sub">Persistence of the current anomaly decaying toward the day-of-year climatology, weighted
+    with the ENSO analog composite and nudged by the CPC outlook. The envelope widens monotonically
+    with lead time — ${bandTxt(state.zone)}.</div></div>`));
+  cT.appendChild(el('div', 'chart', '<canvas id="ch-outsst"></canvas>'));
+  host.appendChild(cT);
+  {
+    const zx = exZone(state.zone);
+    const nd = nearDates;
+    const lab = [...nd, ...zx.map(r => r.date)];
+    const obs = lab.map(d => nd.includes(d) ? (cond(state.zone, d)?.sst_f ?? null) : null);
+    const lastO = cond(state.zone, nd[nd.length - 1])?.sst_f ?? null;
+    const proj = lab.map((d, i) => i === nd.length - 1 ? lastO : (zx.find(r => r.date === d)?.sst_proj_f ?? null));
+    const plo = lab.map((d, i) => i === nd.length - 1 ? lastO : (zx.find(r => r.date === d)?.sst_proj_lo_f ?? null));
+    const phi = lab.map((d, i) => i === nd.length - 1 ? lastO : (zx.find(r => r.date === d)?.sst_proj_hi_f ?? null));
+    const nrm = lab.map(d => zx.find(r => r.date === d)?.sst_norm_f ?? (cond(state.zone, d)?.sst_norm ?? null));
+    mk('ch-outsst', {
+      type: 'line',
+      data: {
+        labels: lab.map(dLabel),
+        datasets: [
+          { label: 'Uncertainty envelope', data: phi, borderColor: 'transparent', pointRadius: 0, backgroundColor: 'rgba(91,192,235,.16)', fill: '+1', tension: .35, order: 9 },
+          { label: '_lo', data: plo, borderColor: 'transparent', pointRadius: 0, fill: false, tension: .35, order: 9 },
+          { label: 'Seasonal normal', data: nrm, borderColor: css('--text-3'), borderDash: [3, 3], borderWidth: 1.5, pointRadius: 0, tension: .35 },
+          { label: 'Observed / forecast', data: obs, borderColor: css('--t1'), borderWidth: 2.4, pointRadius: 0, tension: .35 },
+          { label: 'Projection', data: proj, borderColor: css('--sky'), borderWidth: 2.2, borderDash: [6, 4], pointRadius: 1.8, tension: .35 }
+        ]
+      },
+      options: baseOpts({
+        plugins: {
+          legend: { labels: { color: css('--text-2'), boxWidth: 10, boxHeight: 10, font: { size: 11 }, usePointStyle: true, filter: it => it.text !== '_lo' } },
+          tooltip: { backgroundColor: css('--surface-2'), borderColor: css('--line'), borderWidth: 1, titleColor: css('--text'), bodyColor: css('--text-2'), padding: 10, cornerRadius: 8, titleFont: { size: 12, weight: '600' }, bodyFont: { size: 11.5 }, filter: it => it.dataset.label !== '_lo' && it.parsed.y !== null }
+        },
+        scales: {
+          x: { grid: { color: css('--line-soft') }, ticks: { color: css('--text-3'), font: { size: 9.5 }, maxRotation: 45, minRotation: 45, maxTicksLimit: 18 } },
+          y: { grid: { color: css('--line-soft') }, ticks: { color: css('--text-3') }, title: { display: true, text: 'Water temperature °F', color: css('--text-3'), font: { size: 10.5 } } }
+        }
+      })
+    });
+  }
+
+  /* ---------- 3. regime context driving the extended range ---------- */
+  const e = D.enso_current[0] || {};
+  const cpcT = (D.cpc || []).filter(r => r.kind === 'temperature');
+  const kpis = el('div', 'grid g4'); kpis.style.marginTop = '14px';
+  const wk = EXT.find(r => r.zone_id === state.zone && r.confidence_tier === 3) || {};
+  [
+    ['ENSO regime', ensoLabel(e.regime), `ONI <b>${sign(e.oni, 2)}</b> · ${e.season || ''} ${e.year || ''}.
+      Weighted more heavily as lead time grows — ${fmt((wk.w_enso_analog || 0) * 100, 0)}% of the day-15+ signal here.`],
+    ['Analog years', (EMETA.analog_years || []).slice(0, 4).join(', ') + ((EMETA.analog_years || []).length > 4 ? '…' : ''),
+      `${(EMETA.analog_years || []).length} years with a comparable ONI in this calendar window, from the 1950-present record.`],
+    ['CPC outlook signal', cpcT.length ? `${cpcT[0].cat} ${fmt(cpcT[0].prob, 0)}%` : '—',
+      cpcT.map(r => `${r.product.replace('cpc_', '').replace('_temp', '')}: ${r.cat} ${fmt(r.prob, 0)}%`).join(' · ')
+      + '. Probabilistic tercile, land-based CONUS product.'],
+    ['Model horizon', EMETA.model_horizon_last_date ? dLabel(EMETA.model_horizon_last_date) : '—',
+      `Last date any deterministic weather model reaches. Past this, no daily wind or swell numbers are published.`]
+  ].forEach(([l, v, m]) => {
+    const k = el('div', 'card kpi');
+    k.innerHTML = `<div class="lab">${l}</div><div class="val">${v}</div><div class="meta">${m}</div>`;
+    kpis.appendChild(k);
+  });
+  host.appendChild(kpis);
+
+  /* ---------- 4. day-by-day extended table for the selected zone ---------- */
+  const c2 = el('div', 'card'); c2.style.marginTop = '14px';
+  c2.appendChild(el('div', 'card-hd', `<div><h3>Day-by-day extended outlook — ${z.name}</h3>
+    <div class="sub">Water temperature is a projection with an uncertainty range. Tide and moon are astronomical
+    and exact at any lead. Swell and wind are shown only where a real model reaches; elsewhere they are blank
+    rather than filled with a seasonal average dressed up as a forecast.</div></div>`));
+  const zr = EXT.filter(r => r.zone_id === state.zone);
+  c2.appendChild(el('div', 'tbl-wrap scroll-tall', `<table><thead><tr>
+    <th>Date</th><th>Lead</th><th>Confidence</th><th>Water °F</th><th>Range °F</th><th>vs normal</th>
+    <th>Swell ft</th><th>Wind kt</th><th>Tide ft</th><th>Moon</th><th>CPC temp</th>
+    ${hasSp ? '<th>Score</th><th>Score range</th><th>Trend</th>' : ''}</tr></thead><tbody>` +
+    zr.map(r => {
+      const s = hasSp ? exs(state.zone, state.species, r.date) : null;
+      return `<tr>
+        <td>${dLabel(r.date)}</td><td>+${r.lead_days}</td><td>${cBadge(r.confidence_tier)}</td>
+        <td style="font-weight:600" title="${r.sst_basis || ''}">${fmt(r.sst_proj_f)}</td>
+        <td class="note" style="font-size:11.5px">${fmt(r.sst_proj_lo_f)}–${fmt(r.sst_proj_hi_f)}</td>
+        <td>${deltaTag(r.sst_anom_proj_f)}</td>
+        <td${r.wave_proj_ft == null ? ' class="np"' : ''} title="${r.wave_basis || ''}">${r.wave_proj_ft == null ? 'n/f' : fmt(r.wave_proj_ft)}</td>
+        <td${r.wind_proj_kt == null ? ' class="np"' : ''} title="${r.wind_basis || ''}">${r.wind_proj_kt == null ? 'n/f' : fmt(r.wind_proj_kt, 0)}</td>
+        <td>${fmt(r.tide_range_ft)}</td>
+        <td>${fmt(r.moon_illum * 100, 0)}%<span class="note"> ${r.moon_phase || ''}</span></td>
+        <td>${r.cpc_temp_cat ? r.cpc_temp_cat + ' ' + fmt(r.cpc_temp_prob, 0) + '%' : '—'}</td>
+        ${hasSp ? `<td>${svChip(s?.score_outlook)}</td>
+          <td class="note" style="font-size:11.5px" title="${s?.score_band_hits_ceiling ? 'Upper edge clipped at the top of the 0-100 scale — modelled uncertainty is wider than shown' : s?.score_band_is_ratcheted ? 'Widened so the band never implies more certainty at longer lead' : ''}">${sTxt(s?.score_lo)}–${sTxt(s?.score_hi)}${s?.score_band_hits_ceiling ? ' <span class="pill mx">clipped</span>' : ''}</td>
+          <td>${trendTag(s?.trend)}</td>` : ''}
+      </tr>`;
+    }).join('') + '</tbody></table>'));
+  c2.appendChild(el('div', 'note', `<b>n/f</b> = not forecastable at this lead. Swell and wind are published only
+    inside the deterministic model horizon (through ${EMETA.model_horizon_last_date ? dLabel(EMETA.model_horizon_last_date) : '—'}
+    for wind, and earlier still for swell, since the marine model runs shorter than the atmospheric one).`));
+  host.appendChild(c2);
+
+  /* ---------- 5. where the extended trend is strongest ---------- */
+  const c3 = el('div', 'card'); c3.style.marginTop = '14px';
+  c3.appendChild(el('div', 'card-hd', `<div><h3>Strongest extended windows by species</h3>
+    <div class="sub">Best day 8-30 opportunity per species, against that day's seasonal norm.
+    Treat the date as indicative of a favourable stretch, not a specific bookable day.</div></div>`));
+  const rows = D.species.map(s => {
+    let best = null;
+    zonesInBand().forEach(zz => extDates.forEach(d => {
+      const v = exs(zz.id, s.species_id, d);
+      if (v && (!best || v.score_outlook > best.score_outlook)) best = v;
+    }));
+    return best ? { s, best } : null;
+  }).filter(Boolean).sort((a, b) => b.best.score_outlook - a.best.score_outlook);
+  c3.appendChild(el('div', 'tbl-wrap', `<table><thead><tr>
+    <th>Species</th><th>Best window</th><th>Lead</th><th>Zone</th><th>Confidence</th>
+    <th>Score</th><th>Range</th><th>Typical</th><th>Trend</th><th>Water °F</th></tr></thead><tbody>` +
+    rows.map(({ s, best }) => `<tr>
+      <td>${s.species}</td><td>${dLabel(best.date)}</td><td>+${best.lead_days}</td>
+      <td>${ZM[best.zone_id].name}</td><td>${cBadge(best.confidence_tier)}</td>
+      <td>${svChip(best.score_outlook)}</td>
+      <td class="note" style="font-size:11.5px">${sTxt(best.score_lo)}–${sTxt(best.score_hi)}</td>
+      <td>${sTxt(best.climatological_score)}</td><td>${trendTag(best.trend)}</td>
+      <td>${fmt(ex(best.zone_id, best.date)?.sst_proj_f)}</td></tr>`).join('') + '</tbody></table>'));
+  host.appendChild(c3);
+
+  /* ---------- 6. how each extended field is actually derived ---------- */
+  const g = el('div', 'grid g2'); g.style.marginTop = '14px';
+
+  const c4 = el('div', 'card pad0');
+  c4.appendChild(el('div', 'card-hd', `<div><h3>Forecast vs historical pattern</h3>
+    <div class="sub">Which extended fields are a real forecast and which are a seasonal-average or
+    analog-year estimate. Also in Data &amp; Sources.</div></div>`));
+  $('.card-hd', c4).style.padding = '16px 16px 0';
+  const basisOrder = ['forecast', 'blend', 'enso_analog', 'climatology', 'astronomical', 'metadata'];
+  const prov = [...(D.extended_provenance || [])]
+    .sort((a, b) => basisOrder.indexOf(a.basis) - basisOrder.indexOf(b.basis));
+  c4.appendChild(el('div', 'tbl-wrap scroll-tall', `<table><thead><tr>
+    <th>Field</th><th>Basis</th><th>Source</th></tr></thead><tbody>` +
+    prov.map(r => `<tr><td><code>${r.field}</code></td>
+      <td><span class="basis ${r.basis}">${r.basis.replace('_', ' ')}</span></td>
+      <td class="wrap-ok">${r.source}</td></tr>`).join('') + '</tbody></table>'));
+  g.appendChild(c4);
+
+  const c5 = el('div', 'card');
+  c5.appendChild(el('div', 'card-hd', `<div><h3>Limits of the 15–30 day range</h3>
+    <div class="sub">Read these before acting on anything past two weeks</div></div>`));
+  c5.appendChild(el('div', 'callout', `<b>No true extended marine forecast exists</b> at public-API level for this
+    range. Deterministic swell and wind stop around
+    ${EMETA.model_horizon_last_date ? dLabel(EMETA.model_horizon_last_date) : 'day 15'}, so days 15–30 publish
+    <b>no daily wind or swell numbers at all</b>. What remains is the seasonal norm, the ENSO analog signal,
+    and exactly-calculable tide and moon.`));
+  const lims = [
+    ['CPC outlooks are land products', `The 8-14 day, week 3-4 and monthly tercile outlooks are CONUS
+      <i>air temperature</i> forecasts. No polygon covers the offshore zones, so an onshore San Diego proxy point is
+      sampled for all ${D.zones.length} zones — including Cortez Bank at 95 nm. Treat it as a regional warm/cool lean, not a marine SST forecast.`],
+    ['Small analog sample', `Observed analog-year SST anomalies can only be computed for years inside the satellite
+      record, so the primary ENSO signal comes from the zone composite rather than from directly observed analog years.`],
+    ['Monthly product is stale', `The CPC monthly-update product was not current at build time; the September
+      monthly outlook came from the seasonal lead-14 file instead.`],
+    ['Pressure driver excluded', `Barometric trend exists only inside the model horizon. Feeding it into days 8-14
+      and dropping it at day 15 renormalized the driver weights and created a false cliff at the boundary, so it is
+      excluded from the extended score at both tiers and shown as reference only.`],
+    ['Fewer drivers than near-term', `Frontal structure and chlorophyll are unavailable in the extended range, so
+      those drivers are dropped and the remaining weights renormalize. Extended scores are directionally comparable
+      to near-term scores but not identically constructed.`]
+  ];
+  lims.forEach(([t, b]) => {
+    const d = el('div'); d.style.marginTop = '11px';
+    d.innerHTML = `<div style="font-size:12.5px;font-weight:600;color:var(--text)">${t}</div>
+      <div class="note" style="margin-top:3px">${b}</div>`;
+    c5.appendChild(d);
+  });
+  g.appendChild(c5);
+  host.appendChild(g);
+}
+
 /* ================================================== CONDITIONS ================================================== */
 function renderConditions() {
   const host = $('#tab-conditions'); host.innerHTML = '';
@@ -649,6 +984,11 @@ function renderData() {
     <div class="sub" style="margin-top:14px">Individual tables as CSV</div>
     <div class="chips">` +
     [...new Set(D.dictionary.map(r => r.table))].map(t =>
+      `<a class="chip lnk" href="downloads/csv/${t}.csv" download>${t}.csv</a>`).join('') +
+    // The extended-range tables are new and are not described in D.dictionary, which was baked by
+    // the original build, so list them explicitly rather than leaving them undownloadable.
+    ['extended_outlook', 'extended_scores', 'extended_field_provenance', 'forecast_confidence',
+      'enso_analog_years', 'enso_analog_zone_anomaly', 'cpc_outlook_current'].map(t =>
       `<a class="chip lnk" href="downloads/csv/${t}.csv" download>${t}.csv</a>`).join('') + '</div>');
   host.appendChild(c0);
 
@@ -693,6 +1033,26 @@ function renderData() {
   });
   c2.insertAdjacentHTML('beforeend', '<div class="note" id="dict-count" style="padding:8px 14px 12px"></div>');
 
+  // Requirement: make it unambiguous which extended-range fields are real forecasts and which are
+  // climatology or astronomy. Same table the 30-Day Outlook tab shows, kept here so the source
+  // registry is self-contained.
+  const cP = el('div', 'card'); cP.style.marginTop = '14px';
+  const PB = ['forecast', 'blend', 'enso_analog', 'climatology', 'astronomical', 'metadata'];
+  const PROV = (D.extended_provenance || []).slice()
+    .sort((a, b) => PB.indexOf(a.basis) - PB.indexOf(b.basis) || a.field.localeCompare(b.field));
+  const pc = {}; PROV.forEach(r => pc[r.basis] = (pc[r.basis] || 0) + 1);
+  cP.appendChild(el('div', 'card-hd', `<div><h3>Extended-range field provenance</h3>
+    <div class="sub">${PROV.length} fields in the 8-30 day tables, tagged forecast vs historical pattern</div></div>
+    <div class="chips">` + PB.filter(b => pc[b]).map(b =>
+    `<span class="basis ${b}">${b.replace('_', ' ')} ${pc[b]}</span>`).join('') + '</div>'));
+  cP.appendChild(el('div', 'tbl-wrap scroll-tall', `<table><thead><tr><th>Field</th><th>Table</th>
+    <th>Basis</th><th>Source</th><th class="wrap-ok">Note</th></tr></thead><tbody>` +
+    PROV.map(r => `<tr><td class="mono">${r.field}</td><td>${r.table}</td>
+      <td><span class="basis ${r.basis}">${String(r.basis).replace('_', ' ')}</span></td>
+      <td class="wrap-ok">${r.source}</td><td class="wrap-ok">${r.notes}</td></tr>`).join('') +
+    '</tbody></table>'));
+  host.appendChild(cP);
+
   const c3 = el('div', 'card'); c3.style.marginTop = '14px';
   c3.appendChild(el('div', 'card-hd', `<div><h3>Known gaps</h3></div>`));
   c3.insertAdjacentHTML('beforeend', '<ul class="note" style="margin:0;padding-left:18px;font-size:12.5px;line-height:1.7">' +
@@ -710,7 +1070,7 @@ function syncControls() {
 function render() {
   document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === state.tab));
   document.querySelectorAll('section.tab').forEach(s => s.classList.toggle('on', s.id === 'tab-' + state.tab));
-  ({ today: renderToday, forecast: renderForecast, conditions: renderConditions, species: renderSpecies,
+  ({ today: renderToday, forecast: renderForecast, outlook: renderOutlook, conditions: renderConditions, species: renderSpecies,
     enso: renderEnso, validation: renderValidation, data: renderData }[state.tab])();
 }
 function boot() {
