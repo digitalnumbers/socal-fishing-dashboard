@@ -16,6 +16,8 @@ DEST = os.path.join(ROOT, "app", "downloads")
 
 
 def main():
+    if os.path.isdir(DEST):
+        shutil.rmtree(DEST)
     os.makedirs(os.path.join(DEST, "csv"), exist_ok=True)
     n = 0
     for rel in ["dataset/socal_fishing_dataset.xlsx", "docs/SOURCE_REGISTRY.md",

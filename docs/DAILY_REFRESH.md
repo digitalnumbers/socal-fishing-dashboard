@@ -84,6 +84,8 @@ Machine-readable status is written to `dataset/csv/source_status.json`, embedded
 
 The persistent `.refresh-cache` contains only bounded rolling responses, compact CPC point samples, provenance, and local-day state. Large national CPC GIS archives are deleted from staging after their validated San Diego sample is built, preventing routine Git growth while preserving the exact model input needed on a `not_due` or failed-fetch day.
 
+Scheduled bot commits persist canonical `dataset/csv/` tables, compact cache/state, `app/data.js`, build reports, and generated documentation. The workbook and duplicate `app/downloads/` copies are rebuilt and included in the Pages artifact but are not committed on every daily run; this avoids accumulating two large binary copies while preserving reproducibility from the canonical CSVs.
+
 ## Validation and publication
 
 `pipeline/validate_build.py` blocks publication for:
