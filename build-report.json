@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "local_date": "2026-10-03",
+  "promoted": true,
+  "source_summary": {
+    "fresh": 41,
+    "failed": 2
+  }
+}

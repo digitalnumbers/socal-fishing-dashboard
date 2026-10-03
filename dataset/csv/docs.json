@@ -1,0 +1,2287 @@
+{
+ "registry": [
+  {
+   "id": "ndbc_realtime",
+   "name": "NDBC realtime standard meteorological data",
+   "provider": "NOAA National Data Buoy Center",
+   "url": "https://www.ndbc.noaa.gov/data/realtime2/46232.txt",
+   "endpoint": "https://www.ndbc.noaa.gov/data/realtime2/{station}.txt",
+   "stations": "46232 Point Loma South, 46258 Mission Bay West, 46086 San Clemente Basin, 46225 Torrey Pines Outer, SDBC1 Shelter Island, LJAC1 La Jolla",
+   "used_for": "Current wave height, dominant/average period, wind speed and direction, air and sea temperature, barometric pressure; cross-check for the modeled zone timelines",
+   "coverage": "Rolling 45 days",
+   "cadence": "Every 10-60 minutes",
+   "access": "Public, no key",
+   "units": "m, s, m/s, degC, hPa (converted to ft, kt, degF in this project)",
+   "license": "US Government work, public domain",
+   "limitations": "Station outages are common; 46225 and 46258 have multi-month gaps; wave period fields are sometimes MM (missing) even when height reports"
+  },
+  {
+   "id": "ndbc_historical",
+   "name": "NDBC historical standard meteorological archive",
+   "provider": "NOAA National Data Buoy Center",
+   "url": "https://www.ndbc.noaa.gov/histsearch.php",
+   "endpoint": "https://www.ndbc.noaa.gov/view_text_file.php?filename={station}h{year}.txt.gz&dir=data/historical/stdmet/",
+   "stations": "46232, 46258, 46086, 46225",
+   "used_for": "Day-of-year climatology and percentiles for wave height, wind speed and buoy sea temperature; the long-baseline 'normal' that current conditions are compared against",
+   "coverage": "2003/2004 through 2025 depending on station (75 station-years retrieved)",
+   "cadence": "Annual files, 10-60 minute samples",
+   "access": "Public, no key",
+   "units": "m, s, m/s, degC, hPa",
+   "license": "US Government work, public domain",
+   "limitations": "Buoy relocations and sensor changes are not homogenized; 46225 was deployed later than the others; gaps reduce the effective sample in some day-of-year windows"
+  },
+  {
+   "id": "coops_water_temp",
+   "name": "CO-OPS water temperature (shore thermistor)",
+   "provider": "NOAA Tides & Currents",
+   "url": "https://tidesandcurrents.noaa.gov/stationhome.html?id=9410170",
+   "endpoint": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=water_temperature&station={station}&begin_date=&end_date=&units=english&time_zone=lst_ldt&format=json",
+   "stations": "9410170 San Diego Bay (Broadway Pier), 9410230 La Jolla (Scripps Pier)",
+   "used_for": "Authoritative inshore water temperature for San Diego Bay, Mission Bay and the surf zone, plus their 11-year day-of-year climatology and anomalies",
+   "coverage": "2015-01 through present (retrieved in 31-day chunks, 304 requests)",
+   "cadence": "6 minutes",
+   "access": "Public, no key",
+   "units": "degF (requested directly)",
+   "license": "US Government work, public domain",
+   "limitations": "Hard 31-day limit per request for this product; no usable record before 2015 for these stations, so the inshore climatology is 11 years rather than the 23-year buoy baseline; pier thermistors sit at fixed depth and read warmer than the open coast in summer"
+  },
+  {
+   "id": "coops_predictions",
+   "name": "CO-OPS harmonic tide predictions",
+   "provider": "NOAA Tides & Currents",
+   "url": "https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=9410170",
+   "endpoint": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&station={station}&interval=hilo|30&datum=MLLW&units=english&time_zone=lst_ldt&format=json",
+   "stations": "9410170 San Diego Bay, 9410230 La Jolla",
+   "used_for": "Tide range, maximum exchange rate, high/low timing and the best-water hour used by the tide timing term",
+   "coverage": "Retrieved window 2026-07 through 2026-09-06",
+   "cadence": "High/low events plus 30-minute series",
+   "access": "Public, no key",
+   "units": "ft above MLLW, local time",
+   "license": "US Government work, public domain",
+   "limitations": "Harmonic predictions exclude weather-driven setup and surge; the 30-minute series was pulled only for the dashboard window, so scoring outside that window falls back to high/low interpolation"
+  },
+  {
+   "id": "coops_pressure",
+   "name": "CO-OPS barometric pressure",
+   "provider": "NOAA Tides & Currents",
+   "url": "https://tidesandcurrents.noaa.gov/stationhome.html?id=9410170",
+   "endpoint": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=air_pressure&station=9410170&...",
+   "stations": "9410170",
+   "used_for": "Independent check on the modeled barometric trend used by the pressure term",
+   "coverage": "2026 monthly chunks",
+   "cadence": "6 minutes",
+   "access": "Public, no key",
+   "units": "mbar",
+   "license": "US Government work, public domain",
+   "limitations": "Single station, bay location; sensor gaps in some months"
+  },
+  {
+   "id": "mur_sst",
+   "name": "MUR L4 global 1 km sea surface temperature (jplMURSST41)",
+   "provider": "NASA JPL via NOAA CoastWatch ERDDAP",
+   "url": "https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplMURSST41.html",
+   "endpoint": "https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplMURSST41.csv?analysed_sst[(start):1:(end)][(lat)][(lon)]",
+   "used_for": "Satellite sea surface temperature for the kelp, canyon, bank and Mexican-water zones; the day-of-year SST climatology, anomalies and percentiles; ENSO regime composites and per-zone ENSO sensitivity; horizontal temperature-break (front) strength",
+   "coverage": "2015-01-01 through present per zone point, plus a recent regional grid for gradients",
+   "cadence": "Daily, 1 km analysed field",
+   "access": "Public ERDDAP, no key",
+   "units": "degC (converted to degF)",
+   "license": "NASA/JPL MUR, open with attribution",
+   "limitations": "ERDDAP accepts only one concurrent request per client, so acquisition is strictly sequential and slow; the analysed field is a gap-free blend, not a raw observation; the 1 km grid masks the interior of San Diego and Mission Bay, so those zones sample the nearest open-water pixel and defer to the shore thermistor"
+  },
+  {
+   "id": "openmeteo_marine",
+   "name": "Open-Meteo Marine forecast API",
+   "provider": "Open-Meteo (ECMWF/MFWAM-based wave models)",
+   "url": "https://open-meteo.com/en/docs/marine-weather-api",
+   "endpoint": "https://marine-api.open-meteo.com/v1/marine?latitude=&longitude=&daily=wave_height_max,wave_period_max,swell_wave_height_max,sea_surface_temperature_max&past_days=14&forecast_days=7",
+   "used_for": "Per-zone wave height, wave and swell period, dominant direction and model SST for the 14-day hindcast plus 7-day forecast timeline that the scoring engine runs on",
+   "coverage": "14 days past, 7 days forward, all 9 zones",
+   "cadence": "Hourly and daily, refreshed multiple times per day",
+   "access": "Public, no key for non-commercial use",
+   "units": "m, s, degC (converted to ft, degF)",
+   "license": "Open-Meteo, CC-BY 4.0; underlying ECMWF data under its own open terms",
+   "limitations": "Model output rather than measurement; nearshore refraction and island shadowing at the Coronados are not resolved at model scale; SST is a model field and is only used where satellite or thermistor data are unavailable"
+  },
+  {
+   "id": "openmeteo_weather",
+   "name": "Open-Meteo forecast API (atmosphere)",
+   "provider": "Open-Meteo",
+   "url": "https://open-meteo.com/en/docs",
+   "endpoint": "https://api.open-meteo.com/v1/forecast?latitude=&longitude=&daily=wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant,pressure_msl_mean,cloud_cover_mean&past_days=14&forecast_days=7&wind_speed_unit=kn",
+   "used_for": "Per-zone wind speed, gusts, direction, mean sea-level pressure (and its 24-hour trend), cloud cover and air temperature",
+   "coverage": "14 days past, 7 days forward, all 9 zones",
+   "cadence": "Hourly and daily",
+   "access": "Public, no key for non-commercial use",
+   "units": "kt, hPa, %, degC",
+   "license": "CC-BY 4.0",
+   "limitations": "Coarse grid smooths Santa Ana channeling and the afternoon sea-breeze ramp inside the bays"
+  },
+  {
+   "id": "nws_api",
+   "name": "National Weather Service API (San Diego, SGX)",
+   "provider": "NOAA National Weather Service",
+   "url": "https://api.weather.gov/points/32.72,-117.22",
+   "endpoint": "https://api.weather.gov/gridpoints/SGX/{x},{y} and /forecast",
+   "used_for": "Narrative and gridded coastal forecast retained as a cross-check on wind timing",
+   "coverage": "7 days forward",
+   "cadence": "Hourly updates",
+   "access": "Public, User-Agent required",
+   "units": "km/h, degC",
+   "license": "US Government work, public domain",
+   "limitations": "The coastal land gridpoint can return degenerate wave fields (a single zero value), so wave data are taken from the marine model instead. The SGX Coastal Waters Forecast narrative is a cross-check, not a numerical wave input."
+  },
+  {
+   "id": "cpc_oni",
+   "name": "CPC Oceanic Nino Index (ONI)",
+   "provider": "NOAA Climate Prediction Center",
+   "url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+   "endpoint": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+   "used_for": "ENSO regime classification (El Nino / La Nina / neutral, with strength tiers), the regime badge, the ONI history chart, monthly regime composites of zone SST anomaly, and the per-zone ENSO sensitivity regression",
+   "coverage": "1950-01 through present (918 months)",
+   "cadence": "Monthly",
+   "access": "Public, no key",
+   "units": "degC anomaly, 3-month running mean",
+   "license": "US Government work, public domain",
+   "limitations": "Monthly resolution and a 3-month running mean lag current conditions; ERSSTv5 base periods are updated in 5-year steps, so historical values shift slightly between releases"
+  },
+  {
+   "id": "cpc_nino34",
+   "name": "CPC weekly Nino 3.4 SST anomaly",
+   "provider": "NOAA Climate Prediction Center",
+   "url": "https://www.cpc.ncep.noaa.gov/data/indices/wksst8110.for",
+   "endpoint": "https://www.cpc.ncep.noaa.gov/data/indices/wksst8110.for",
+   "used_for": "Weekly cross-check on the direction of the current ENSO state ahead of the monthly ONI update",
+   "coverage": "1990 through present",
+   "cadence": "Weekly",
+   "access": "Public, no key",
+   "units": "degC anomaly",
+   "license": "US Government work, public domain",
+   "limitations": "Fixed-width legacy text format; not used in scoring"
+  },
+  {
+   "id": "dock_totals",
+   "name": "San Diego dock totals (CPFV fish counts)",
+   "provider": "sandiegofishreports.com, cross-checked against Fisherman's Landing and Seaforth Landing",
+   "url": "https://www.sandiegofishreports.com/dock_totals/boats.php",
+   "endpoint": "https://www.sandiegofishreports.com/dock_totals/boats.php",
+   "used_for": "Observed catch-per-angler-day used as the validation target for model skill, and the species mix currently being landed",
+   "coverage": "2026-08-15 through 2026-08-27 (13 days, 336 boat trips, 7,998 angler-days, 4 landings)",
+   "cadence": "Daily",
+   "access": "Public web page",
+   "units": "fish kept and released, anglers per trip",
+   "license": "Third-party editorial content; used here for non-commercial analysis with attribution",
+   "limitations": "Effort is self-reported and only normalizable by anglers and trip length; fishing location is inferred from trip type rather than logged; totals reflect where the fleet chose to fish, and species are reported inconsistently across landings; only 13 days were available, which is far too short for a real skill estimate"
+  },
+  {
+   "id": "cdfw",
+   "name": "CDFW marine fisheries data and CPFV logbook program",
+   "provider": "California Department of Fish and Wildlife",
+   "url": "https://wildlife.ca.gov/Conservation/Marine/Data-Management-Research/MFDE",
+   "endpoint": "https://wildlife.ca.gov/Fishing/Commercial/MFSU",
+   "used_for": "Species-behavior context, regulatory framing and published aggregate landings used when setting seasonal indices",
+   "coverage": "Multi-decade published aggregates",
+   "cadence": "Annual to monthly publications",
+   "access": "Public reports; trip-level CPFV logbook records are confidential and not obtainable via API",
+   "units": "fish, pounds",
+   "license": "State of California public records",
+   "limitations": "Trip-level logbook data are confidential, so the project substitutes public dock totals; published aggregates lag by roughly a year and are not spatially resolved to these zones"
+  },
+  {
+   "id": "cpc_814_outlook",
+   "name": "CPC 8-14 day temperature and precipitation outlook (GIS shapefiles)",
+   "provider": "NOAA Climate Prediction Center",
+   "url": "https://www.cpc.ncep.noaa.gov/products/predictions/814day/",
+   "endpoint": "https://ftp.cpc.ncep.noaa.gov/GIS/us_tempprcpfcst/814temp_latest.zip",
+   "stations": "Sampled at the San Diego onshore proxy point -117.15, 32.70",
+   "used_for": "Probabilistic warm/cool lean applied as an additive nudge to the day 7-14 SST projection (cpc_nudge_f), and the CPC columns shown on the 30-Day Outlook tab",
+   "coverage": "Days 8-14 from the issuance date",
+   "cadence": "Daily",
+   "access": "Public, no key",
+   "units": "Tercile probability in percent, converted to a signed degF nudge",
+   "license": "US Government work, public domain",
+   "limitations": "BASIS = forecast, but a LAND forecast: this is a CONUS *air* temperature tercile product, not a marine SST forecast. No polygon covers the offshore zones, so a single onshore San Diego proxy point is sampled for all nine zones including Cortez Bank at 95 nm. The true coastal point -117.22, 32.72 falls outside every CPC CONUS polygon. Equal-Chances areas contribute exactly zero signal."
+  },
+  {
+   "id": "cpc_wk34_outlook",
+   "name": "CPC week 3-4 temperature and precipitation outlook (GIS shapefiles)",
+   "provider": "NOAA Climate Prediction Center",
+   "url": "https://www.cpc.ncep.noaa.gov/products/predictions/WK34/",
+   "endpoint": "https://ftp.cpc.ncep.noaa.gov/GIS/us_tempprcpfcst/wk34temp_latest.zip",
+   "stations": "Sampled at the San Diego onshore proxy point -117.15, 32.70",
+   "used_for": "Probabilistic warm/cool lean for the day 15-28 outlook tier",
+   "coverage": "Weeks 3 and 4 from the issuance date",
+   "cadence": "Weekly (Friday)",
+   "access": "Public, no key",
+   "units": "Tercile probability in percent",
+   "license": "US Government work, public domain",
+   "limitations": "BASIS = forecast. Same land/CONUS air-temperature caveat as the 8-14 day product, and it is a two-week average, so it carries no day-to-day information at all. Down-weighted to 0.32 in the extended blend."
+  },
+  {
+   "id": "cpc_monthly_seasonal_outlook",
+   "name": "CPC monthly and seasonal temperature outlooks (GIS shapefiles)",
+   "provider": "NOAA Climate Prediction Center",
+   "url": "https://www.cpc.ncep.noaa.gov/products/predictions/long_range/",
+   "endpoint": "https://ftp.cpc.ncep.noaa.gov/GIS/us_tempprcpfcst/seastemp_{YYYYMM}.zip",
+   "stations": "Sampled at the San Diego onshore proxy point -117.15, 32.70",
+   "used_for": "Weakest-weighted warm/cool lean at the far end of the 30-day window",
+   "coverage": "Monthly lead 1 and seasonal leads",
+   "cadence": "Monthly (mid-month), with a monthly update near the end of the month",
+   "access": "Public, no key",
+   "units": "Tercile probability in percent",
+   "license": "US Government work, public domain",
+   "limitations": "BASIS = forecast, weakly weighted (0.20 monthly, 0.15 seasonal). At this build the monthly *update* product was stale, so the September outlook was read from the seasonal lead-14 file instead, and at 33 percent probability it is Equal Chances and contributes exactly zero signal. Same land/CONUS air-temperature caveat."
+  },
+  {
+   "id": "coops_predictions_extended",
+   "name": "CO-OPS tide predictions, extended horizon",
+   "provider": "NOAA Tides & Currents",
+   "url": "https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=9410170",
+   "endpoint": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&station={station}&begin_date={YYYYMMDD}&end_date={YYYYMMDD}&datum=MLLW&interval=hilo&units=english&time_zone=lst_ldt&format=json",
+   "stations": "9410170 San Diego Bay (Broadway Pier), 9410230 La Jolla (Scripps Pier)",
+   "used_for": "Tide range, strongest exchange rate and best-water hour for all 30 days",
+   "coverage": "Verified working at least 40 days ahead",
+   "cadence": "Static harmonic predictions",
+   "access": "Public, no key",
+   "units": "ft MLLW, ft/h, local hour",
+   "license": "US Government work, public domain",
+   "limitations": "BASIS = astronomical, so these are exactly as reliable at day 30 as at day 1 and are the strongest signal in the outlook tier. Harmonic predictions exclude weather-driven surge and river/runoff effects. On strongly diurnal days the daily extremum window is narrowed to the day's single extremum plus the closer of its two neighbours, flagged by tide_window_widened, to avoid inflating the range across two exchanges."
+  },
+  {
+   "id": "openmeteo_16day",
+   "name": "Open-Meteo 16-day marine and atmospheric forecast",
+   "provider": "Open-Meteo",
+   "url": "https://open-meteo.com/en/docs/marine-weather-api",
+   "endpoint": "https://marine-api.open-meteo.com/v1/marine?forecast_days=16 and https://api.open-meteo.com/v1/forecast?forecast_days=16",
+   "stations": "One sampling point per zone (nine zones)",
+   "used_for": "The deterministic tail of the day 8-14 tier: wind, swell and pressure blended toward climatology with weight exp(-(lead-6)/7)",
+   "coverage": "16 requested days, but the two models do NOT reach equally far",
+   "cadence": "Multiple runs daily",
+   "access": "Public, no key",
+   "units": "m, s, m/s, hPa (converted to ft, kt, degF)",
+   "license": "CC-BY 4.0, non-commercial free tier",
+   "limitations": "BASIS = forecast, but with a hard and unequal horizon. At this build the MARINE (swell) fields null out after 2026-09-05, roughly lead 8, while the ATMOSPHERIC (wind) fields run to 2026-09-12, lead 15. The two are therefore handled independently and tagged per row by wave_basis and wind_basis. Beyond the atmospheric horizon no daily wind or swell number is published at all."
+  }
+ ],
+ "dictionary": [
+  {
+   "table": "conditions_daily",
+   "field": "zone_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Fishing zone identifier; joins to dim_zones."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "date",
+   "type": "date",
+   "units": "local date",
+   "definition": "Calendar date in America/Los_Angeles."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "wave_ft",
+   "type": "float",
+   "units": "ft",
+   "definition": "Significant wave height (daily maximum of the marine model)."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "swell_ft",
+   "type": "float",
+   "units": "ft",
+   "definition": "Swell-partition wave height."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "wave_period_s",
+   "type": "float",
+   "units": "s",
+   "definition": "Peak wave period."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "swell_period_s",
+   "type": "float",
+   "units": "s",
+   "definition": "Swell-partition period."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "wave_dir_deg",
+   "type": "float",
+   "units": "\u00b0 true",
+   "definition": "Dominant wave direction (coming from)."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_f_model",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Open-Meteo marine model SST (mean of daily max and min)."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "wind_kt",
+   "type": "float",
+   "units": "kt",
+   "definition": "Daily maximum 10 m wind speed."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "gust_kt",
+   "type": "float",
+   "units": "kt",
+   "definition": "Daily maximum wind gust."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "wind_dir_deg",
+   "type": "float",
+   "units": "\u00b0 true",
+   "definition": "Dominant wind direction (coming from)."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "pressure_hpa",
+   "type": "float",
+   "units": "hPa",
+   "definition": "Mean sea-level pressure."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "cloud_pct",
+   "type": "float",
+   "units": "%",
+   "definition": "Mean cloud cover."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "air_temp_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Daily maximum 2 m air temperature."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "precip_mm",
+   "type": "float",
+   "units": "mm",
+   "definition": "Daily precipitation total."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "pressure_trend_24h",
+   "type": "float",
+   "units": "hPa/24 h",
+   "definition": "Change in mean sea-level pressure from the previous day."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "doy",
+   "type": "int",
+   "units": "1\u2013366",
+   "definition": "Day of year used to join day-of-year climatologies."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "month",
+   "type": "int",
+   "units": "1\u201312",
+   "definition": "Calendar month."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_f_sat",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "MUR 1 km satellite SST at the zone's open-water sampling point."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Zone sea surface temperature actually used in scoring: shore thermistor inshore, MUR satellite offshore, marine model as last resort."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_source",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Which feed supplied sst_f for that zone-day."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_norm",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Day-of-year climatological mean SST from the matching baseline (\u00b17-day window)."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_sd",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Standard deviation of the day-of-year SST sample."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_p10",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "10th percentile of the day-of-year SST sample."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_p50",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Median of the day-of-year SST sample."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_p90",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "90th percentile of the day-of-year SST sample."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_n",
+   "type": "int",
+   "units": "days",
+   "definition": "Number of observations in the day-of-year window."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_years",
+   "type": "int",
+   "units": "years",
+   "definition": "Distinct years contributing to that climatology."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "tide_station",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "NOAA CO-OPS station identifier."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "tide_high_ft",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "tide_low_ft",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "tide_range_ft",
+   "type": "float",
+   "units": "ft",
+   "definition": "Highest high minus lowest low predicted tide for the day."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "tide_exchanges",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "max_exchange_rate_ft_h",
+   "type": "float",
+   "units": "ft/h",
+   "definition": "Largest mean vertical exchange rate between consecutive tide extremes."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "best_water_hour",
+   "type": "float",
+   "units": "local h",
+   "definition": "Midpoint of the strongest tidal exchange of the day."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "first_high_hour",
+   "type": "float",
+   "units": "local h",
+   "definition": "Decimal hour of the first predicted high tide."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "shore_sst_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "CO-OPS shore thermistor daily mean water temperature."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "shoresst_norm",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "shoresst_sd",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "shoresst_p10",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "shoresst_p50",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "shoresst_p90",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "shoresst_years",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "shore_sst_anom_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Shore thermistor departure from its own day-of-year normal."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_anom_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "sst_f minus sst_norm: the headline 'warmer or colder than normal' figure."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_pctile",
+   "type": "float",
+   "units": "0\u2013100",
+   "definition": "Percentile of today's SST within the day-of-year distribution, from a normal fit to its mean and SD."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_trend_7d",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Change in sst_f over the previous 7 days."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "primary_buoy",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "NDBC buoy used as the zone's wave/wind climatology reference."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "wave_norm",
+   "type": "float",
+   "units": "ft",
+   "definition": "Day-of-year climatological wave height at the reference buoy."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "wave_p90",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "wind_norm",
+   "type": "float",
+   "units": "kt",
+   "definition": "Day-of-year climatological wind speed at the reference buoy."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "wind_p90",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "buoysst_norm",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "buoysst_years",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "wave_years",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "wave_anom_ft",
+   "type": "float",
+   "units": "ft",
+   "definition": "wave_ft minus wave_norm."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "wind_anom_kt",
+   "type": "float",
+   "units": "kt",
+   "definition": "wind_kt minus wind_norm."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "front_f_per_nm",
+   "type": "float",
+   "units": "\u00b0F/nm",
+   "definition": "Horizontal SST gradient magnitude near the zone from the MUR grid: temperature-break strength."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sst_spread_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Range of SST within the sampled neighbourhood around the zone."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "chl_mg_m3",
+   "type": "float",
+   "units": "mg/m\u00b3",
+   "definition": "Satellite chlorophyll-a concentration (not resolved in this build)."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "cuti",
+   "type": "float",
+   "units": "m\u00b2/s",
+   "definition": "Coastal Upwelling Transport Index (not resolved in this build)."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "offshore_minus_nearshore_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "SST at San Clemente Basin (46086) minus Point Loma South (46232): a cross-shore gradient proxy."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "moon_illum",
+   "type": "float",
+   "units": "0\u20131",
+   "definition": "Fraction of the lunar disc illuminated."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "moon_phase",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Named lunar phase."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "moon_age_days",
+   "type": "float",
+   "units": "days",
+   "definition": "Days since the previous new moon."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sunrise_hour",
+   "type": "float",
+   "units": "local h",
+   "definition": "Decimal hour of sunrise."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "sunset_hour",
+   "type": "float",
+   "units": "local h",
+   "definition": "Decimal hour of sunset."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "daylight_hours",
+   "type": "float",
+   "units": "h",
+   "definition": "Sunset minus sunrise."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "oni_latest",
+   "type": "float",
+   "units": "\u00b0C",
+   "definition": "Most recent ONI value at build time, attached to every row for convenience."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "enso_regime",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Detailed regime in force at build time."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "enso_simple",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Collapsed regime in force at build time."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "enso_season",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "conditions_daily",
+   "field": "is_forecast",
+   "type": "bool",
+   "units": "\u2014",
+   "definition": "True when the row is in the forward forecast window."
+  },
+  {
+   "table": "scores_daily",
+   "field": "date",
+   "type": "date",
+   "units": "local date",
+   "definition": "Calendar date in America/Los_Angeles."
+  },
+  {
+   "table": "scores_daily",
+   "field": "zone_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Fishing zone identifier; joins to dim_zones."
+  },
+  {
+   "table": "scores_daily",
+   "field": "zone",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "scores_daily",
+   "field": "band",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "inshore, nearshore or offshore."
+  },
+  {
+   "table": "scores_daily",
+   "field": "species_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Species identifier; joins to dim_species."
+  },
+  {
+   "table": "scores_daily",
+   "field": "species",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Common name."
+  },
+  {
+   "table": "scores_daily",
+   "field": "group",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Functional group used for chlorophyll and front handling."
+  },
+  {
+   "table": "scores_daily",
+   "field": "score",
+   "type": "float",
+   "units": "0\u2013100",
+   "definition": "Opportunity score: weighted geometric mean of driver suitabilities, adjusted for SST anomaly preference and gated by access."
+  },
+  {
+   "table": "scores_daily",
+   "field": "seasonal_norm_score",
+   "type": "float",
+   "units": "0\u2013100",
+   "definition": "The same model run on climatological drivers with neutral tide and moon: what is typical for this date and place."
+  },
+  {
+   "table": "scores_daily",
+   "field": "vs_norm",
+   "type": "float",
+   "units": "points",
+   "definition": "score minus seasonal_norm_score: today's departure from typical."
+  },
+  {
+   "table": "scores_daily",
+   "field": "core_score",
+   "type": "float",
+   "units": "0\u2013100",
+   "definition": "Score before the access gate is applied."
+  },
+  {
+   "table": "scores_daily",
+   "field": "fishability",
+   "type": "float",
+   "units": "0\u2013100",
+   "definition": "Small-boat access gate from wind, wave height, wave period and run distance."
+  },
+  {
+   "table": "scores_daily",
+   "field": "access_note",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Plain-language reason the access gate was reduced."
+  },
+  {
+   "table": "scores_daily",
+   "field": "is_forecast",
+   "type": "bool",
+   "units": "\u2014",
+   "definition": "True when the row is in the forward forecast window."
+  },
+  {
+   "table": "scores_daily",
+   "field": "sst_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Zone sea surface temperature actually used in scoring: shore thermistor inshore, MUR satellite offshore, marine model as last resort."
+  },
+  {
+   "table": "scores_daily",
+   "field": "sst_anom_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "sst_f minus sst_norm: the headline 'warmer or colder than normal' figure."
+  },
+  {
+   "table": "scores_daily",
+   "field": "wave_ft",
+   "type": "float",
+   "units": "ft",
+   "definition": "Significant wave height (daily maximum of the marine model)."
+  },
+  {
+   "table": "scores_daily",
+   "field": "wind_kt",
+   "type": "float",
+   "units": "kt",
+   "definition": "Daily maximum 10 m wind speed."
+  },
+  {
+   "table": "scores_daily",
+   "field": "tide_range_ft",
+   "type": "float",
+   "units": "ft",
+   "definition": "Highest high minus lowest low predicted tide for the day."
+  },
+  {
+   "table": "scores_daily",
+   "field": "moon_illum",
+   "type": "float",
+   "units": "0\u20131",
+   "definition": "Fraction of the lunar disc illuminated."
+  },
+  {
+   "table": "scores_daily",
+   "field": "front_f_per_nm",
+   "type": "float",
+   "units": "\u00b0F/nm",
+   "definition": "Horizontal SST gradient magnitude near the zone from the MUR grid: temperature-break strength."
+  },
+  {
+   "table": "scores_daily",
+   "field": "term_sst",
+   "type": "float",
+   "units": "0\u20131",
+   "definition": "Temperature suitability from the species trapezoidal response curve."
+  },
+  {
+   "table": "scores_daily",
+   "field": "term_season",
+   "type": "float",
+   "units": "0\u20131",
+   "definition": "Monthly seasonal presence index for the species."
+  },
+  {
+   "table": "scores_daily",
+   "field": "term_tide",
+   "type": "float",
+   "units": "0\u20131",
+   "definition": "Tide strength and timing suitability for the species tide preference."
+  },
+  {
+   "table": "scores_daily",
+   "field": "term_moon",
+   "type": "float",
+   "units": "0\u20131",
+   "definition": "Lunar suitability for the species moon preference."
+  },
+  {
+   "table": "scores_daily",
+   "field": "term_pressure",
+   "type": "float",
+   "units": "0\u20131",
+   "definition": "Barometric-trend suitability (slow falls score highest)."
+  },
+  {
+   "table": "scores_daily",
+   "field": "term_swell",
+   "type": "float",
+   "units": "0\u20131",
+   "definition": "Swell suitability relative to the species tolerance."
+  },
+  {
+   "table": "scores_daily",
+   "field": "term_front",
+   "type": "float",
+   "units": "0\u20131",
+   "definition": "Temperature-break strength suitability (pelagics only in practice)."
+  },
+  {
+   "table": "scores_daily",
+   "field": "term_chl",
+   "type": "float",
+   "units": "0\u20131",
+   "definition": "Chlorophyll suitability (null in this build)."
+  },
+  {
+   "table": "scores_daily",
+   "field": "anomaly_term",
+   "type": "float",
+   "units": "0.35\u20131.35",
+   "definition": "ENSO/anomaly multiplier from the species anomaly preference and the SST anomaly."
+  },
+  {
+   "table": "scores_daily",
+   "field": "contrib_json",
+   "type": "json",
+   "units": "log units",
+   "definition": "Per-driver weighted log-odds contribution relative to a neutral 0.5 suitability; drives the 'why' bars."
+  },
+  {
+   "table": "scores_daily",
+   "field": "missing_drivers",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Weighted drivers that had no data for that row."
+  },
+  {
+   "table": "scores_daily",
+   "field": "enso_regime",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Detailed regime in force at build time."
+  },
+  {
+   "table": "scores_daily",
+   "field": "oni",
+   "type": "float",
+   "units": "\u00b0C",
+   "definition": "CPC Oceanic Ni\u00f1o Index, 3-month running mean SST anomaly in Ni\u00f1o 3.4."
+  },
+  {
+   "table": "scores_daily",
+   "field": "annual_percentile",
+   "type": "float",
+   "units": "0\u2013100",
+   "definition": "Rank of today's score within that zone-species climatological annual distribution."
+  },
+  {
+   "table": "climatological_curve",
+   "field": "zone_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Fishing zone identifier; joins to dim_zones."
+  },
+  {
+   "table": "climatological_curve",
+   "field": "species_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Species identifier; joins to dim_species."
+  },
+  {
+   "table": "climatological_curve",
+   "field": "doy",
+   "type": "int",
+   "units": "1\u2013366",
+   "definition": "Day of year used to join day-of-year climatologies."
+  },
+  {
+   "table": "climatological_curve",
+   "field": "month",
+   "type": "int",
+   "units": "1\u201312",
+   "definition": "Calendar month."
+  },
+  {
+   "table": "climatological_curve",
+   "field": "climatological_score",
+   "type": "float",
+   "units": "0\u2013100",
+   "definition": "Score computed entirely from climatological drivers for that day of year."
+  },
+  {
+   "table": "climatological_curve",
+   "field": "sst_norm_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Climatological SST used to compute the climatological score curve."
+  },
+  {
+   "table": "climatological_curve",
+   "field": "wave_norm_ft",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "climatological_curve",
+   "field": "wind_norm_kt",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "climatological_curve",
+   "field": "climatology_source",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Which climatology baseline supplied the SST for the curve."
+  },
+  {
+   "table": "sst_climatology",
+   "field": "zone_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Fishing zone identifier; joins to dim_zones."
+  },
+  {
+   "table": "sst_climatology",
+   "field": "doy",
+   "type": "int",
+   "units": "1\u2013366",
+   "definition": "Day of year used to join day-of-year climatologies."
+  },
+  {
+   "table": "sst_climatology",
+   "field": "sst_norm",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Day-of-year climatological mean SST from the matching baseline (\u00b17-day window)."
+  },
+  {
+   "table": "sst_climatology",
+   "field": "sst_sd",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Standard deviation of the day-of-year SST sample."
+  },
+  {
+   "table": "sst_climatology",
+   "field": "sst_p10",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "10th percentile of the day-of-year SST sample."
+  },
+  {
+   "table": "sst_climatology",
+   "field": "sst_p50",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Median of the day-of-year SST sample."
+  },
+  {
+   "table": "sst_climatology",
+   "field": "sst_p90",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "90th percentile of the day-of-year SST sample."
+  },
+  {
+   "table": "sst_climatology",
+   "field": "sst_n",
+   "type": "int",
+   "units": "days",
+   "definition": "Number of observations in the day-of-year window."
+  },
+  {
+   "table": "sst_climatology",
+   "field": "sst_years",
+   "type": "int",
+   "units": "years",
+   "definition": "Distinct years contributing to that climatology."
+  },
+  {
+   "table": "shore_sst_climatology",
+   "field": "tide_station",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "NOAA CO-OPS station identifier."
+  },
+  {
+   "table": "shore_sst_climatology",
+   "field": "doy",
+   "type": "int",
+   "units": "1\u2013366",
+   "definition": "Day of year used to join day-of-year climatologies."
+  },
+  {
+   "table": "shore_sst_climatology",
+   "field": "shoresst_norm",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "shore_sst_climatology",
+   "field": "shoresst_sd",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "shore_sst_climatology",
+   "field": "shoresst_p10",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "shore_sst_climatology",
+   "field": "shoresst_p50",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "shore_sst_climatology",
+   "field": "shoresst_p90",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "shore_sst_climatology",
+   "field": "shoresst_n",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "shore_sst_climatology",
+   "field": "shoresst_years",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "shore_sst_daily",
+   "field": "tide_station",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "NOAA CO-OPS station identifier."
+  },
+  {
+   "table": "shore_sst_daily",
+   "field": "date",
+   "type": "date",
+   "units": "local date",
+   "definition": "Calendar date in America/Los_Angeles."
+  },
+  {
+   "table": "shore_sst_daily",
+   "field": "shore_sst_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "CO-OPS shore thermistor daily mean water temperature."
+  },
+  {
+   "table": "shore_sst_daily",
+   "field": "shore_sst_min_f",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "shore_sst_daily",
+   "field": "shore_sst_max_f",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "shore_sst_daily",
+   "field": "n_obs",
+   "type": "int",
+   "units": "count",
+   "definition": "Underlying observations in the aggregate."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "station",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "NDBC buoy station identifier."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "doy",
+   "type": "int",
+   "units": "1\u2013366",
+   "definition": "Day of year used to join day-of-year climatologies."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wave_norm",
+   "type": "float",
+   "units": "ft",
+   "definition": "Day-of-year climatological wave height at the reference buoy."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wave_sd",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wave_p10",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wave_p50",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wave_p90",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wave_n",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wave_years",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wind_norm",
+   "type": "float",
+   "units": "kt",
+   "definition": "Day-of-year climatological wind speed at the reference buoy."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wind_sd",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wind_p10",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wind_p50",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wind_p90",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wind_n",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "wind_years",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "buoysst_norm",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "buoysst_sd",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "buoysst_p10",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "buoysst_p50",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "buoysst_p90",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "buoysst_n",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_climatology",
+   "field": "buoysst_years",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "station",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "NDBC buoy station identifier."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "date",
+   "type": "date",
+   "units": "local date",
+   "definition": "Calendar date in America/Los_Angeles."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "wind_kt",
+   "type": "float",
+   "units": "kt",
+   "definition": "Daily maximum 10 m wind speed."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "wind_kt_max",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "gust_kt_max",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "wave_ft",
+   "type": "float",
+   "units": "ft",
+   "definition": "Significant wave height (daily maximum of the marine model)."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "wave_ft_max",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "swell_period_s",
+   "type": "float",
+   "units": "s",
+   "definition": "Swell-partition period."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "swell_dir_deg",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "pressure_hpa",
+   "type": "float",
+   "units": "hPa",
+   "definition": "Mean sea-level pressure."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "pressure_hpa_min",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "buoy_sst_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "NDBC buoy sea temperature daily mean."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "air_temp_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Daily maximum 2 m air temperature."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "wind_dir_deg",
+   "type": "float",
+   "units": "\u00b0 true",
+   "definition": "Dominant wind direction (coming from)."
+  },
+  {
+   "table": "buoy_daily",
+   "field": "pressure_trend_24h",
+   "type": "float",
+   "units": "hPa/24 h",
+   "definition": "Change in mean sea-level pressure from the previous day."
+  },
+  {
+   "table": "mur_history",
+   "field": "zone_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Fishing zone identifier; joins to dim_zones."
+  },
+  {
+   "table": "mur_history",
+   "field": "date",
+   "type": "date",
+   "units": "local date",
+   "definition": "Calendar date in America/Los_Angeles."
+  },
+  {
+   "table": "mur_history",
+   "field": "sst_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Zone sea surface temperature actually used in scoring: shore thermistor inshore, MUR satellite offshore, marine model as last resort."
+  },
+  {
+   "table": "tide_daily",
+   "field": "tide_station",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "NOAA CO-OPS station identifier."
+  },
+  {
+   "table": "tide_daily",
+   "field": "date",
+   "type": "date",
+   "units": "local date",
+   "definition": "Calendar date in America/Los_Angeles."
+  },
+  {
+   "table": "tide_daily",
+   "field": "tide_high_ft",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "tide_daily",
+   "field": "tide_low_ft",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "tide_daily",
+   "field": "tide_range_ft",
+   "type": "float",
+   "units": "ft",
+   "definition": "Highest high minus lowest low predicted tide for the day."
+  },
+  {
+   "table": "tide_daily",
+   "field": "tide_exchanges",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "tide_daily",
+   "field": "max_exchange_rate_ft_h",
+   "type": "float",
+   "units": "ft/h",
+   "definition": "Largest mean vertical exchange rate between consecutive tide extremes."
+  },
+  {
+   "table": "tide_daily",
+   "field": "best_water_hour",
+   "type": "float",
+   "units": "local h",
+   "definition": "Midpoint of the strongest tidal exchange of the day."
+  },
+  {
+   "table": "tide_daily",
+   "field": "first_high_hour",
+   "type": "float",
+   "units": "local h",
+   "definition": "Decimal hour of the first predicted high tide."
+  },
+  {
+   "table": "enso_oni",
+   "field": "season",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "CPC three-letter overlapping season label (e.g. JJA)."
+  },
+  {
+   "table": "enso_oni",
+   "field": "year",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "enso_oni",
+   "field": "sst_c",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "enso_oni",
+   "field": "oni",
+   "type": "float",
+   "units": "\u00b0C",
+   "definition": "CPC Oceanic Ni\u00f1o Index, 3-month running mean SST anomaly in Ni\u00f1o 3.4."
+  },
+  {
+   "table": "enso_oni",
+   "field": "month",
+   "type": "int",
+   "units": "1\u201312",
+   "definition": "Calendar month."
+  },
+  {
+   "table": "enso_oni",
+   "field": "regime",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Detailed ENSO classification: strong/moderate/weak El Ni\u00f1o, neutral, or La Ni\u00f1a equivalents."
+  },
+  {
+   "table": "enso_oni",
+   "field": "simple_regime",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Collapsed ENSO classification: el_nino, neutral or la_nina."
+  },
+  {
+   "table": "enso_current",
+   "field": "season",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "CPC three-letter overlapping season label (e.g. JJA)."
+  },
+  {
+   "table": "enso_current",
+   "field": "year",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "enso_current",
+   "field": "oni",
+   "type": "float",
+   "units": "\u00b0C",
+   "definition": "CPC Oceanic Ni\u00f1o Index, 3-month running mean SST anomaly in Ni\u00f1o 3.4."
+  },
+  {
+   "table": "enso_current",
+   "field": "regime",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Detailed ENSO classification: strong/moderate/weak El Ni\u00f1o, neutral, or La Ni\u00f1a equivalents."
+  },
+  {
+   "table": "enso_current",
+   "field": "simple_regime",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Collapsed ENSO classification: el_nino, neutral or la_nina."
+  },
+  {
+   "table": "enso_current",
+   "field": "trailing_12mo_mean_oni",
+   "type": "float",
+   "units": "\u00b0C",
+   "definition": "Mean ONI over the last 12 months: regime persistence."
+  },
+  {
+   "table": "enso_zone_composite",
+   "field": "zone_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Fishing zone identifier; joins to dim_zones."
+  },
+  {
+   "table": "enso_zone_composite",
+   "field": "month",
+   "type": "int",
+   "units": "1\u201312",
+   "definition": "Calendar month."
+  },
+  {
+   "table": "enso_zone_composite",
+   "field": "simple_regime",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Collapsed ENSO classification: el_nino, neutral or la_nina."
+  },
+  {
+   "table": "enso_zone_composite",
+   "field": "mean_anom_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Mean zone SST anomaly observed in that ENSO regime and month."
+  },
+  {
+   "table": "enso_zone_composite",
+   "field": "sd_anom_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Standard deviation of that composite sample."
+  },
+  {
+   "table": "enso_zone_composite",
+   "field": "n_days",
+   "type": "int",
+   "units": "days",
+   "definition": "Sample size."
+  },
+  {
+   "table": "enso_sensitivity",
+   "field": "zone_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Fishing zone identifier; joins to dim_zones."
+  },
+  {
+   "table": "enso_sensitivity",
+   "field": "month",
+   "type": "int",
+   "units": "1\u201312",
+   "definition": "Calendar month."
+  },
+  {
+   "table": "enso_sensitivity",
+   "field": "anom_f_per_oni",
+   "type": "float",
+   "units": "\u00b0F per \u00b0C",
+   "definition": "Regression slope of zone SST anomaly on ONI for that month: local ENSO sensitivity."
+  },
+  {
+   "table": "enso_sensitivity",
+   "field": "r",
+   "type": "float",
+   "units": "\u22121\u20131",
+   "definition": "Pearson correlation for that regression."
+  },
+  {
+   "table": "enso_sensitivity",
+   "field": "n_days",
+   "type": "int",
+   "units": "days",
+   "definition": "Sample size."
+  },
+  {
+   "table": "catch_reports",
+   "field": "date",
+   "type": "date",
+   "units": "local date",
+   "definition": "Calendar date in America/Los_Angeles."
+  },
+  {
+   "table": "catch_reports",
+   "field": "landing",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Sportfishing landing reporting the trip."
+  },
+  {
+   "table": "catch_reports",
+   "field": "boat",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Vessel name."
+  },
+  {
+   "table": "catch_reports",
+   "field": "trip_type",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Reported trip length category."
+  },
+  {
+   "table": "catch_reports",
+   "field": "anglers",
+   "type": "int",
+   "units": "count",
+   "definition": "Anglers aboard."
+  },
+  {
+   "table": "catch_reports",
+   "field": "species_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Species identifier; joins to dim_species."
+  },
+  {
+   "table": "catch_reports",
+   "field": "kept",
+   "type": "int",
+   "units": "fish",
+   "definition": "Fish reported kept."
+  },
+  {
+   "table": "catch_reports",
+   "field": "released",
+   "type": "int",
+   "units": "fish",
+   "definition": "Fish reported released."
+  },
+  {
+   "table": "catch_reports",
+   "field": "zone_hint",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Zone inferred from the trip description, where stated."
+  },
+  {
+   "table": "catch_reports",
+   "field": "source_url",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Page the report was read from."
+  },
+  {
+   "table": "catch_reports",
+   "field": "trip_days",
+   "type": "float",
+   "units": "days",
+   "definition": "Trip length in days used to normalize effort."
+  },
+  {
+   "table": "catch_reports",
+   "field": "cpue",
+   "type": "float",
+   "units": "fish/angler",
+   "definition": "Fish kept per angler."
+  },
+  {
+   "table": "catch_reports",
+   "field": "cpue_per_angler_day",
+   "type": "float",
+   "units": "fish/angler-day",
+   "definition": "Fish kept per angler per day of trip length: the validation target."
+  },
+  {
+   "table": "catch_daily_cpue",
+   "field": "date",
+   "type": "date",
+   "units": "local date",
+   "definition": "Calendar date in America/Los_Angeles."
+  },
+  {
+   "table": "catch_daily_cpue",
+   "field": "species_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Species identifier; joins to dim_species."
+  },
+  {
+   "table": "catch_daily_cpue",
+   "field": "kept",
+   "type": "int",
+   "units": "fish",
+   "definition": "Fish reported kept."
+  },
+  {
+   "table": "catch_daily_cpue",
+   "field": "released",
+   "type": "int",
+   "units": "fish",
+   "definition": "Fish reported released."
+  },
+  {
+   "table": "catch_daily_cpue",
+   "field": "anglers",
+   "type": "int",
+   "units": "count",
+   "definition": "Anglers aboard."
+  },
+  {
+   "table": "catch_daily_cpue",
+   "field": "angler_days",
+   "type": "float",
+   "units": "angler-days",
+   "definition": "Anglers \u00d7 trip length."
+  },
+  {
+   "table": "catch_daily_cpue",
+   "field": "trips",
+   "type": "int",
+   "units": "count",
+   "definition": "Boat trips contributing to the row."
+  },
+  {
+   "table": "catch_daily_cpue",
+   "field": "cpue",
+   "type": "float",
+   "units": "fish/angler",
+   "definition": "Fish kept per angler."
+  },
+  {
+   "table": "catch_daily_cpue",
+   "field": "cpue_per_angler_day",
+   "type": "float",
+   "units": "fish/angler-day",
+   "definition": "Fish kept per angler per day of trip length: the validation target."
+  },
+  {
+   "table": "model_validation",
+   "field": "species_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Species identifier; joins to dim_species."
+  },
+  {
+   "table": "model_validation",
+   "field": "species",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Common name."
+  },
+  {
+   "table": "model_validation",
+   "field": "n_days",
+   "type": "int",
+   "units": "days",
+   "definition": "Sample size."
+  },
+  {
+   "table": "model_validation",
+   "field": "spearman_rho",
+   "type": "float",
+   "units": "\u22121\u20131",
+   "definition": "Rank correlation between daily best score and normalized CPUE."
+  },
+  {
+   "table": "model_validation",
+   "field": "pearson_r",
+   "type": "float",
+   "units": "\u22121\u20131",
+   "definition": "Linear correlation of the same pair."
+  },
+  {
+   "table": "model_validation",
+   "field": "spearman_rho_raw_cpue",
+   "type": "float",
+   "units": "\u22121\u20131",
+   "definition": "Rank correlation against un-normalized fish per angler."
+  },
+  {
+   "table": "model_validation",
+   "field": "mean_cpue_per_angler_day",
+   "type": "float",
+   "units": "fish/angler-day",
+   "definition": "Mean observed normalized CPUE over the compared days."
+  },
+  {
+   "table": "model_validation",
+   "field": "mean_score",
+   "type": "float",
+   "units": "0\u2013100",
+   "definition": "Mean modeled score over the compared days."
+  },
+  {
+   "table": "model_validation",
+   "field": "total_fish",
+   "type": "int",
+   "units": "fish",
+   "definition": "Fish in the compared sample."
+  },
+  {
+   "table": "model_validation",
+   "field": "total_anglers",
+   "type": "int",
+   "units": "anglers",
+   "definition": "Anglers in the compared sample."
+  },
+  {
+   "table": "dim_zones",
+   "field": "id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Zone identifier."
+  },
+  {
+   "table": "dim_zones",
+   "field": "name",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Human-readable zone name."
+  },
+  {
+   "table": "dim_zones",
+   "field": "band",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "inshore, nearshore or offshore."
+  },
+  {
+   "table": "dim_zones",
+   "field": "lat",
+   "type": "float",
+   "units": "\u00b0N",
+   "definition": "Zone centroid latitude."
+  },
+  {
+   "table": "dim_zones",
+   "field": "lon",
+   "type": "float",
+   "units": "\u00b0E",
+   "definition": "Zone centroid longitude."
+  },
+  {
+   "table": "dim_zones",
+   "field": "depth_ft",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "dim_zones",
+   "field": "distance_nm",
+   "type": "float",
+   "units": "nm",
+   "definition": "Approximate run from Point Loma."
+  },
+  {
+   "table": "dim_zones",
+   "field": "waters",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "us or mexico."
+  },
+  {
+   "table": "dim_zones",
+   "field": "buoys",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Reference NDBC buoys, comma separated."
+  },
+  {
+   "table": "dim_zones",
+   "field": "tide_station",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "NOAA CO-OPS station identifier."
+  },
+  {
+   "table": "dim_zones",
+   "field": "structure",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Dominant habitat or structure."
+  },
+  {
+   "table": "dim_zones",
+   "field": "permit",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Permit requirement note."
+  },
+  {
+   "table": "dim_zones",
+   "field": "sst_lat",
+   "type": "float",
+   "units": "\u00b0N",
+   "definition": "Latitude of the open-water pixel used for satellite SST."
+  },
+  {
+   "table": "dim_zones",
+   "field": "sst_lon",
+   "type": "float",
+   "units": "\u00b0E",
+   "definition": "Longitude of the open-water pixel used for satellite SST."
+  },
+  {
+   "table": "dim_zones",
+   "field": "depth_mid_ft",
+   "type": "float",
+   "units": "ft",
+   "definition": "Representative depth used for the near-bottom temperature approximation."
+  },
+  {
+   "table": "dim_species",
+   "field": "species_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Species identifier; joins to dim_species."
+  },
+  {
+   "table": "dim_species",
+   "field": "species",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Common name."
+  },
+  {
+   "table": "dim_species",
+   "field": "group",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Functional group used for chlorophyll and front handling."
+  },
+  {
+   "table": "dim_species",
+   "field": "temp_reference",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Whether the temperature window applies to surface or near-bottom temperature."
+  },
+  {
+   "table": "dim_species",
+   "field": "sst_min_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Lower bound of the trapezoidal temperature response."
+  },
+  {
+   "table": "dim_species",
+   "field": "sst_opt_lo_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Start of the optimum temperature plateau."
+  },
+  {
+   "table": "dim_species",
+   "field": "sst_opt_hi_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "End of the optimum temperature plateau."
+  },
+  {
+   "table": "dim_species",
+   "field": "sst_max_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Upper bound of the trapezoidal temperature response."
+  },
+  {
+   "table": "dim_species",
+   "field": "anomaly_pref",
+   "type": "float",
+   "units": "\u22121\u20131",
+   "definition": "Preference for warm (positive) or cold (negative) SST anomalies."
+  },
+  {
+   "table": "dim_species",
+   "field": "tide_pref",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Tide regime the species is scored against."
+  },
+  {
+   "table": "dim_species",
+   "field": "moon_pref",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Lunar regime the species is scored against."
+  },
+  {
+   "table": "dim_species",
+   "field": "swell_tolerance_ft",
+   "type": "float",
+   "units": "ft",
+   "definition": "Wave height at which the swell term begins to fall away sharply."
+  },
+  {
+   "table": "dim_species",
+   "field": "depth_min_ft",
+   "type": "float",
+   "units": "ft",
+   "definition": "Shallow end of the species' usual depth range."
+  },
+  {
+   "table": "dim_species",
+   "field": "depth_max_ft",
+   "type": "float",
+   "units": "ft",
+   "definition": "Deep end of the species' usual depth range."
+  },
+  {
+   "table": "dim_species",
+   "field": "zones",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Zones in which the species is modeled."
+  },
+  {
+   "table": "dim_species",
+   "field": "season_index_monthly",
+   "type": "string",
+   "units": "0\u20131 \u00d7 12",
+   "definition": "Monthly seasonal presence index, January first."
+  },
+  {
+   "table": "dim_species",
+   "field": "weights_json",
+   "type": "json",
+   "units": "\u2014",
+   "definition": "Driver weights used in the weighted geometric mean."
+  },
+  {
+   "table": "dim_species",
+   "field": "notes",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Behavioural notes behind the parameters."
+  },
+  {
+   "table": "dim_species",
+   "field": "sources",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Reference URLs for the species parameters."
+  },
+  {
+   "table": "fronts",
+   "field": "zone_id",
+   "type": "string",
+   "units": "\u2014",
+   "definition": "Fishing zone identifier; joins to dim_zones."
+  },
+  {
+   "table": "fronts",
+   "field": "date",
+   "type": "date",
+   "units": "local date",
+   "definition": "Calendar date in America/Los_Angeles."
+  },
+  {
+   "table": "fronts",
+   "field": "front_f_per_nm",
+   "type": "float",
+   "units": "\u00b0F/nm",
+   "definition": "Horizontal SST gradient magnitude near the zone from the MUR grid: temperature-break strength."
+  },
+  {
+   "table": "fronts",
+   "field": "front_mean_f_per_nm",
+   "type": "\u2014",
+   "units": "\u2014",
+   "definition": "Derived column; see build_dataset.py."
+  },
+  {
+   "table": "fronts",
+   "field": "sst_spread_f",
+   "type": "float",
+   "units": "\u00b0F",
+   "definition": "Range of SST within the sampled neighbourhood around the zone."
+  }
+ ],
+ "gaps": [
+  "Chlorophyll-a: no ERDDAP dataset ID resolved during this build, so the chlorophyll driver has zero weight in every score and is reported as a missing driver rather than imputed.",
+  "Upwelling index (CUTI): the ERDDAP table endpoint returned HTTP 404, so the upwelling column is present in the schema but empty.",
+  "Front (temperature-break) strength is computed only where the recent MUR regional grid covers the zone; older dates fall back to a null front term rather than an estimate.",
+  "Trip-level CPFV logbook catch is confidential, so validation relies on 13 days of public dock totals from a single late-summer window - enough for a sanity check, not for a skill score.",
+  "The inshore SST climatology is 11 years (CO-OPS, 2015-present) while the wave and wind climatology is up to 23 years (NDBC buoys); anomalies from the two baselines are not directly comparable.",
+  "Species response parameters are literature- and experience-derived priors, not fitted coefficients. They have not been calibrated against catch data because the available catch record is too short.",
+  "Mexican-water zones (Coronado Islands, Cortez and Tanner banks) carry no permit or closure feed; a Mexican FMM permit and fishing licence are required and must be verified independently.",
+  "This is a static snapshot build: the dashboard reflects the data as of the build timestamp and does not refresh itself.",
+  "Extended range, days 15-30: no true extended MARINE forecast exists at public-API level, so wave_proj_ft, wind_proj_kt and fishability_outlook are deliberately NULL for the whole tier rather than filled with a seasonal average dressed up as a forecast.",
+  "Extended range: the CPC 8-14 day, week 3-4 and monthly outlooks are CONUS land air-temperature tercile products. No polygon covers the offshore zones, so one onshore San Diego proxy point (-117.15, 32.70) is sampled for all nine zones. Treat it as a regional warm/cool lean only.",
+  "Extended range: observed analog-year SST anomalies can only be computed for analog years inside the MUR satellite record, so of the eight ENSO analog years only 2023 has an observed local anomaly (and it ran counter to the composite). The primary ENSO signal is the zone composite.",
+  "Extended range: barometric pressure exists only inside the deterministic model horizon. Feeding it into days 8-14 and dropping it at day 15 renormalized the driver weights and produced a false score cliff at the tier boundary, so pressure is excluded from the extended score at BOTH tiers and published only as the reference field pressure_trend_model_24h.",
+  "Extended range: front strength and chlorophyll are unavailable beyond the near term, so those drivers are dropped and the remaining weights renormalize. Extended scores are directionally comparable to near-term scores but are not identically constructed.",
+  "Extended range: only NDBC 46086 carries a wind climatology, so seven of nine zones fall back to it as a regional wind normal, flagged by wind_norm_is_regional_fallback. Wave climatology gets NO such fallback -- San Diego Bay and Mission Bay keep a null wave normal and honestly drop the swell driver, because substituting an offshore buoy put 8 ft swell inside a harbour.",
+  "Extended range: the published score band is ratcheted so its half-width never narrows as lead time grows. The raw SST-sensitivity band can narrow at long lead where the score saturates near its soft ceiling, which would falsely imply rising certainty. Rows where the band edge is clipped by the bounded 0-100 scale are flagged by score_band_hits_ceiling / score_band_hits_floor."
+ ]
+}

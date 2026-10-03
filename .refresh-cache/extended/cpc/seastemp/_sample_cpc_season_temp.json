@@ -1,0 +1,11 @@
+{
+ "cat": "Above",
+ "prob": 40.0,
+ "record": {
+  "Fcst_Date": "2026-09-17",
+  "Valid_Seas": "OND 2026",
+  "Prob": 40.0,
+  "Cat": "Above"
+ },
+ "shapefile": "cpc/seastemp/lead1_OND_temp.shp"
+}

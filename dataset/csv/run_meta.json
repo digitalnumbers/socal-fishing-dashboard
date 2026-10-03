@@ -1,0 +1,10 @@
+{
+  "run_utc": "2026-10-03T23:18:28.490878+00:00",
+  "zones": 9,
+  "species": 15,
+  "score_rows": 1218,
+  "baseline": "2015\u20132026",
+  "baseline_satellite": "2015\u20132026",
+  "baseline_shore": "2015\u20132026",
+  "baseline_buoy": "2003\u20132026"
+}
