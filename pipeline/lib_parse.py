@@ -4,8 +4,9 @@ from datetime import datetime, date, timedelta, timezone
 import numpy as np
 import pandas as pd
 
-RAW = "/home/user/workspace/socal/data/raw"
-CFG = "/home/user/workspace/socal/config"
+ROOT = os.environ.get("SOCAL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+RAW = os.environ.get("SOCAL_RAW", os.path.join(ROOT, "data", "raw"))
+CFG = os.path.join(ROOT, "pipeline", "config")
 ZONES = json.load(open(f"{CFG}/zones.json"))
 SPECIES = json.load(open(f"{CFG}/species.json"))
 MISS = {"MM", "999", "99.0", "999.0", "9999.0", "99.00", "9999", "99"}

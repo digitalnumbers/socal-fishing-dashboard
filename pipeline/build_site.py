@@ -3,8 +3,9 @@ import json, os, math
 import numpy as np
 import pandas as pd
 
-OUT = "/home/user/workspace/socal/data/out"
-SITE = "/home/user/workspace/socal/site"
+ROOT = os.environ.get("SOCAL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT = os.environ.get("SOCAL_OUT", os.path.join(ROOT, "dataset", "csv"))
+SITE = os.environ.get("SOCAL_SITE", os.path.join(ROOT, "app"))
 os.makedirs(SITE, exist_ok=True)
 
 def rd(name):
@@ -83,6 +84,10 @@ payload = {
     "cpue": recs(cpue, None, 3),
     "trips": recs(trips[["date", "landing", "boat", "trip_type", "anglers", "species_id", "kept", "cpue_per_angler_day"]]
                   if not trips.empty else trips, None, 3),
+}
+status_path = os.environ.get("SOCAL_SOURCE_STATUS", os.path.join(OUT, "source_status.json"))
+payload["source_status"] = json.load(open(status_path)) if os.path.exists(status_path) else {
+    "overall": "unknown", "sources": [], "note": "Freshness metadata unavailable for this legacy build."
 }
 docs = json.load(open(f"{OUT}/docs.json"))
 payload["registry"] = docs["registry"]

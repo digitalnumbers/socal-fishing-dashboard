@@ -16,8 +16,8 @@ from openpyxl.utils import get_column_letter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-CSV_DIR = os.path.join(ROOT, "dataset", "csv")
-XLSX = os.path.join(ROOT, "dataset", "socal_fishing_dataset.xlsx")
+CSV_DIR = os.environ.get("SOCAL_OUT", os.path.join(ROOT, "dataset", "csv"))
+XLSX = os.environ.get("SOCAL_XLSX", os.path.join(ROOT, "dataset", "socal_fishing_dataset.xlsx"))
 
 # (csv filename, sheet name). Sheet names are capped at 31 chars by the format.
 SHEETS = [
@@ -56,7 +56,9 @@ def main():
         ws.freeze_panes = "A2"
         ws.auto_filter.ref = ws.dimensions
         for i, col in enumerate(df.columns, start=1):
-            width = max(len(str(col)) + 2, min(38, int(df[col].astype(str).str.len().max() or 8) + 2))
+            measured = df[col].astype("string").str.len().max()
+            content_width = 8 if pd.isna(measured) else int(measured)
+            width = max(len(str(col)) + 2, min(38, content_width + 2))
             ws.column_dimensions[get_column_letter(i)].width = width
         print(f"  {sheet:24s} <- {fname:34s} {len(df):5d} rows x {len(df.columns)} cols")
 

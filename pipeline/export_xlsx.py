@@ -5,11 +5,11 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.formatting.rule import ColorScaleRule
 
-BASE = "/home/user/workspace/socal"
-OUT = f"{BASE}/data/out"
-DIST = f"{BASE}/dist"
+BASE = os.environ.get("SOCAL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT = os.environ.get("SOCAL_OUT", os.path.join(BASE, "dataset", "csv"))
+DIST = os.environ.get("SOCAL_DIST", os.path.join(BASE, "dataset"))
 os.makedirs(DIST, exist_ok=True)
-XLSX = f"{DIST}/socal_fishing_dataset.xlsx"
+XLSX = os.environ.get("SOCAL_XLSX", os.path.join(DIST, "socal_fishing_dataset.xlsx"))
 
 SHEETS = [
     ("README", None),
@@ -124,18 +124,7 @@ def main():
         rm["A1"].font = TITLE_FONT
         rm["A1"].fill = PatternFill("solid", fgColor="F2F6F9")
 
-    # CSV bundle
-    csvdir = f"{DIST}/csv"
-    os.makedirs(csvdir, exist_ok=True)
-    n = 0
-    for p in glob.glob(f"{OUT}/*.csv"):
-        shutil.copy(p, csvdir); n += 1
-    for name, d in frames.items():
-        if not d.empty:
-            d.to_csv(f"{csvdir}/{name}.csv", index=False); n += 1
-    shutil.copy(f"{BASE}/docs/SOURCE_REGISTRY.md", DIST)
-    shutil.copy(f"{BASE}/docs/DATA_DICTIONARY.md", DIST)
-    print(f"{XLSX} ({os.path.getsize(XLSX)/1024:.0f} KB) · {n} CSVs in dist/csv")
+    print(f"{XLSX} ({os.path.getsize(XLSX)/1024:.0f} KB)")
 
 
 if __name__ == "__main__":

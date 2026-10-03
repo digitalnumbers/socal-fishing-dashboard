@@ -974,7 +974,25 @@ function renderValidation() {
 /* ================================================== DATA & SOURCES ================================================== */
 function renderData() {
   const host = $('#tab-data'); host.innerHTML = '';
+  const SS = D.source_status || {};
+  const SR = SS.sources || [];
+  const sc = SS.summary || {};
+  const cS = el('div', 'card');
+  cS.appendChild(el('div', 'card-hd', `<div><h3>Build and source freshness</h3>
+    <div class="sub">Build time is separate from each source's newest observation or forecast issue time</div></div>
+    <a class="chip lnk" href="downloads/csv/source_status.json" download>source_status.json</a>`));
+  cS.insertAdjacentHTML('beforeend', '<div class="status-summary">' +
+    ['fresh', 'delayed', 'stale', 'failed', 'cached', 'not_due'].filter(k => sc[k])
+      .map(k => `<span class="status-count ${k}">${k.replace('_', ' ')} ${sc[k]}</span>`).join('') +
+    '</div><div class="tbl-wrap"><table><thead><tr><th>Source</th><th>Status</th><th>Newest data</th><th>Last success</th><th>Cadence</th><th>Note</th></tr></thead><tbody>' +
+    SR.map(r => `<tr><td>${r.display_name}</td><td><span class="pill">${r.freshness}${r.used_cached_data ? ' · cached' : ''}</span></td>
+      <td>${r.newest_valid_source_timestamp || '—'}</td><td>${r.last_successful_fetch_local || '—'}</td>
+      <td>${r.expected_cadence}</td><td class="wrap-ok status-note">${r.error || r.note || '—'}</td></tr>`).join('') +
+    '</tbody></table></div>');
+  host.appendChild(cS);
+
   const c0 = el('div', 'card');
+  c0.style.marginTop = '14px';
   c0.appendChild(el('div', 'card-hd', `<div><h3>Downloads</h3>
     <div class="sub">Full cleaned dataset, every intermediate table, and the written documentation</div></div>`));
   c0.insertAdjacentHTML('beforeend', `<div class="chips" style="gap:10px">
@@ -1080,7 +1098,19 @@ function boot() {
   const e = D.enso_current[0] || {};
   $('#badge-enso').innerHTML = `<span class="dot" style="background:${e.simple_regime === 'el_nino' ? css('--coral') : e.simple_regime === 'la_nina' ? css('--sky') : css('--teal')}"></span>
     <span>${e.regime ? ensoLabel(e.regime) : 'ENSO'} · ONI <b>${sign(e.oni, 2)}</b></span>`;
-  $('#badge-run').textContent = 'Built ' + new Date(D.meta.generated).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' · static snapshot';
+  const ss = D.source_status || {}, sm = ss.summary || {};
+  const degraded = (sm.failed || 0) + (sm.stale || 0) + (sm.delayed || 0) + (sm.cached || 0);
+  const sb = $('#badge-sources');
+  const hasStatus = (ss.sources || []).length > 0;
+  sb.textContent = !hasStatus ? 'Freshness unavailable' :
+    (degraded ? `${degraded} source${degraded === 1 ? '' : 's'} degraded` : 'Sources current');
+  sb.classList.toggle('status-bad', (sm.failed || 0) + (sm.stale || 0) > 0);
+  sb.classList.toggle('status-warn', !sb.classList.contains('status-bad') && (!hasStatus || degraded > 0));
+  const built = ss.build_completed_at_utc || ss.build_started_at_utc || D.meta.generated;
+  $('#badge-run').textContent = 'Built ' + new Date(built).toLocaleString('en-US', {
+    timeZone: 'America/Los_Angeles', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
+    timeZoneName: 'short'
+  }) + ' · static snapshot';
   $('#hd-sub').textContent = `${D.zones.length} zones · ${D.species.length} species · ${D.meta.dates.length}-day window`;
   $('#foot').innerHTML = `<b>SoCal Fishing Intelligence</b> — built for San Diego inshore, nearshore and offshore waters.
     Model scores are decision support, not a guarantee: they combine public environmental feeds with published

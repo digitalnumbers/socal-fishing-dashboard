@@ -12,11 +12,27 @@ Data build: **2026-08-28 14:00 UTC** · 9 zones · 15 species · 21-day window (
 | Path | What it is |
 | --- | --- |
 | `app/` | The interactive dashboard (static — `index.html` + `app.js` + `data.js`, Chart.js from CDN) |
-| `dataset/socal_fishing_dataset.xlsx` | 24-sheet workbook: every cleaned source table and every calculation |
-| `dataset/csv/` | The same 24 tables as individual CSVs |
+| `dataset/socal_fishing_dataset.xlsx` | 31-sheet workbook: every cleaned source table and calculation |
+| `dataset/csv/` | 31 CSV tables plus machine-readable build/source metadata |
 | `docs/SOURCE_REGISTRY.md` | All 13 data sources with endpoint, coverage, cadence, licence and limitations |
 | `docs/DATA_DICTIONARY.md` | 287 field definitions plus the scoring model and reproduction steps |
 | `pipeline/` | The fetch, build, export and site-generation scripts, and the zone/species/source config |
+
+## Daily automation
+
+The production-safe entry point is:
+
+```bash
+python pipeline/run_daily_refresh.py
+```
+
+Validate the current clean-clone snapshot without network access or repository changes:
+
+```bash
+python pipeline/run_daily_refresh.py --dry-run
+```
+
+GitHub Actions evaluates UTC candidates for both PST and PDT, gates them with `America/Los_Angeles`, and runs once per successful Pacific calendar date around 06:30. It fetches only bounded recent or due source windows, retains last-known-good data for honest degraded operation, validates a complete staged generation, commits meaningful state, and deploys `app/` only after every gate passes. See [Daily Refresh Operations](docs/DAILY_REFRESH.md) and [Pipeline Safety Audit](docs/PIPELINE_AUDIT.md).
 
 ## Zones
 
@@ -71,12 +87,7 @@ The dashboard now carries a fourth view, **30-Day Outlook**, extending the horiz
 
 Days 15-30 deliberately publish no daily wind or swell figures, because no public extended marine forecast has useful skill at that range. Field-by-field provenance is in `dataset/csv/extended_field_provenance.csv` and `docs/SOURCE_REGISTRY.md`.
 
-```bash
-python pipeline/fetch_extended.py      # CPC GIS outlooks, 40-day tides, 16-day models (slow, >10 min)
-python pipeline/build_extended.py     # extended tables, reusing the near-term scoring engine
-python pipeline/gen_extended_docs.py    # registry + dictionary (this script)
-python pipeline/append_extended_xlsx.py # add the extended sheets to the workbook
-python pipeline/stage_downloads.py      # populate app/downloads for the Data tab
-python pipeline/inject_extended.py    # additive patch of app/data.js
-```
+The daily orchestrator refreshes the extended inputs and rebuilds these tables automatically. Run
+`python pipeline/run_daily_refresh.py --force --full-rebuild` for an on-demand recomputation; use the
+legacy individual scripts only for deliberate historical repair or schema maintenance.
 <!-- END extended-range -->

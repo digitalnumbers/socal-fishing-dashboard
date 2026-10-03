@@ -2,11 +2,11 @@
 import json, os, glob
 import pandas as pd
 
-BASE = "/home/user/workspace/socal"
-OUT = f"{BASE}/data/out"
-DOC = f"{BASE}/docs"
+BASE = os.environ.get("SOCAL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT = os.environ.get("SOCAL_OUT", os.path.join(BASE, "dataset", "csv"))
+DOC = os.environ.get("SOCAL_DOCS", os.path.join(BASE, "docs"))
 os.makedirs(DOC, exist_ok=True)
-SRC = json.load(open(f"{BASE}/config/sources.json"))
+SRC = json.load(open(os.path.join(BASE, "pipeline", "config", "sources.json")))
 
 DEF = {
  # keys
@@ -260,8 +260,16 @@ def md_dictionary(rows):
 
 if __name__ == "__main__":
     rows = dictionary()
-    open(f"{DOC}/SOURCE_REGISTRY.md", "w").write(md_registry())
-    open(f"{DOC}/DATA_DICTIONARY.md", "w").write(md_dictionary(rows))
+    for path, content in (
+        (os.path.join(DOC, "SOURCE_REGISTRY.md"), md_registry()),
+        (os.path.join(DOC, "DATA_DICTIONARY.md"), md_dictionary(rows)),
+    ):
+        tmp = path + ".tmp"
+        open(tmp, "w").write(content)
+        os.replace(tmp, path)
+    path = os.path.join(OUT, "docs.json")
+    tmp = path + ".tmp"
     json.dump({"registry": SRC["registry"], "dictionary": rows, "gaps": SRC["gaps"]},
-              open(f"{OUT}/docs.json", "w"), indent=1)
+              open(tmp, "w"), indent=1)
+    os.replace(tmp, path)
     print(f"registry {len(SRC['registry'])} sources | dictionary {len(rows)} fields | gaps {len(SRC['gaps'])}")

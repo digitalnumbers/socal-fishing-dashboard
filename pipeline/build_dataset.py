@@ -4,11 +4,13 @@ from datetime import datetime, date, timedelta, timezone
 import numpy as np
 import pandas as pd
 
-sys.path.insert(0, "/home/user/workspace/socal")
+ROOT = os.environ.get("SOCAL_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.join(ROOT, "pipeline"))
 import lib_parse as L
 from lib_parse import ZONES, SPECIES, RAW
 
-OUT = "/home/user/workspace/socal/data/out"
+OUT = os.environ.get("SOCAL_OUT", os.path.join(ROOT, "dataset", "csv"))
+BASELINE = os.environ.get("SOCAL_BASELINE_CSV", os.path.join(ROOT, "dataset", "csv"))
 os.makedirs(OUT, exist_ok=True)
 ZMAP = {z["id"]: z for z in ZONES}
 SMAP = {s["id"]: s for s in SPECIES}
@@ -47,6 +49,11 @@ def om_zone_daily():
 # ============================================================ 2. MUR SST + climatology
 def mur_zone_history():
     frames = []
+    prior = os.path.join(BASELINE, "mur_history.csv")
+    if os.path.exists(prior):
+        d = pd.read_csv(prior)
+        d["date"] = pd.to_datetime(d.date)
+        frames.append(d[["zone_id", "date", "sst_f"]])
     for p in sorted(glob.glob(f"{RAW}/mur_*_*.csv")):
         if "grid" in p:
             continue
@@ -93,8 +100,14 @@ def doy_climatology(df, value_col, group_col="zone_id", window=7, label="sst"):
 # ============================================================ 3. buoy climatology (waves/wind/SST)
 def buoy_climatology():
     hourly, daily = L.ndbc_all()
+    prior = os.path.join(BASELINE, "buoy_daily.csv")
+    if os.path.exists(prior):
+        old = pd.read_csv(prior)
+        old["date"] = pd.to_datetime(old.date)
+        daily = pd.concat([old, daily], ignore_index=True) if not daily.empty else old
+        daily = daily.drop_duplicates(["station", "date"], keep="last")
     if daily.empty:
-        return daily, pd.DataFrame(), pd.DataFrame()
+        return daily, pd.DataFrame(), hourly
     daily = daily.dropna(subset=["date"])
     wave_clim = doy_climatology(daily.dropna(subset=["wave_ft"]), "wave_ft", "station", 7, "wave")
     wind_clim = doy_climatology(daily.dropna(subset=["wind_kt"]), "wind_kt", "station", 7, "wind")
@@ -105,13 +118,22 @@ def buoy_climatology():
 # ============================================================ 4. shore SST (CO-OPS)
 def shore_sst():
     d = L.coops_json("coops_*_water_temperature_*.json", "data")
-    if d.empty:
+    daily = pd.DataFrame()
+    if not d.empty:
+        d["date"] = pd.to_datetime(d.ts.dt.date)
+        daily = d.groupby(["station", "date"]).v.agg(["mean", "min", "max", "count"]).reset_index()
+        daily = daily.rename(columns={"station": "tide_station", "mean": "shore_sst_f",
+                                      "min": "shore_sst_min_f", "max": "shore_sst_max_f", "count": "n_obs"})
+        daily = daily[daily.n_obs >= 12]
+    prior = os.path.join(BASELINE, "shore_sst_daily.csv")
+    if os.path.exists(prior):
+        old = pd.read_csv(prior, dtype={"tide_station": str})
+        old["date"] = pd.to_datetime(old.date)
+        daily["tide_station"] = daily.get("tide_station", pd.Series(dtype=str)).astype(str)
+        daily = pd.concat([old, daily], ignore_index=True).drop_duplicates(
+            ["tide_station", "date"], keep="last")
+    if daily.empty:
         return pd.DataFrame(), pd.DataFrame()
-    d["date"] = pd.to_datetime(d.ts.dt.date)
-    daily = d.groupby(["station", "date"]).v.agg(["mean", "min", "max", "count"]).reset_index()
-    daily = daily.rename(columns={"station": "tide_station", "mean": "shore_sst_f",
-                                  "min": "shore_sst_min_f", "max": "shore_sst_max_f", "count": "n_obs"})
-    daily = daily[daily.n_obs >= 12]
     clim = doy_climatology(daily, "shore_sst_f", "tide_station", 7, "shoresst")
     return daily, clim
 
@@ -524,6 +546,10 @@ TRIP_DAYS = {"half_day": 0.5, "three_quarter_day": 0.75, "full_day": 1.0, "twili
 def catch_frame():
     p = f"{RAW}/catch_reports.json"
     if not os.path.exists(p):
+        old = os.path.join(BASELINE, "catch_reports.csv")
+        old_daily = os.path.join(BASELINE, "catch_daily_cpue.csv")
+        if os.path.exists(old):
+            return pd.read_csv(old), pd.read_csv(old_daily) if os.path.exists(old_daily) else pd.DataFrame()
         return pd.DataFrame(), pd.DataFrame()
     j = json.load(open(p))
     rows = []
@@ -536,8 +562,22 @@ def catch_frame():
                          "kept": n, "released": (r.get("released") or {}).get(sid, 0),
                          "zone_hint": r.get("zone_hint"), "source_url": r.get("source_url")})
     df = pd.DataFrame(rows)
+    old = os.path.join(BASELINE, "catch_reports.csv")
+    if os.path.exists(old):
+        prior = pd.read_csv(old)
+        prior["date"] = pd.to_datetime(prior["date"], errors="coerce")
+        if not df.empty:
+            # A successful daily scrape is authoritative only for the date(s) it
+            # contains. Preserve all earlier rows at table level; reconstructing
+            # trips from species rows loses distinct same-boat outings.
+            current_dates = set(pd.to_datetime(df["date"]).dt.normalize())
+            prior = prior[~prior["date"].dt.normalize().isin(current_dates)]
+            df = pd.concat([prior, df], ignore_index=True, sort=False)
+        else:
+            df = prior
     if df.empty:
         return df, df
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
     df["trip_days"] = df.trip_type.map(TRIP_DAYS).fillna(1.0)
     df["cpue"] = df.kept / df.anglers
     df["cpue_per_angler_day"] = df.kept / (df.anglers * df.trip_days)

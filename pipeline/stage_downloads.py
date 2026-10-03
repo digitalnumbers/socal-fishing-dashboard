@@ -11,7 +11,7 @@ import os
 import shutil
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = os.environ.get("SOCAL_ROOT", os.path.dirname(HERE))
 DEST = os.path.join(ROOT, "app", "downloads")
 
 
@@ -27,6 +27,9 @@ def main():
     csv_src = os.path.join(ROOT, "dataset", "csv")
     for f in sorted(os.listdir(csv_src)):
         if f.endswith(".csv"):
+            shutil.copy2(os.path.join(csv_src, f), os.path.join(DEST, "csv", f))
+            n += 1
+        elif f in {"source_status.json", "extended_meta.json"}:
             shutil.copy2(os.path.join(csv_src, f), os.path.join(DEST, "csv", f))
             n += 1
     mb = sum(os.path.getsize(os.path.join(dp, f)) for dp, _, fs in os.walk(DEST) for f in fs) / 1e6

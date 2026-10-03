@@ -54,7 +54,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CFG = os.path.join(REPO, "pipeline", "config")
-DEFAULT_RAW = os.environ.get("SOCAL_RAW_EXT", "/home/user/workspace/socal/data/raw_extended")
+DEFAULT_RAW = os.environ.get("SOCAL_RAW_EXT", os.path.join(REPO, ".refresh-cache", "extended"))
 DEFAULT_CSV = os.path.join(REPO, "dataset", "csv")
 
 HORIZON = 30                 # last lead day produced
@@ -67,12 +67,13 @@ WIND_FALLBACK_BUOY = "46086"
 SD_PROXY = (-117.15, 32.70)  # onshore San Diego metro point used to sample CPC CONUS outlooks
 
 TIERS = [
-    {"tier": 1, "lead_from": 1, "lead_to": 7, "key": "high",
+    # lead_days is zero-based: build date through +6 is the seven-day view.
+    {"tier": 1, "lead_from": 0, "lead_to": 6, "key": "high",
      "label": "High confidence", "short": "Days 1-7",
      "basis": "Observed conditions plus deterministic marine and atmospheric forecast",
      "shows": "Specific daily SST, swell, wind, tide and score",
      "produced_by": "build_dataset.py (near-term model, unchanged)"},
-    {"tier": 2, "lead_from": 8, "lead_to": 14, "key": "moderate",
+    {"tier": 2, "lead_from": 7, "lead_to": 14, "key": "moderate",
      "label": "Moderate confidence", "short": "Days 8-14",
      "basis": "Deterministic model blended toward day-of-year climatology, plus the CPC 8-14 day "
               "probabilistic outlook, plus exact tide and lunar values",
@@ -183,11 +184,24 @@ def collect_cpc(raw):
 
     def one(key, pattern, kind, scale, window_from=None, window_to=None):
         hit = None
-        for p in sorted(glob.glob(os.path.join(raw, "cpc", pattern))):
+        product_dir = os.path.join(raw, "cpc", pattern.split("/", 1)[0])
+        sample_path = os.path.join(product_dir, f"_sample_{key}.json")
+        for p in sorted(glob.glob(os.path.join(raw, "cpc", pattern)), reverse=True):
             hit = sample_cpc(p)
             if hit:
                 hit["shapefile"] = os.path.relpath(p, raw)
+                os.makedirs(product_dir, exist_ok=True)
+                tmp = sample_path + ".tmp"
+                with open(tmp, "w") as fh:
+                    json.dump(hit, fh, indent=1, default=str)
+                os.replace(tmp, sample_path)
                 break
+        if not hit and os.path.exists(sample_path):
+            try:
+                with open(sample_path) as fh:
+                    hit = json.load(fh)
+            except (OSError, ValueError, TypeError):
+                hit = None
         if not hit:
             return
         rec = hit.get("record", {})
@@ -995,7 +1009,9 @@ def main():
     # ---------------------------------------------------------------- write
     def w(name, df):
         p = os.path.join(csv, name + ".csv")
-        df.to_csv(p, index=False)
+        tmp = p + ".tmp"
+        df.to_csv(tmp, index=False)
+        os.replace(tmp, p)
         print(f"  {name+'.csv':34s} {len(df):6d} rows")
 
     print("writing:")

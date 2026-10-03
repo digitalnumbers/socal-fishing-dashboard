@@ -47,6 +47,8 @@ header{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 8
 .badge{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border:1px solid var(--line);
   border-radius:999px;background:var(--surface);font-size:11.5px;color:var(--text-2);white-space:nowrap}
 .badge b{color:var(--text);font-weight:600}
+.badge.status-warn{border-color:color-mix(in srgb,var(--warn) 55%,var(--line));color:var(--warn)}
+.badge.status-bad{border-color:color-mix(in srgb,var(--bad) 55%,var(--line));color:var(--bad)}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);flex:none}
 .iconbtn{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--surface);
   color:var(--text-2);cursor:pointer;display:grid;place-items:center;font-size:13px}
@@ -154,6 +156,12 @@ td.wrap-ok{white-space:normal;min-width:220px;line-height:1.4}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .chip{font-size:11px;padding:3px 9px;border-radius:999px;background:var(--surface-2);
   border:1px solid var(--line-soft);color:var(--text-2)}
+.status-summary{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 12px}
+.status-count{font:600 12px/1 var(--mono);padding:6px 9px;border-radius:6px;border:1px solid var(--line)}
+.status-count.fresh,.status-count.not_due{color:var(--good)}
+.status-count.delayed,.status-count.cached{color:var(--warn)}
+.status-count.stale,.status-count.failed{color:var(--bad)}
+.status-note{max-width:420px;white-space:normal}
 /* methodology block */
 .meth{padding:2px 16px 4px}
 .meth ol{margin:0;padding-left:20px;font-size:12.5px;line-height:1.75;color:var(--text-2)}
@@ -256,6 +264,7 @@ td.np,.np{color:var(--text-3);font-style:italic}
     </div>
     <div class="hd-right">
       <span class="badge" id="badge-enso"><span class="dot"></span><span></span></span>
+      <span class="badge" id="badge-sources" aria-label="Source freshness"></span>
       <span class="badge" id="badge-run"></span>
       <button class="iconbtn" id="theme" title="Toggle light / dark" aria-label="Toggle theme">◐</button>
     </div>

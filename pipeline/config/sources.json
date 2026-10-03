@@ -129,7 +129,7 @@
    "access": "Public, User-Agent required",
    "units": "km/h, degC",
    "license": "US Government work, public domain",
-   "limitations": "The coastal land gridpoint returns degenerate wave fields (a single zero value), so wave data are taken from the marine model instead; the marine text zone endpoints (PZZ7xx) returned 404 during this build"
+   "limitations": "The coastal land gridpoint can return degenerate wave fields (a single zero value), so wave data are taken from the marine model instead. The SGX Coastal Waters Forecast narrative is a cross-check, not a numerical wave input."
   },
   {
    "id": "cpc_oni",

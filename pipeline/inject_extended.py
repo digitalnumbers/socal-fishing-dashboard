@@ -178,7 +178,9 @@ def main() -> int:
     if not os.path.exists(bak):
         shutil.copy2(data_js, bak)
         print(f"backed up original -> {os.path.basename(bak)}")
-    open(data_js, "w", encoding="utf-8").write(out)
+    tmp = data_js + ".tmp"
+    open(tmp, "w", encoding="utf-8").write(out)
+    os.replace(tmp, data_js)
     print(f"wrote {data_js}  {len(out):,} bytes ({len(out)/1e6:.2f} MB)")
     print(f"payload keys now ({len(payload)}): {', '.join(sorted(payload.keys()))}")
     return 0
