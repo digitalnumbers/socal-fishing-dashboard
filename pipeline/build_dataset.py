@@ -589,10 +589,29 @@ def catch_frame():
     daily["cpue_per_angler_day"] = daily.kept / daily.angler_days
     return df, daily
 
+VALIDATION_COLUMNS = [
+    "species_id", "species", "n_days", "spearman_rho", "pearson_r",
+    "spearman_rho_raw_cpue", "mean_cpue_per_angler_day", "mean_score",
+    "total_fish", "total_anglers",
+]
+
+
+def prior_model_validation():
+    path = os.path.join(BASELINE, "model_validation.csv")
+    if os.path.exists(path):
+        try:
+            prior = pd.read_csv(path)
+            if set(VALIDATION_COLUMNS).issubset(prior.columns):
+                return prior[VALIDATION_COLUMNS]
+        except (OSError, ValueError):
+            pass
+    return pd.DataFrame(columns=VALIDATION_COLUMNS)
+
+
 def validate(scores, catch_daily):
     """Rank-correlate modeled opportunity vs observed fish-per-angler where both exist."""
     if catch_daily.empty or scores.empty:
-        return pd.DataFrame()
+        return prior_model_validation()
     obs = scores[~scores.is_forecast]
     rows = []
     for sid, g in catch_daily.groupby("species_id"):
@@ -613,7 +632,11 @@ def validate(scores, catch_daily):
                      "mean_cpue_per_angler_day": round(j.cpue_per_angler_day.mean(), 3),
                      "mean_score": round(j.score.mean(), 1),
                      "total_fish": int(j.kept.sum()), "total_anglers": int(j.anglers.sum())})
-    return pd.DataFrame(rows).sort_values("spearman_rho", ascending=False)
+    if not rows:
+        return prior_model_validation()
+    return pd.DataFrame(rows, columns=VALIDATION_COLUMNS).sort_values(
+        "spearman_rho", ascending=False
+    )
 
 # ============================================================ 8. run + export
 def main():

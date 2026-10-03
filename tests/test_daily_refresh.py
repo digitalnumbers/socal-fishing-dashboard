@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "pipeline"))
 
 from refresh_support import due, status_record  # noqa: E402
 from run_daily_refresh import Refresh, committed_snapshot_date  # noqa: E402
+import build_dataset as build_dataset_module  # noqa: E402
 
 
 class ScheduleGateTests(unittest.TestCase):
@@ -34,6 +35,27 @@ class ScheduleGateTests(unittest.TestCase):
 
 
 class FreshnessStateTests(unittest.TestCase):
+    def test_model_validation_reuses_prior_when_windows_do_not_overlap(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            prior = Path(tmp) / "model_validation.csv"
+            prior.write_text(
+                "species_id,species,n_days,spearman_rho,pearson_r,"
+                "spearman_rho_raw_cpue,mean_cpue_per_angler_day,"
+                "mean_score,total_fish,total_anglers\n"
+                "yellowtail,California Yellowtail,8,0.4,0.3,0.2,1.1,70,40,20\n"
+            )
+            original = build_dataset_module.BASELINE
+            build_dataset_module.BASELINE = tmp
+            try:
+                result = build_dataset_module.validate(
+                    build_dataset_module.pd.DataFrame(),
+                    build_dataset_module.pd.DataFrame(),
+                )
+            finally:
+                build_dataset_module.BASELINE = original
+            self.assertEqual(len(result), 1)
+            self.assertEqual(result.iloc[0]["species_id"], "yellowtail")
+
     def test_committed_snapshot_date_uses_last_day_of_seven_day_view(self):
         with tempfile.TemporaryDirectory() as tmp:
             csv_dir = Path(tmp) / "dataset" / "csv"
