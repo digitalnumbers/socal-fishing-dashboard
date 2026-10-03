@@ -117,7 +117,15 @@ The workflow runs only on `schedule` and `workflow_dispatch`, so its bot commit 
 
 ### Private repository alternative
 
-GitHub Pages availability for private repositories depends on the account plan. If the source must remain private without an eligible Pages plan, connect the repository to Cloudflare Pages Free, set the build output directory to `app`, and let the validated bot commit trigger deployment. No Worker, database, paid add-on, or secret is required for a purely static project. Do not enable both deployment paths unless duplicate deployment is intentional.
+GitHub Pages availability for private repositories depends on the account plan. If the source must remain private without an eligible Pages plan, use a Cloudflare Pages Free **Direct Upload** project so the same validated `app/` workspace is uploaded; do not use a repository-triggered Cloudflare rebuild because daily workbook/download mirrors are intentionally not committed.
+
+1. Create a Direct Upload Pages project in Cloudflare and keep all paid add-ons disabled.
+2. Create a narrowly scoped API token with `Account / Cloudflare Pages / Edit`.
+3. Add GitHub Actions secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`, plus repository variable `CLOUDFLARE_PROJECT_NAME`.
+4. Replace the `deploy` job's GitHub Pages step with `npx wrangler pages deploy app --project-name "$CLOUDFLARE_PROJECT_NAME"` and pass those two secrets as `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+5. Keep the existing `needs.refresh`, success condition, and `should_deploy` condition so Cloudflare receives only a fully validated generation.
+
+No Worker, Durable Object, database, paid add-on, or always-on service is needed. Do not enable both deployment paths unless duplicate deployment is intentional.
 
 ## Rollback, pause, and diagnostics
 
