@@ -971,6 +971,226 @@ function renderValidation() {
   host.appendChild(c4);
 }
 
+/* ================================================== FORECAST ACCURACY ================================================== */
+const pct = v => (v === null || v === undefined || Number.isNaN(v)) ? '—' : Math.round(v * 100) + '%';
+const MODEL_NAME = { v1: 'Model v1 (production)', baseline_climatology: 'A · Seasonal climatology', baseline_enso: 'B · ENSO/SST regime' };
+const mName = id => MODEL_NAME[id] || (id + ' (challenger)');
+const FLAG = {
+  insufficient: ['Insufficient sample', 'status-bad'],
+  preliminary: ['Preliminary', 'status-warn'],
+  reportable: ['Reportable', '']
+};
+const flagPill = f => `<span class="badge ${FLAG[f]?.[1] || ''}" style="padding:2px 8px;font-size:11px">${FLAG[f]?.[0] || f || '—'}</span>`;
+const WIN = { rolling_30d: 'Rolling 30 days', rolling_90d: 'Rolling 90 days', season_to_date: 'Season to date', all: 'All verified' };
+const HG = { short_0_7: 'Short-term (days 0–7)', outlook_8_30: 'Outlook (days 8–30)' };
+
+function renderAccuracy() {
+  const host = $('#tab-accuracy'); host.innerHTML = '';
+  const L = D.learning;
+  if (!L || !L.evaluation || !L.evaluation.headline) {
+    host.appendChild(el('div', 'callout', '<b>Forecast accuracy is not available in this build.</b> The learning ledger has not produced an evaluation yet.'));
+    return;
+  }
+  const E = L.evaluation, lab = E.labels || {}, pr = E.pairs || {}, led = E.ledger || {};
+  const H = (w, dim, st, m) => E.headline.find(r => r.window === w && r.dimension === dim && r.stratum === st && r.model_id === m);
+  const prod = L.registry?.production_model || 'v1';
+
+  host.appendChild(el('div', 'callout', `<b>Read this first — what this page can and cannot tell you.</b>
+    Every forecast is frozen in an append-only ledger at the moment it is issued and is only scored after the day has
+    been fished and reported. Outcomes come from public San Diego dock totals: they measure where boats chose to go and
+    how many anglers fished as much as how the fish bit. A day with no reports is <b>not</b> scored as a poor bite — a
+    Poor label needs enough effort (≥2 eligible trips and ≥30 angler-days) and a species that was demonstrably being
+    caught in that region. Labels are provisional for 3 days after the trip date because boats update counts late.
+    The ledger currently holds <b>${led.issuances || 0} issuance${led.issuances === 1 ? '' : 's'}</b>
+    (${led.first_issue || '—'} → ${led.last_issue || '—'}); <b>${pr.issuances || 0}</b> of them can be verified so far.
+    Every stratum below carries a sample-size flag and strong conclusions are suppressed until it is
+    <i>Reportable</i> (≥100 pairs, ≥30 target days and ≥10 issuances). Pairs from one issuance are highly correlated, so
+    the current numbers are a pipeline check, not a skill estimate.`));
+
+  /* KPI matrix: windows x horizon groups */
+  const kc = el('div', 'card'); kc.style.marginTop = '14px';
+  kc.appendChild(el('div', 'card-hd', `<div><h3>Production model accuracy</h3>
+    <div class="sub">${mName(prod)} · exact class hit, within-one-class, MAE and Brier (P(Good or better)) · skill vs seasonal climatology</div></div>`));
+  const kg = el('div', 'grid g3');
+  ['rolling_30d', 'rolling_90d', 'season_to_date'].forEach(w => {
+    const cells = ['short_0_7', 'outlook_8_30'].map(hg => {
+      const r = H(w, 'horizon_group', hg, prod);
+      if (!r) return `<div class="meta" style="margin-top:8px"><b>${HG[hg]}</b> · no verified pairs yet</div>`;
+      const strong = r.sample_flag === 'reportable';
+      return `<div style="margin-top:10px"><div class="lab" style="display:flex;justify-content:space-between;gap:6px;align-items:center">
+        <span>${HG[hg]}</span>${flagPill(r.sample_flag)}</div>
+        <div class="val" style="${strong ? '' : 'opacity:.6'}">${pct(r.exact_hit)} <small>exact · ${pct(r.within_one)} ±1 class</small></div>
+        <div class="meta">MAE ${fmt(r.mae, 1)} pts · Brier ${fmt(r.brier, 3)} · skill ${r.brier_skill_vs_clim == null ? '—' : sign(r.brier_skill_vs_clim * 100, 0) + '%'}
+        · n=${r.n_pairs} pairs / ${r.n_target_dates} days / ${r.n_issuances} issuance${r.n_issuances === 1 ? '' : 's'}</div></div>`;
+    }).join('');
+    kg.appendChild(el('div', 'kpi', `<div class="lab"><b>${WIN[w]}</b></div>${cells}`));
+  });
+  kc.appendChild(kg);
+  kc.appendChild(el('p', 'note', `Values are shown faded until the stratum is Reportable. Skill = 1 − Brier(model)/Brier(climatology); positive means better than the seasonal baseline.
+    Lead-0 forecasts issued after local noon are excluded (the day was already being fished).`));
+  host.appendChild(kc);
+
+  /* Model comparison by lead bucket */
+  const mc = el('div', 'card'); mc.style.marginTop = '14px';
+  mc.appendChild(el('div', 'card-hd', `<div><h3>Model comparison by forecast lead</h3>
+    <div class="sub">Walk-forward over as-issued records only · A = seasonal climatology · B = ENSO/SST-regime baseline · C = production v1 · D = shadow challengers</div></div>`));
+  const leads = ['0-3', '4-7', '8-14', '15-30'];
+  const models = E.models || [];
+  const BL = (lb, m) => (E.by_lead || []).find(r => r.stratum === lb && r.model_id === m);
+  mc.appendChild(el('div', 'tbl-wrap', `<table><thead><tr><th>Lead (days)</th><th>Model</th><th>Sample</th><th>Exact</th><th>±1 class</th>
+    <th>MAE</th><th>Brier</th><th>Skill vs A</th><th>Precision G+</th><th>Recall G+</th></tr></thead><tbody>` +
+    leads.flatMap(lb => models.map((m, i) => {
+      const r = BL(lb, m);
+      if (!r) return i === 0 ? `<tr><td>${lb}</td><td colspan="9" class="note">No verified pairs yet</td></tr>` : '';
+      const dim = r.sample_flag === 'insufficient' ? ' style="opacity:.55"' : '';
+      return `<tr${dim}><td>${i === 0 ? '<b>' + lb + '</b>' : ''}</td><td>${mName(m)}</td><td>${flagPill(r.sample_flag)} <span class="note">${r.n_pairs}/${r.n_target_dates}d</span></td>
+        <td>${pct(r.exact_hit)}</td><td>${pct(r.within_one)}</td><td>${fmt(r.mae, 1)}</td><td>${fmt(r.brier, 3)}</td>
+        <td>${m === 'baseline_climatology' ? '—' : (r.brier_skill_vs_clim == null ? '—' : sign(r.brier_skill_vs_clim * 100, 0) + '%')}</td>
+        <td>${r.precision_good == null ? '<span class="note">n&lt;10</span>' : pct(r.precision_good)}</td>
+        <td>${r.recall_good == null ? '<span class="note">n&lt;10</span>' : pct(r.recall_good)}</td></tr>`;
+    })).join('') + '</tbody></table>'));
+  mc.appendChild(el('p', 'note', `Days 15–30 are scored as a probabilistic seasonal/regime outlook (calendar seasonality, ENSO analogs, tide/moon timing);
+    no deterministic daily swell or wind is issued or evaluated beyond day 14.`));
+  host.appendChild(mc);
+
+  /* Observed vs forecast timeline + reliability */
+  const g = el('div', 'grid g2'); g.style.marginTop = '14px';
+  const regionOf = Object.entries(L.regions || {}).find(([, r]) => r.zones.includes(state.zone));
+  const rid = regionOf ? regionOf[0] : null;
+  const tl = (E.timeline || []).filter(r => r.region_id === rid && r.species_id === state.species);
+  const t1 = el('div', 'card');
+  t1.appendChild(el('div', 'card-hd', `<div><h3>Forecast vs observed · ${SM[state.species]?.species || state.species}</h3>
+    <div class="sub">${regionOf ? regionOf[1].name : 'This zone has no outcome region'} · shortest-lead issued forecast vs effort-normalized dock index (0–100)</div></div>`));
+  if (tl.length) {
+    t1.appendChild(el('div', 'chart', '<canvas id="ch-acc-tl"></canvas>'));
+  } else {
+    t1.appendChild(el('p', 'note', regionOf && !regionOf[1].labelled ? 'Bays and surf have no reliable public effort signal, so they are not scored.'
+      : 'No verified forecast/outcome pairs yet for this species and region. Choose another species or zone, or check back as the ledger grows.'));
+  }
+  g.appendChild(t1);
+  const t2 = el('div', 'card');
+  t2.appendChild(el('div', 'card-hd', `<div><h3>Confidence calibration</h3>
+    <div class="sub">Forecast P(Good or better) vs observed frequency · production model · all verified pairs</div></div>`));
+  t2.appendChild(el('div', 'chart', '<canvas id="ch-acc-rel"></canvas>'));
+  g.appendChild(t2);
+  host.appendChild(g);
+  if (tl.length) {
+    mk('ch-acc-tl', {
+      type: 'line',
+      data: {
+        labels: tl.map(r => dLabel(r.target_date)),
+        datasets: [
+          { label: 'Observed', data: tl.map(r => r.observed_score), borderColor: css('--amber'), backgroundColor: css('--amber'), showLine: false, pointRadius: 4 },
+          { label: 'v1 forecast', data: tl.map(r => r.bite_score), borderColor: css('--teal'), backgroundColor: css('--teal'), borderWidth: 2, tension: .3, pointRadius: 1.5 },
+          { label: 'Climatology (A)', data: tl.map(r => r.baseline_clim_score), borderColor: css('--text-3'), borderDash: [4, 4], borderWidth: 1.5, pointRadius: 0 }
+        ]
+      },
+      options: baseOpts({
+        plugins: { legend: { labels: { color: css('--text-2'), boxWidth: 10, font: { size: 11 } } },
+          tooltip: { callbacks: { afterBody: items => { const r = tl[items[0].dataIndex]; return `lead ${r.lead_days} d · label ${r.label_status}`; } } } },
+        scales: { x: { grid: { display: false }, ticks: { color: css('--text-3'), font: { size: 9.5 } } }, y: { min: 0, max: 100, grid: { color: css('--line-soft') }, ticks: { color: css('--text-3') } } }
+      })
+    });
+  }
+  const rel = E.reliability || [];
+  const pal = { short_0_7: css('--teal'), outlook_8_30: css('--violet') };
+  mk('ch-acc-rel', {
+    type: 'scatter',
+    data: {
+      datasets: [{ label: 'Perfect calibration', type: 'line', data: [{ x: 0, y: 0 }, { x: 1, y: 1 }], borderColor: css('--text-3'), borderDash: [4, 4], pointRadius: 0, borderWidth: 1 }]
+        .concat(['short_0_7', 'outlook_8_30'].map(hg => ({
+          label: HG[hg], data: rel.filter(r => r.horizon_group === hg).map(r => ({ x: r.mean_p, y: r.obs_rate, n: r.n })),
+          backgroundColor: pal[hg], borderColor: pal[hg], pointRadius: c => Math.max(3, Math.min(11, Math.sqrt(c.raw?.n || 1)))
+        })))
+    },
+    options: baseOpts({
+      interaction: { mode: 'nearest', intersect: true },
+      plugins: { tooltip: { callbacks: { label: c => c.raw?.n ? `${c.dataset.label}: forecast ${pct(c.raw.x)} → observed ${pct(c.raw.y)} (n=${c.raw.n})` : '' } } },
+      scales: { x: { type: 'linear', min: 0, max: 1, title: { display: true, text: 'forecast probability', color: css('--text-3') }, grid: { color: css('--line-soft') }, ticks: { color: css('--text-3'), callback: v => pct(v) } },
+        y: { type: 'linear', min: 0, max: 1, title: { display: true, text: 'observed frequency', color: css('--text-3') }, grid: { color: css('--line-soft') }, ticks: { color: css('--text-3'), callback: v => pct(v) } } }
+    })
+  });
+
+  /* Why this forecast changed */
+  const wc = el('div', 'card'); wc.style.marginTop = '14px';
+  const cm = L.changes_meta;
+  wc.appendChild(el('div', 'card-hd', `<div><h3>Why this forecast changed · ${ZM[state.zone]?.name || state.zone} · ${SM[state.species]?.species || state.species}</h3>
+    <div class="sub">${cm ? `Latest issuance ${cm.current} vs prior ${cm.prior}` : 'Compares the active forecast with the prior issuance'} · driver contributions in score points, summing to the change</div></div>`));
+  const rows = (L.changes || []).filter(r => r.zone_id === state.zone && r.species_id === state.species);
+  if (!rows.length) {
+    wc.appendChild(el('p', 'note', (L.changes || []).length
+      ? 'This zone/species pair has no overlapping target days between the last two issuances.'
+      : `Not available yet: the two issuances in the ledger (${(L.ledger_index || []).map(r => r.issue_local_date).join(', ') || '—'}) do not cover any of the same target days.
+         From the next daily refresh, every day that both issuances forecast will be compared here.`));
+  } else {
+    wc.appendChild(el('div', 'tbl-wrap scroll-tall', `<table><thead><tr><th>Target day</th><th>Lead</th><th>Prior</th><th>Now</th><th>Δ</th>
+      <th>Class</th><th>Main drivers (pts)</th><th>Input changes</th><th>Notes</th></tr></thead><tbody>` +
+      rows.map(r => `<tr><td>${dLabel(r.target_date)}</td><td>${r.lead_prior}→${r.lead_now} d</td><td>${sTxt(r.score_prior)}</td><td>${sTxt(r.score_now)}</td>
+        <td>${deltaTag(r.delta)}</td><td>${r.class_prior === r.class_now ? r.class_now : `${r.class_prior} → <b>${r.class_now}</b>`}</td>
+        <td style="white-space:normal;text-align:left;min-width:180px">${r.top_drivers || '—'}</td><td class="note" style="white-space:normal;text-align:left;min-width:160px">${r.input_changes || '—'}</td><td class="note" style="white-space:normal;text-align:left;min-width:160px">${r.notes || ''}</td></tr>`).join('') + '</tbody></table>'));
+  }
+  host.appendChild(wc);
+
+  /* Strata */
+  const sc2 = el('div', 'card'); sc2.style.marginTop = '14px';
+  sc2.appendChild(el('div', 'card-hd', `<div><h3>Accuracy by species, region, month, season and ENSO regime</h3>
+    <div class="sub">Production model vs climatology, all verified pairs · strata below the minimum sample are greyed and their skill is withheld</div></div>`));
+  const DIM = { species_id: 'Species', region_id: 'Region', month: 'Month', season: 'Season', enso_regime: 'ENSO regime', label_status: 'Label status' };
+  const strata = (E.strata || []).filter(r => r.window === 'all');
+  const nameOf = (dim, s) => dim === 'species_id' ? (SM[s]?.species || s) : dim === 'region_id' ? (L.regions?.[s]?.name || s) : dim === 'enso_regime' ? ensoLabel(s) : s;
+  sc2.appendChild(el('div', 'tbl-wrap scroll-tall', `<table><thead><tr><th>Dimension</th><th>Stratum</th><th>Sample</th><th>Exact</th><th>±1</th><th>MAE</th>
+    <th>Brier</th><th>Clim. Brier</th><th>Skill vs A</th></tr></thead><tbody>` +
+    Object.keys(DIM).flatMap(dim => {
+      const ss = [...new Set(strata.filter(r => r.dimension === dim).map(r => r.stratum))].sort();
+      return ss.map(s => {
+        const r = strata.find(x => x.dimension === dim && x.stratum === s && x.model_id === prod);
+        const c = strata.find(x => x.dimension === dim && x.stratum === s && x.model_id === 'baseline_climatology');
+        if (!r) return '';
+        const weak = r.sample_flag === 'insufficient';
+        return `<tr${weak ? ' style="opacity:.55"' : ''}><td>${DIM[dim]}</td><td>${nameOf(dim, s)}</td><td>${flagPill(r.sample_flag)} <span class="note">${r.n_pairs}/${r.n_target_dates}d</span></td>
+          <td>${pct(r.exact_hit)}</td><td>${pct(r.within_one)}</td><td>${fmt(r.mae, 1)}</td><td>${fmt(r.brier, 3)}</td><td>${fmt(c?.brier, 3)}</td>
+          <td>${weak ? '<span class="note">withheld</span>' : (r.brier_skill_vs_clim == null ? '—' : sign(r.brier_skill_vs_clim * 100, 0) + '%')}</td></tr>`;
+      });
+    }).join('') + '</tbody></table>'));
+  host.appendChild(sc2);
+
+  /* Ledger, labels, governance */
+  const g3 = el('div', 'grid g2'); g3.style.marginTop = '14px';
+  const lc = el('div', 'card');
+  lc.appendChild(el('div', 'card-hd', `<div><h3>Ledger and outcome status</h3><div class="sub">Immutable forecasts · append-only raw reports · versioned labels (${E.label_version || 'L1'})</div></div>`));
+  lc.appendChild(el('div', 'tbl-wrap', `<table class="wraptxt"><tbody>
+    <tr><td>Forecast issuances</td><td><b>${led.issuances || 0}</b> · ${(led.forecast_rows || 0).toLocaleString()} rows · ${led.first_issue || '—'} → ${led.last_issue || '—'}</td></tr>
+    <tr><td>Outcome label rows</td><td>${(lab.rows || 0).toLocaleString()} (${lab.first_fishing_date || '—'} → ${lab.last_fishing_date || '—'})</td></tr>
+    <tr><td>Labelled</td><td>${lab.labelled || 0} · ${lab.final || 0} final · ${lab.provisional || 0} provisional</td></tr>
+    <tr><td>Not labelled</td><td>${lab.insufficient_effort || 0} insufficient effort · others have no species-region reference</td></tr>
+    <tr><td>Effort-adjusted zero catch (Poor)</td><td>${lab.effort_adjusted_zero || 0}</td></tr>
+    <tr><td>Reporting lag (trip → report date)</td><td>median ${fmt(lab.median_reporting_lag_days, 0)} d · labels final after 3 d</td></tr>
+    <tr><td>Collection lag</td><td>${lab.median_publication_lag_days_live == null ? `live: not yet measured · ${lab.backfilled || 0} labels were backfilled from archived pages` : `median ${fmt(lab.median_publication_lag_days_live, 0)} d`}</td></tr>
+    <tr><td>Verified pairs</td><td>${pr.total || 0} (${pr.target_dates || 0} target days · ${pr.excluded_late_lead0_rows || 0} late lead-0 rows excluded)</td></tr>
+    </tbody></table>`));
+  lc.appendChild(el('div', 'chips', ['model_registry.json', 'model_evaluation.csv', 'outcome_ledger.csv', 'index.csv', 'update_log.json', 'FORECAST_LEARNING.md']
+    .map(f => `<a class="chip" href="downloads/learning/${f}" download>${f === 'index.csv' ? 'forecast_ledger index.csv' : f}</a>`).join('')));
+  g3.appendChild(lc);
+  const rc = el('div', 'card');
+  const gov = L.registry?.governance || {};
+  rc.appendChild(el('div', 'card-hd', `<div><h3>Model registry and challengers</h3><div class="sub">Live model changes need a passing review, a human approval flag and a reviewed code change · auto-retrain ${gov.auto_retrain ? 'ON' : 'off'}</div></div>`));
+  rc.appendChild(el('div', 'tbl-wrap', `<table class="wraptxt"><thead><tr><th>Model</th><th>Status</th><th>Latest decision</th><th>Approved</th></tr></thead><tbody>` +
+    (L.registry?.models || []).map(m => {
+      const ch = (E.challengers || []).find(c => c.model_id === m.model_id);
+      return `<tr><td><b>${m.model_id}</b><div class="note">${m.description || ''}</div></td>
+        <td><span class="pill">${m.status}</span></td>
+        <td>${ch ? `<span class="pill">${ch.recommendation.replace(/_/g, ' ')}</span><div class="note">${ch.checks.filter(x => !x.passed).map(x => x.check + ': ' + x.detail).slice(0, 3).join('<br>') || 'all checks passed'}</div>` : (m.promotion_decision?.decision || '—').replace(/_/g, ' ')}</td>
+        <td>${m.human_approval?.approved ? 'yes' : 'no'}</td></tr>`;
+    }).join('') + '</tbody></table>'));
+  const crit = gov.promotion_criteria || {};
+  rc.appendChild(el('p', 'note', `Promotion is only recommended when a challenger has ≥${crit.min_pairs} pairs over ≥${crit.min_target_dates} target days and ≥${crit.min_issuances} issuances,
+    improves aggregate Brier by ≥${Math.round((crit.min_aggregate_brier_improvement || 0) * 100)}% with bootstrap P ≥ ${crit.min_bootstrap_p_positive},
+    does not worsen MAE by more than ${crit.max_mae_degradation_pts} pts, does not degrade priority species (${(gov.priority_species || []).map(s => SM[s]?.species || s).join(', ')})
+    or regions (${(gov.priority_regions || []).map(r => L.regions?.[r]?.name || r).join(', ')}) and keeps 0–7 day accuracy.`));
+  g3.appendChild(rc);
+  host.appendChild(g3);
+}
+
 /* ================================================== DATA & SOURCES ================================================== */
 function renderData() {
   const host = $('#tab-data'); host.innerHTML = '';
@@ -1089,7 +1309,7 @@ function render() {
   document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === state.tab));
   document.querySelectorAll('section.tab').forEach(s => s.classList.toggle('on', s.id === 'tab-' + state.tab));
   ({ today: renderToday, forecast: renderForecast, outlook: renderOutlook, conditions: renderConditions, species: renderSpecies,
-    enso: renderEnso, validation: renderValidation, data: renderData }[state.tab])();
+    enso: renderEnso, validation: renderValidation, accuracy: renderAccuracy, data: renderData }[state.tab])();
 }
 function boot() {
   $('#f-date').innerHTML = D.meta.dates.map(d => `<option value="${d}"${d === state.date ? ' selected' : ''}>${dLabel(d)}${isFcst(d) ? ' · forecast' : d === TODAY ? ' · today' : ''}</option>`).join('');

@@ -65,7 +65,7 @@ class Refresh:
         self.ext = self.stage / ".refresh-cache/extended"
 
     def prepare(self) -> None:
-        for rel in ("dataset", "app", "docs", "pipeline/config"):
+        for rel in ("dataset", "app", "docs", "pipeline/config", "data"):
             src, dst = ROOT / rel, self.stage / rel
             if src.exists():
                 shutil.copytree(src, dst, dirs_exist_ok=True)
@@ -443,6 +443,29 @@ class Refresh:
                         success=False, freshness="failed", cached=cached, error=exc,
                         note="Parser/page changes never clear or truncate prior catch history; non-commercial attribution applies.")
 
+    def fetch_dock_outcomes(self) -> None:
+        """Re-read the last few report dates (late boat updates) for the outcome ledger.
+
+        Non-critical: failures only delay outcome labels and never block the refresh."""
+        from outcome_ledger import fetch_dates
+        dates = [self.today - timedelta(days=k) for k in range(3, -1, -1)]
+        fetches = fetch_dates(dates, method="daily_refresh", today=self.today, pause_s=1.0)
+        doc = {"collected_at_utc": self.utc, "fetches": fetches}
+        atomic_write(self.raw / "dock_trips.json", json.dumps(doc, indent=1).encode())
+        ok = [f for f in fetches if f["ok"]]
+        self.record("dock_outcomes", "Dock totals for outcome ledger (today-3..today)", "daily", "daily",
+                    success=bool(ok), newest=max((f["report_date"] for f in ok), default=None),
+                    freshness="fresh" if ok else "failed", cached=bool(ok),
+                    error=None if ok else "; ".join(f["error"] or "" for f in fetches)[:300],
+                    note="Raw trips are appended to data/outcome_raw; labels are derived separately.")
+
+    def learning(self, mode: str) -> None:
+        self.run_cmd([sys.executable, "pipeline/learning_step.py", "--root", str(self.stage),
+                      "--mode", mode, "--today", self.today.isoformat()])
+
+    def inject_learning(self, env) -> None:
+        self.run_cmd([sys.executable, "pipeline/inject_learning.py", "--repo", str(self.stage)], env)
+
     def write_status(self, completed=False) -> None:
         counts = {}
         for row in self.status:
@@ -518,7 +541,7 @@ class Refresh:
                       "--report", str(report)])
 
     def promote(self) -> None:
-        for rel in ("dataset/csv", "dataset/socal_fishing_dataset.xlsx", "app", "docs", ".refresh-cache"):
+        for rel in ("dataset/csv", "dataset/socal_fishing_dataset.xlsx", "app", "docs", ".refresh-cache", "data"):
             src, dst = self.stage / rel, ROOT / rel
             if src.is_dir():
                 for path in src.rglob("*"):
@@ -548,6 +571,9 @@ class Refresh:
                 self.run_cmd([sys.executable, "pipeline/build_site.py"], env)
                 self.run_cmd([sys.executable, "pipeline/inject_extended.py", "--repo", str(self.stage)], env)
                 self.run_cmd([sys.executable, "pipeline/stage_downloads.py"], {**env, "SOCAL_ROOT": str(self.stage)})
+                if (self.stage / "data").exists():
+                    self.learning("dry_run")
+                    self.inject_learning(env)
                 self.validate()
                 print("DRY RUN PASSED: no network requests and no repository changes")
                 return 0
@@ -578,18 +604,26 @@ class Refresh:
             self.fetch_extended_forecast()
             self.fetch_periodic()
             self.fetch_dock()
+            try:
+                self.fetch_dock_outcomes()
+            except Exception as exc:  # outcome collection is never critical
+                self.record("dock_outcomes", "Dock totals for outcome ledger", "daily", "daily",
+                            success=False, freshness="failed", cached=False, error=exc)
             if self.failures:
                 raise RuntimeError("critical fetch failures: " + "; ".join(self.failures))
             self.write_status()
             self.build()
             self.compact_cpc_cache()
             self.write_status(completed=True)
+            # Record this run's forecasts in the immutable ledger, then evaluate (never retrains v1).
+            self.learning("live")
             # Rebuild payload/downloads once to embed final completion metadata.
             env = {"SOCAL_ROOT": str(ROOT), "SOCAL_OUT": str(self.stage / "dataset/csv"),
                    "SOCAL_SITE": str(self.stage / "app"), "SOCAL_DOCS": str(self.stage / "docs")}
             self.run_cmd([sys.executable, "pipeline/build_site.py"], env)
             self.run_cmd([sys.executable, "pipeline/inject_extended.py", "--repo", str(self.stage)], env)
             self.run_cmd([sys.executable, "pipeline/stage_downloads.py"], {**env, "SOCAL_ROOT": str(self.stage)})
+            self.inject_learning(env)
             self.validate()
             if not self.args.no_promote:
                 self.promote()

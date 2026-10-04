@@ -1,0 +1,37 @@
+species_id,region_id,reference_index,n_days,basis,window_start,window_end,label_version,frozen_utc
+barracuda,coronados,0.5,0,default (no reference data),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+barracuda,kelp_nearshore,0.0421,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+barracuda,offshore_banks,0.5,0,default (no reference data),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+bluefin_tuna,coronados,0.0042,32,species median (region fallback),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+bluefin_tuna,extended_offshore,0.0233,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+bluefin_tuna,offshore_banks,0.0042,32,species median (region fallback),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+bonito,coronados,0.676,6,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+bonito,extended_offshore,0.0623,45,species median (region fallback),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+bonito,kelp_nearshore,0.7162,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+bonito,offshore_banks,0.0297,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+calico_bass,coronados,1.3322,19,species median (region fallback),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+calico_bass,kelp_nearshore,1.7014,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+california_halibut,kelp_nearshore,0.5,0,default (no reference data),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+dorado,coronados,0.0524,32,species median (region fallback),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+dorado,extended_offshore,0.1053,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+dorado,offshore_banks,0.068,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+rockfish,coronados,0.0499,45,species median (region fallback),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+rockfish,extended_offshore,0.0499,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+rockfish,kelp_nearshore,0.9295,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+rockfish,offshore_banks,0.0499,45,species median (region fallback),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+sand_bass,kelp_nearshore,0.3533,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+sheephead,coronados,0.5,0,default (no reference data),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+sheephead,extended_offshore,0.5,0,default (no reference data),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+sheephead,kelp_nearshore,0.14,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+sheephead,offshore_banks,0.5,0,default (no reference data),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+white_seabass,coronados,0.5,0,default (no reference data),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+white_seabass,extended_offshore,0.5,0,default (no reference data),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+white_seabass,kelp_nearshore,0.5,0,default (no reference data),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+white_seabass,offshore_banks,0.5,0,default (no reference data),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+yellowfin_tuna,coronados,0.2614,32,species median (region fallback),2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+yellowfin_tuna,extended_offshore,0.1359,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+yellowfin_tuna,offshore_banks,1.0526,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+yellowtail,coronados,2.8371,6,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+yellowtail,extended_offshore,0.9301,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+yellowtail,kelp_nearshore,0.1053,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z
+yellowtail,offshore_banks,0.3983,13,species-region median,2026-08-15,2026-08-27,L1,2026-10-04T06:19:06Z

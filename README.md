@@ -17,6 +17,8 @@ Data build: **2026-08-28 14:00 UTC** · 9 zones · 15 species · 21-day window (
 | `docs/SOURCE_REGISTRY.md` | All 13 data sources with endpoint, coverage, cadence, licence and limitations |
 | `docs/DATA_DICTIONARY.md` | 287 field definitions plus the scoring model and reproduction steps |
 | `pipeline/` | The fetch, build, export and site-generation scripts, and the zone/species/source config |
+| `data/` | Forecast-learning ledgers: immutable forecast issuances, raw and normalized outcomes, model registry, evaluation and run log |
+| `docs/FORECAST_LEARNING.md` | Methodology and data dictionary for forecast verification, backtesting and model governance |
 
 ## Daily automation
 
@@ -33,6 +35,23 @@ python pipeline/run_daily_refresh.py --dry-run
 ```
 
 GitHub Actions evaluates UTC candidates for both PST and PDT, gates them with `America/Los_Angeles`, and runs once per successful Pacific calendar date around 06:30. It fetches only bounded recent or due source windows, retains last-known-good data for honest degraded operation, validates a complete staged generation, commits meaningful state, and deploys `app/` only after every gate passes. See [Daily Refresh Operations](docs/DAILY_REFRESH.md) and [Pipeline Safety Audit](docs/PIPELINE_AUDIT.md).
+
+## Forecast learning and accuracy
+
+Each daily refresh freezes the day's forecasts in an append-only, hash-chained ledger
+(`data/forecast_ledger/`). Dock totals for the last few report dates are added to an
+append-only raw outcome store, and labels are derived from it under strict effort rules:
+no reports never counts as a poor bite. The run then scores Model v1 against a seasonal
+climatology baseline, an ENSO/SST-regime baseline and shadow challengers, using
+walk-forward evaluation over the as-issued records only. Results appear on the
+dashboard's **Forecast Accuracy** tab, with sample-size warnings and a "why this
+forecast changed" view.
+
+The live Bite Score is never retrained automatically. Model v1 stays the production
+champion until a challenger passes the registry gate, receives a recorded human
+approval, and is implemented in a reviewed code change
+(`python pipeline/model_registry.py --help`). See
+[Forecast Learning](docs/FORECAST_LEARNING.md).
 
 ## Zones
 

@@ -195,10 +195,50 @@ def validate(root: Path, baseline: Path | None, today: date) -> dict:
     ):
         fail(errors, "download workbook is missing or inconsistent")
 
+    learning_checks(root, baseline, errors, warnings)
+
     result = {"ok": not errors, "validated_for_local_date": today.isoformat(),
               "errors": errors, "warnings": warnings, "row_counts": counts}
     print(json.dumps(result, indent=2))
     return result
+
+
+def learning_checks(root: Path, baseline: Path | None, errors: list[str], warnings: list[str]) -> None:
+    """Forecast-learning governance gate (only when the learning system is present)."""
+    data = root / "data"
+    if not data.exists():
+        return
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from forecast_ledger import verify_ledger
+    from model_registry import validate_registry
+    from outcome_ledger import verify_raw
+    base_data = baseline.parent.parent / "data" if baseline else None
+    if base_data is not None and not base_data.exists():
+        base_data = None
+    for e in verify_ledger(data, base_data):
+        fail(errors, f"forecast ledger: {e}")
+    for e in verify_raw(data, base_data):
+        fail(errors, f"outcome raw: {e}")
+    reg = json.loads((data / "model_registry.json").read_text()) if (data / "model_registry.json").exists() else None
+    old = json.loads((base_data / "model_registry.json").read_text()) if base_data and (base_data / "model_registry.json").exists() else None
+    for e in validate_registry(reg, old):
+        fail(errors, f"model registry: {e}")
+    lab_p = data / "outcome_ledger.csv"
+    if lab_p.exists():
+        lab = pd.read_csv(lab_p)
+        bad = lab[(lab.label_status.isin(["insufficient_effort", "no_reference"])) & lab.observed_class.notna()]
+        if len(bad):
+            fail(errors, f"{len(bad)} outcome labels assign a class without sufficient effort or reference")
+    for rel in ("model_evaluation.json", "update_log.json"):
+        if not (data / rel).exists():
+            fail(errors, f"data/{rel} missing")
+    try:
+        payload = load_data_js(root / "app" / "data.js")
+        if not payload.get("learning"):
+            fail(errors, "app/data.js missing learning payload")
+    except Exception:
+        pass
 
 
 def main() -> int:

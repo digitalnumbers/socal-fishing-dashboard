@@ -1,0 +1,529 @@
+{
+  "schema_version": 1,
+  "engine_model_version": "v1",
+  "production_model": "v1",
+  "governance": {
+    "auto_retrain": false,
+    "human_approval_required": true,
+    "live_model_changes_require_code_change": true,
+    "priority_species": [
+      "yellowtail",
+      "yellowfin_tuna",
+      "bluefin_tuna",
+      "calico_bass",
+      "rockfish"
+    ],
+    "priority_regions": [
+      "kelp_nearshore",
+      "offshore_banks"
+    ],
+    "promotion_criteria": {
+      "min_pairs": 300,
+      "min_target_dates": 45,
+      "min_issuances": 30,
+      "min_aggregate_brier_improvement": 0.02,
+      "max_mae_degradation_pts": 0.5,
+      "min_bootstrap_p_positive": 0.9,
+      "min_stratum_pairs": 30,
+      "max_priority_brier_degradation": 0.05,
+      "max_short_range_brier_degradation": 0.02,
+      "max_short_range_hit_drop": 0.02
+    },
+    "review_cadence": {
+      "daily": "append forecasts and outcomes, refresh accuracy (no retraining)",
+      "monthly": "review shadow challengers if enough new labels (recommendation only)",
+      "seasonal": "full walk-forward review; human decision on promotion"
+    },
+    "label_version": "L1"
+  },
+  "models": [
+    {
+      "model_id": "v1",
+      "status": "production",
+      "role": "champion",
+      "kind": "engine",
+      "created_utc": "2026-08-28T20:20:23Z",
+      "registered_utc": "2026-10-04T06:21:43Z",
+      "description": "Original SoCal Fishing Intelligence Bite Score: weighted geometric mean of driver suitabilities x ENSO/SST anomaly multiplier x access (fishability) gate, soft ceiling. Days 8-30 reuse the same engine on blended/climatological inputs.",
+      "code_ref": "pipeline/build_dataset.py section 6 (score_row); pipeline/build_extended.py (extended inputs)",
+      "feature_set": [
+        "term_sst",
+        "term_season",
+        "term_tide",
+        "term_moon",
+        "term_pressure",
+        "term_swell",
+        "term_front",
+        "term_chl",
+        "anomaly_term (sst_anom_f, anomaly_pref)",
+        "fishability (wind, wave, period, distance)"
+      ],
+      "weights": {
+        "california_halibut": {
+          "sst": 0.28,
+          "season": 0.2,
+          "tide": 0.24,
+          "moon": 0.05,
+          "pressure": 0.08,
+          "swell": 0.1,
+          "front": 0.0,
+          "chl": 0.05
+        },
+        "calico_bass": {
+          "sst": 0.26,
+          "season": 0.22,
+          "tide": 0.16,
+          "moon": 0.06,
+          "pressure": 0.08,
+          "swell": 0.14,
+          "front": 0.0,
+          "chl": 0.08
+        },
+        "sand_bass": {
+          "sst": 0.3,
+          "season": 0.24,
+          "tide": 0.16,
+          "moon": 0.06,
+          "pressure": 0.08,
+          "swell": 0.1,
+          "front": 0.0,
+          "chl": 0.06
+        },
+        "spotted_bay_bass": {
+          "sst": 0.2,
+          "season": 0.14,
+          "tide": 0.34,
+          "moon": 0.06,
+          "pressure": 0.08,
+          "swell": 0.04,
+          "front": 0.0,
+          "chl": 0.14
+        },
+        "corbina": {
+          "sst": 0.28,
+          "season": 0.22,
+          "tide": 0.24,
+          "moon": 0.04,
+          "pressure": 0.04,
+          "swell": 0.14,
+          "front": 0.0,
+          "chl": 0.04
+        },
+        "barred_surfperch": {
+          "sst": 0.22,
+          "season": 0.24,
+          "tide": 0.2,
+          "moon": 0.04,
+          "pressure": 0.06,
+          "swell": 0.2,
+          "front": 0.0,
+          "chl": 0.04
+        },
+        "rockfish": {
+          "sst": 0.14,
+          "season": 0.16,
+          "tide": 0.16,
+          "moon": 0.02,
+          "pressure": 0.08,
+          "swell": 0.34,
+          "front": 0.0,
+          "chl": 0.1
+        },
+        "sheephead": {
+          "sst": 0.18,
+          "season": 0.16,
+          "tide": 0.2,
+          "moon": 0.02,
+          "pressure": 0.08,
+          "swell": 0.28,
+          "front": 0.0,
+          "chl": 0.08
+        },
+        "barracuda": {
+          "sst": 0.3,
+          "season": 0.2,
+          "tide": 0.14,
+          "moon": 0.04,
+          "pressure": 0.06,
+          "swell": 0.12,
+          "front": 0.06,
+          "chl": 0.08
+        },
+        "bonito": {
+          "sst": 0.3,
+          "season": 0.18,
+          "tide": 0.1,
+          "moon": 0.02,
+          "pressure": 0.06,
+          "swell": 0.14,
+          "front": 0.1,
+          "chl": 0.1
+        },
+        "yellowtail": {
+          "sst": 0.28,
+          "season": 0.18,
+          "tide": 0.14,
+          "moon": 0.06,
+          "pressure": 0.06,
+          "swell": 0.12,
+          "front": 0.1,
+          "chl": 0.06
+        },
+        "white_seabass": {
+          "sst": 0.22,
+          "season": 0.2,
+          "tide": 0.16,
+          "moon": 0.16,
+          "pressure": 0.06,
+          "swell": 0.12,
+          "front": 0.02,
+          "chl": 0.06
+        },
+        "bluefin_tuna": {
+          "sst": 0.2,
+          "season": 0.14,
+          "tide": 0.04,
+          "moon": 0.1,
+          "pressure": 0.04,
+          "swell": 0.16,
+          "front": 0.22,
+          "chl": 0.1
+        },
+        "yellowfin_tuna": {
+          "sst": 0.32,
+          "season": 0.16,
+          "tide": 0.02,
+          "moon": 0.06,
+          "pressure": 0.04,
+          "swell": 0.14,
+          "front": 0.16,
+          "chl": 0.1
+        },
+        "dorado": {
+          "sst": 0.36,
+          "season": 0.16,
+          "tide": 0.02,
+          "moon": 0.04,
+          "pressure": 0.04,
+          "swell": 0.12,
+          "front": 0.14,
+          "chl": 0.12
+        }
+      },
+      "class_mapping": {
+        "classes": [
+          "Poor",
+          "Fair",
+          "Good",
+          "Very Good",
+          "Excellent"
+        ],
+        "score_cuts": [
+          40.0,
+          60.0,
+          75.0,
+          90.0
+        ],
+        "p_good_or_better": {
+          "form": "logistic((score-60)/spread)",
+          "spread_by_lead_bucket": {
+            "0-3": 8.0,
+            "4-7": 10.0,
+            "8-14": 14.0,
+            "15-30": 20.0
+          }
+        }
+      },
+      "training_window": "none - expert/literature-specified weights and response curves; not fitted to catch data",
+      "evaluation_window": {
+        "target_dates_from": "2026-08-14",
+        "target_dates_to": "2026-10-03",
+        "issuances": 1,
+        "method": "rolling-origin walk-forward over as-issued ledger records"
+      },
+      "changes": "Initial production model, preserved unchanged as champion Model v1.",
+      "latest_performance_summary": {
+        "as_of": "2026-10-03",
+        "short_0_7": {
+          "n_pairs": 120,
+          "n_target_dates": 7,
+          "sample_flag": "insufficient",
+          "exact_hit": 0.1417,
+          "within_one": 0.525,
+          "mae": 30.7,
+          "brier": 0.3021,
+          "brier_skill_vs_clim": -0.0634
+        },
+        "outlook_8_30": {
+          "n_pairs": 374,
+          "n_target_dates": 23,
+          "sample_flag": "insufficient",
+          "exact_hit": 0.2727,
+          "within_one": 0.5535,
+          "mae": 31.05,
+          "brier": 0.248,
+          "brier_skill_vs_clim": 0.0376
+        }
+      },
+      "promotion_decision": {
+        "decision": "baseline_production",
+        "decided_utc": "2026-10-04T06:21:43Z",
+        "reason": "Pre-existing production model at the time the learning system was introduced."
+      },
+      "human_approval": {
+        "approved": true,
+        "approved_by": "pre-existing production model (grandfathered)",
+        "approved_utc": "2026-10-04T06:21:43Z",
+        "note": "No change to the live model."
+      }
+    },
+    {
+      "model_id": "baseline_climatology",
+      "status": "reference",
+      "role": "baseline A",
+      "kind": "baseline",
+      "registered_utc": "2026-10-04T06:21:43Z",
+      "description": "Seasonal climatology: the v1 engine run on day-of-year climatological SST, wave and wind with neutral tide/moon terms (climatological_curve.csv). Skill reference.",
+      "feature_set": [
+        "zone",
+        "species",
+        "day_of_year"
+      ],
+      "weights": "as v1, climatological inputs",
+      "class_mapping": {
+        "classes": [
+          "Poor",
+          "Fair",
+          "Good",
+          "Very Good",
+          "Excellent"
+        ],
+        "score_cuts": [
+          40.0,
+          60.0,
+          75.0,
+          90.0
+        ],
+        "p_good_or_better": {
+          "form": "logistic((score-60)/spread)",
+          "spread_by_lead_bucket": {
+            "0-3": 8.0,
+            "4-7": 10.0,
+            "8-14": 14.0,
+            "15-30": 20.0
+          }
+        }
+      },
+      "training_window": "MUR 2015-2026, CO-OPS 2015-2026, NDBC 2003-2026 climatologies",
+      "evaluation_window": {
+        "target_dates_from": "2026-08-14",
+        "target_dates_to": "2026-10-03",
+        "issuances": 1,
+        "method": "rolling-origin walk-forward over as-issued ledger records"
+      },
+      "changes": "Reference baseline.",
+      "latest_performance_summary": {
+        "as_of": "2026-10-03",
+        "short_0_7": {
+          "n_pairs": 120,
+          "n_target_dates": 7,
+          "sample_flag": "insufficient",
+          "exact_hit": 0.0833,
+          "within_one": 0.3667,
+          "mae": 31.95,
+          "brier": 0.2841,
+          "brier_skill_vs_clim": 0.0
+        },
+        "outlook_8_30": {
+          "n_pairs": 374,
+          "n_target_dates": 23,
+          "sample_flag": "insufficient",
+          "exact_hit": 0.1123,
+          "within_one": 0.3262,
+          "mae": 33.59,
+          "brier": 0.2577,
+          "brier_skill_vs_clim": 0.0
+        }
+      },
+      "promotion_decision": {
+        "decision": "not_eligible",
+        "reason": "Reference baseline only."
+      },
+      "human_approval": {
+        "approved": false
+      }
+    },
+    {
+      "model_id": "baseline_enso",
+      "status": "reference",
+      "role": "baseline B",
+      "kind": "baseline",
+      "registered_utc": "2026-10-04T06:21:43Z",
+      "description": "ENSO/SST-regime seasonal baseline: climatological score shifted by the zone x month x ENSO-regime composite SST anomaly through each species' anomaly preference (enso_zone_composite.csv, regime as known at issue time).",
+      "feature_set": [
+        "zone",
+        "species",
+        "day_of_year",
+        "ENSO regime at issue",
+        "composite anomaly"
+      ],
+      "weights": "anomaly multiplier clamp(1 + pref*(anom/2.5)*0.45, 0.35, 1.35)",
+      "class_mapping": {
+        "classes": [
+          "Poor",
+          "Fair",
+          "Good",
+          "Very Good",
+          "Excellent"
+        ],
+        "score_cuts": [
+          40.0,
+          60.0,
+          75.0,
+          90.0
+        ],
+        "p_good_or_better": {
+          "form": "logistic((score-60)/spread)",
+          "spread_by_lead_bucket": {
+            "0-3": 8.0,
+            "4-7": 10.0,
+            "8-14": 14.0,
+            "15-30": 20.0
+          }
+        }
+      },
+      "training_window": "ENSO composites 2015-2026 MUR anomalies",
+      "evaluation_window": {
+        "target_dates_from": "2026-08-14",
+        "target_dates_to": "2026-10-03",
+        "issuances": 1,
+        "method": "rolling-origin walk-forward over as-issued ledger records"
+      },
+      "changes": "Reference baseline.",
+      "latest_performance_summary": {
+        "as_of": "2026-10-03",
+        "short_0_7": {
+          "n_pairs": 120,
+          "n_target_dates": 7,
+          "sample_flag": "insufficient",
+          "exact_hit": 0.0833,
+          "within_one": 0.3667,
+          "mae": 31.65,
+          "brier": 0.2854,
+          "brier_skill_vs_clim": -0.0046
+        },
+        "outlook_8_30": {
+          "n_pairs": 374,
+          "n_target_dates": 23,
+          "sample_flag": "insufficient",
+          "exact_hit": 0.1096,
+          "within_one": 0.3529,
+          "mae": 31.98,
+          "brier": 0.2399,
+          "brier_skill_vs_clim": 0.0691
+        }
+      },
+      "promotion_decision": {
+        "decision": "not_eligible",
+        "reason": "Reference baseline only."
+      },
+      "human_approval": {
+        "approved": false
+      }
+    },
+    {
+      "model_id": "v1.1-cal",
+      "status": "shadow",
+      "role": "challenger",
+      "kind": "calibration",
+      "registered_utc": "2026-10-04T06:21:43Z",
+      "parent": "v1",
+      "description": "Offline calibration challenger: per horizon group (0-7 / 8-30 days) linear mapping observed_score ~ a + b x v1_score, refitted walk-forward at every issuance using only labels available before that issuance. Identity (= v1) until 60 training pairs exist.",
+      "feature_set": "v1 score + horizon group",
+      "weights": "as v1",
+      "min_training_pairs": 60,
+      "class_mapping": {
+        "classes": [
+          "Poor",
+          "Fair",
+          "Good",
+          "Very Good",
+          "Excellent"
+        ],
+        "score_cuts": [
+          40.0,
+          60.0,
+          75.0,
+          90.0
+        ],
+        "p_good_or_better": {
+          "form": "logistic((score-60)/spread)",
+          "spread_by_lead_bucket": {
+            "0-3": 8.0,
+            "4-7": 10.0,
+            "8-14": 14.0,
+            "15-30": 20.0
+          }
+        }
+      },
+      "training_window": "expanding window of labels available before each issuance",
+      "evaluation_window": {
+        "target_dates_from": "2026-08-14",
+        "target_dates_to": "2026-10-03",
+        "issuances": 1,
+        "method": "rolling-origin walk-forward over as-issued ledger records"
+      },
+      "changes": "Recalibrates v1's score scale (v1 runs high: Good-or-better is over-called in late summer).",
+      "latest_performance_summary": {
+        "as_of": "2026-10-03",
+        "short_0_7": {
+          "n_pairs": 120,
+          "n_target_dates": 7,
+          "sample_flag": "insufficient",
+          "exact_hit": 0.1417,
+          "within_one": 0.525,
+          "mae": 30.7,
+          "brier": 0.3021,
+          "brier_skill_vs_clim": -0.0634
+        },
+        "outlook_8_30": {
+          "n_pairs": 374,
+          "n_target_dates": 23,
+          "sample_flag": "insufficient",
+          "exact_hit": 0.2727,
+          "within_one": 0.5535,
+          "mae": 31.05,
+          "brier": 0.248,
+          "brier_skill_vs_clim": 0.0376
+        }
+      },
+      "promotion_decision": {
+        "decision": "pending",
+        "reason": "Shadow evaluation only."
+      },
+      "human_approval": {
+        "approved": false,
+        "approved_by": null,
+        "approved_utc": null
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "utc": "2026-10-04T06:21:43Z",
+      "model_id": "v1",
+      "action": "register",
+      "decision": "production champion",
+      "by": "system",
+      "reason": "Learning system introduced; live model preserved unchanged."
+    },
+    {
+      "utc": "2026-10-04T06:21:43Z",
+      "model_id": "v1.1-cal",
+      "action": "register",
+      "decision": "shadow challenger",
+      "by": "system",
+      "reason": "Offline calibration test; cannot affect the live score."
+    }
+  ]
+}

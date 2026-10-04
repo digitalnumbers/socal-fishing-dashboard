@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "description": "Append-only run log of the forecast-learning system.",
+  "entries": [
+    {
+      "run_utc": "2026-10-04T06:19:06Z",
+      "local_date": "2026-10-03",
+      "mode": "initial_backfill",
+      "warnings": [],
+      "outcomes_ingest": {
+        "pages": 50,
+        "pages_ok": 50,
+        "new_trip_versions": 1380,
+        "report_dates": "2026-08-15..2026-10-03"
+      },
+      "note": "Dock-total pages for 2026-08-15..2026-10-03 read from the public archive; labels flagged backfilled. L1 reference frozen from 2026-08-15..2026-08-27.",
+      "live_model_changed": false
+    },
+    {
+      "run_utc": "2026-10-04T06:19:50Z",
+      "local_date": "2026-10-03",
+      "mode": "seed_from_git",
+      "warnings": [
+        "no source_status.json in commit d8556c6: flagged no_source_timestamps"
+      ],
+      "issuances": [
+        "2026-08-28T1600PT_v1 (commit d8556c6)",
+        "2026-10-03T1619PT_v1 (commit c625edf)"
+      ],
+      "note": "Recovered the only two forecast sets that were genuinely issued and committed before the ledger existed. Hindcast rows excluded.",
+      "live_model_changed": false
+    },
+    {
+      "run_utc": "2026-10-04T06:20:00Z",
+      "local_date": "2026-10-03",
+      "mode": "registry_init",
+      "warnings": [],
+      "note": "Model v1 registered as production champion (unchanged); baselines A/B registered; v1.1-cal registered as shadow challenger.",
+      "live_model_changed": false
+    },
+    {
+      "run_utc": "2026-10-04T06:32:11Z",
+      "local_date": "2026-10-03",
+      "mode": "rebuild",
+      "warnings": [],
+      "labels": {
+        "rows": 1528,
+        "labelled": 828,
+        "final": 785,
+        "provisional": 43
+      },
+      "evaluation": {
+        "pairs": 494,
+        "issuances": 2,
+        "challengers": {
+          "v1.1-cal": "insufficient_data"
+        }
+      },
+      "forecast_changes": 0,
+      "live_model_changed": false
+    }
+  ]
+}

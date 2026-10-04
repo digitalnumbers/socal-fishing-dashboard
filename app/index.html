@@ -121,6 +121,8 @@ input.srch:focus{outline:none;border-color:var(--teal)}
 input.srch::placeholder{color:var(--text-3)}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 th,td{text-align:right;padding:7px 9px;border-bottom:1px solid var(--line-soft);white-space:nowrap}
+/* forecast accuracy: text-heavy tables wrap and read left-aligned */
+table.wraptxt td,table.wraptxt th{white-space:normal;text-align:left;vertical-align:top}
 th{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-3);font-weight:600;
   position:sticky;top:0;background:var(--surface);z-index:1}
 th:first-child,td:first-child{text-align:left}
@@ -277,6 +279,7 @@ td.np,.np{color:var(--text-3);font-style:italic}
     <button role="tab" aria-selected="false" data-tab="species">Species Model</button>
     <button role="tab" aria-selected="false" data-tab="enso">ENSO Regime</button>
     <button role="tab" aria-selected="false" data-tab="validation">Validation</button>
+    <button role="tab" aria-selected="false" data-tab="accuracy">Forecast Accuracy</button>
     <button role="tab" aria-selected="false" data-tab="data">Data &amp; Sources</button>
   </nav>
 </header>
@@ -303,6 +306,7 @@ td.np,.np{color:var(--text-3);font-style:italic}
   <section class="tab" id="tab-species"></section>
   <section class="tab" id="tab-enso"></section>
   <section class="tab" id="tab-validation"></section>
+  <section class="tab" id="tab-accuracy"></section>
   <section class="tab" id="tab-data"></section>
 </main>
 
