@@ -1037,13 +1037,13 @@ function renderAccuracy() {
   const leads = ['0-3', '4-7', '8-14', '15-30'];
   const models = E.models || [];
   const BL = (lb, m) => (E.by_lead || []).find(r => r.stratum === lb && r.model_id === m);
-  mc.appendChild(el('div', 'tbl-wrap', `<table><thead><tr><th>Lead (days)</th><th>Model</th><th>Sample</th><th>Exact</th><th>±1 class</th>
+  mc.appendChild(el('div', 'tbl-wrap', `<table><thead><tr><th>Lead (days)</th><th class="tl">Model</th><th class="tl">Sample</th><th>Exact</th><th>±1 class</th>
     <th>MAE</th><th>Brier</th><th>Skill vs A</th><th>Precision G+</th><th>Recall G+</th></tr></thead><tbody>` +
     leads.flatMap(lb => models.map((m, i) => {
       const r = BL(lb, m);
       if (!r) return i === 0 ? `<tr><td>${lb}</td><td colspan="9" class="note">No verified pairs yet</td></tr>` : '';
       const dim = r.sample_flag === 'insufficient' ? ' style="opacity:.55"' : '';
-      return `<tr${dim}><td>${i === 0 ? '<b>' + lb + '</b>' : ''}</td><td>${mName(m)}</td><td>${flagPill(r.sample_flag)} <span class="note">${r.n_pairs}/${r.n_target_dates}d</span></td>
+      return `<tr${dim}><td>${i === 0 ? '<b>' + lb + '</b>' : ''}</td><td class="tl">${mName(m)}</td><td class="tl">${flagPill(r.sample_flag)} <span class="note">${r.n_pairs}/${r.n_target_dates}d</span></td>
         <td>${pct(r.exact_hit)}</td><td>${pct(r.within_one)}</td><td>${fmt(r.mae, 1)}</td><td>${fmt(r.brier, 3)}</td>
         <td>${m === 'baseline_climatology' ? '—' : (r.brier_skill_vs_clim == null ? '—' : sign(r.brier_skill_vs_clim * 100, 0) + '%')}</td>
         <td>${r.precision_good == null ? '<span class="note">n&lt;10</span>' : pct(r.precision_good)}</td>
@@ -1100,10 +1100,11 @@ function renderAccuracy() {
       datasets: [{ label: 'Perfect calibration', type: 'line', data: [{ x: 0, y: 0 }, { x: 1, y: 1 }], borderColor: css('--text-3'), borderDash: [4, 4], pointRadius: 0, borderWidth: 1 }]
         .concat(['short_0_7', 'outlook_8_30'].map(hg => ({
           label: HG[hg], data: rel.filter(r => r.horizon_group === hg).map(r => ({ x: r.mean_p, y: r.obs_rate, n: r.n })),
-          backgroundColor: pal[hg], borderColor: pal[hg], pointRadius: c => Math.max(3, Math.min(11, Math.sqrt(c.raw?.n || 1)))
+          backgroundColor: pal[hg], borderColor: pal[hg], clip: false, pointRadius: c => Math.max(3, Math.min(11, Math.sqrt(c.raw?.n || 1)))
         })))
     },
     options: baseOpts({
+      layout: { padding: { top: 10, right: 12 } },
       interaction: { mode: 'nearest', intersect: true },
       plugins: { tooltip: { callbacks: { label: c => c.raw?.n ? `${c.dataset.label}: forecast ${pct(c.raw.x)} → observed ${pct(c.raw.y)} (n=${c.raw.n})` : '' } } },
       scales: { x: { type: 'linear', min: 0, max: 1, title: { display: true, text: 'forecast probability', color: css('--text-3') }, grid: { color: css('--line-soft') }, ticks: { color: css('--text-3'), callback: v => pct(v) } },
@@ -1116,18 +1117,31 @@ function renderAccuracy() {
   const cm = L.changes_meta;
   wc.appendChild(el('div', 'card-hd', `<div><h3>Why this forecast changed · ${ZM[state.zone]?.name || state.zone} · ${SM[state.species]?.species || state.species}</h3>
     <div class="sub">${cm ? `Latest issuance ${cm.current} vs prior ${cm.prior}` : 'Compares the active forecast with the prior issuance'} · driver contributions in score points, summing to the change</div></div>`));
-  const rows = (L.changes || []).filter(r => r.zone_id === state.zone && r.species_id === state.species);
-  if (!rows.length) {
+  const allRows = (L.changes || []).filter(r => r.zone_id === state.zone && r.species_id === state.species);
+  const material = r => Math.abs(r.delta || 0) >= 1 || r.class_prior !== r.class_now || r.tier_prior !== r.tier_now || r.notes;
+  const rows = state.chgAll ? allRows : allRows.filter(material);
+  if (!allRows.length) {
     wc.appendChild(el('p', 'note', (L.changes || []).length
       ? 'This zone/species pair has no overlapping target days between the last two issuances.'
-      : `Not available yet: the two issuances in the ledger (${(L.ledger_index || []).map(r => r.issue_local_date).join(', ') || '—'}) do not cover any of the same target days.
+      : `Not available yet: the issuances in the ledger (${(L.ledger_index || []).map(r => r.issue_local_date).join(', ') || '—'}) do not cover any of the same target days.
          From the next daily refresh, every day that both issuances forecast will be compared here.`));
   } else {
-    wc.appendChild(el('div', 'tbl-wrap scroll-tall', `<table><thead><tr><th>Target day</th><th>Lead</th><th>Prior</th><th>Now</th><th>Δ</th>
-      <th>Class</th><th>Main drivers (pts)</th><th>Input changes</th><th>Notes</th></tr></thead><tbody>` +
-      rows.map(r => `<tr><td>${dLabel(r.target_date)}</td><td>${r.lead_prior}→${r.lead_now} d</td><td>${sTxt(r.score_prior)}</td><td>${sTxt(r.score_now)}</td>
-        <td>${deltaTag(r.delta)}</td><td>${r.class_prior === r.class_now ? r.class_now : `${r.class_prior} → <b>${r.class_now}</b>`}</td>
-        <td style="white-space:normal;text-align:left;min-width:180px">${r.top_drivers || '—'}</td><td class="note" style="white-space:normal;text-align:left;min-width:160px">${r.input_changes || '—'}</td><td class="note" style="white-space:normal;text-align:left;min-width:160px">${r.notes || ''}</td></tr>`).join('') + '</tbody></table>'));
+    const nMat = allRows.filter(material).length;
+    const big = [...allRows].sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta))[0];
+    const bar = el('div', '', `<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:8px">
+      <div class="note">${nMat} of ${allRows.length} target days changed by ≥1 point, class or confidence tier${nMat ? ` · largest ${dLabel(big.target_date)} ${sign(big.delta)} pts` : ''}</div>
+      <div class="seg sm" role="group"><button data-chg="0" aria-pressed="${!state.chgAll}">Material changes</button><button data-chg="1" aria-pressed="${!!state.chgAll}">All days</button></div></div>`);
+    bar.querySelectorAll('button[data-chg]').forEach(b => b.onclick = () => { state.chgAll = b.dataset.chg === '1'; renderAccuracy(); });
+    wc.appendChild(bar);
+    if (!rows.length) {
+      wc.appendChild(el('p', 'note', 'No target day changed materially between the two issuances for this zone and species.'));
+    } else {
+      wc.appendChild(el('div', 'tbl-wrap scroll-tall', `<table><thead><tr><th>Target day</th><th>Lead</th><th>Prior</th><th>Now</th><th>Δ</th>
+        <th>Class</th><th class="tl">Main drivers (pts)</th><th class="tl">Input changes</th><th class="tl">Notes</th></tr></thead><tbody>` +
+        rows.map(r => `<tr><td>${dLabel(r.target_date)}</td><td>${r.lead_prior}→${r.lead_now} d</td><td>${sTxt(r.score_prior)}</td><td>${sTxt(r.score_now)}</td>
+          <td>${deltaTag(r.delta)}</td><td>${r.class_prior === r.class_now ? r.class_now : `${r.class_prior} → <b>${r.class_now}</b>`}</td>
+          <td style="white-space:normal;text-align:left;min-width:180px">${r.top_drivers || '—'}</td><td class="note" style="white-space:normal;text-align:left;min-width:160px">${r.input_changes || '—'}</td><td class="note" style="white-space:normal;text-align:left;min-width:160px">${r.notes || ''}</td></tr>`).join('') + '</tbody></table>'));
+    }
   }
   host.appendChild(wc);
 
@@ -1138,7 +1152,7 @@ function renderAccuracy() {
   const DIM = { species_id: 'Species', region_id: 'Region', month: 'Month', season: 'Season', enso_regime: 'ENSO regime', label_status: 'Label status' };
   const strata = (E.strata || []).filter(r => r.window === 'all');
   const nameOf = (dim, s) => dim === 'species_id' ? (SM[s]?.species || s) : dim === 'region_id' ? (L.regions?.[s]?.name || s) : dim === 'enso_regime' ? ensoLabel(s) : s;
-  sc2.appendChild(el('div', 'tbl-wrap scroll-tall', `<table><thead><tr><th>Dimension</th><th>Stratum</th><th>Sample</th><th>Exact</th><th>±1</th><th>MAE</th>
+  sc2.appendChild(el('div', 'tbl-wrap scroll-tall', `<table><thead><tr><th>Dimension</th><th class="tl">Stratum</th><th class="tl">Sample</th><th>Exact</th><th>±1</th><th>MAE</th>
     <th>Brier</th><th>Clim. Brier</th><th>Skill vs A</th></tr></thead><tbody>` +
     Object.keys(DIM).flatMap(dim => {
       const ss = [...new Set(strata.filter(r => r.dimension === dim).map(r => r.stratum))].sort();
@@ -1147,7 +1161,7 @@ function renderAccuracy() {
         const c = strata.find(x => x.dimension === dim && x.stratum === s && x.model_id === 'baseline_climatology');
         if (!r) return '';
         const weak = r.sample_flag === 'insufficient';
-        return `<tr${weak ? ' style="opacity:.55"' : ''}><td>${DIM[dim]}</td><td>${nameOf(dim, s)}</td><td>${flagPill(r.sample_flag)} <span class="note">${r.n_pairs}/${r.n_target_dates}d</span></td>
+        return `<tr${weak ? ' style="opacity:.55"' : ''}><td>${DIM[dim]}</td><td class="tl">${nameOf(dim, s)}</td><td class="tl">${flagPill(r.sample_flag)} <span class="note">${r.n_pairs}/${r.n_target_dates}d</span></td>
           <td>${pct(r.exact_hit)}</td><td>${pct(r.within_one)}</td><td>${fmt(r.mae, 1)}</td><td>${fmt(r.brier, 3)}</td><td>${fmt(c?.brier, 3)}</td>
           <td>${weak ? '<span class="note">withheld</span>' : (r.brier_skill_vs_clim == null ? '—' : sign(r.brier_skill_vs_clim * 100, 0) + '%')}</td></tr>`;
       });
@@ -1174,14 +1188,15 @@ function renderAccuracy() {
   const rc = el('div', 'card');
   const gov = L.registry?.governance || {};
   rc.appendChild(el('div', 'card-hd', `<div><h3>Model registry and challengers</h3><div class="sub">Live model changes need a passing review, a human approval flag and a reviewed code change · auto-retrain ${gov.auto_retrain ? 'ON' : 'off'}</div></div>`));
-  rc.appendChild(el('div', 'tbl-wrap', `<table class="wraptxt"><thead><tr><th>Model</th><th>Status</th><th>Latest decision</th><th>Approved</th></tr></thead><tbody>` +
-    (L.registry?.models || []).map(m => {
-      const ch = (E.challengers || []).find(c => c.model_id === m.model_id);
-      return `<tr><td><b>${m.model_id}</b><div class="note">${m.description || ''}</div></td>
-        <td><span class="pill">${m.status}</span></td>
-        <td>${ch ? `<span class="pill">${ch.recommendation.replace(/_/g, ' ')}</span><div class="note">${ch.checks.filter(x => !x.passed).map(x => x.check + ': ' + x.detail).slice(0, 3).join('<br>') || 'all checks passed'}</div>` : (m.promotion_decision?.decision || '—').replace(/_/g, ' ')}</td>
-        <td>${m.human_approval?.approved ? 'yes' : 'no'}</td></tr>`;
-    }).join('') + '</tbody></table>'));
+  (L.registry?.models || []).forEach(m => {
+    const ch = (E.challengers || []).find(c => c.model_id === m.model_id);
+    const dec = ch ? ch.recommendation : (m.promotion_decision?.decision || '—');
+    const fails = ch ? ch.checks.filter(x => !x.passed) : [];
+    rc.appendChild(el('div', 'reg', `<div class="rn">${m.model_id}${m.role ? ` <span class="note" style="font-weight:400">· ${m.role}</span>` : ''}</div>
+      <div class="rs"><span class="pill">${m.status}</span><span class="pill">${dec.replace(/_/g, ' ')}</span>
+        <span class="pill">${m.human_approval?.approved ? 'approved' : 'not approved'}</span></div>
+      <div class="rd">${m.description || ''}${fails.length ? `<ul>${fails.map(x => `<li>${x.check}: ${x.detail}</li>`).join('')}</ul>` : ''}</div>`));
+  });
   const crit = gov.promotion_criteria || {};
   rc.appendChild(el('p', 'note', `Promotion is only recommended when a challenger has ≥${crit.min_pairs} pairs over ≥${crit.min_target_dates} target days and ≥${crit.min_issuances} issuances,
     improves aggregate Brier by ≥${Math.round((crit.min_aggregate_brier_improvement || 0) * 100)}% with bootstrap P ≥ ${crit.min_bootstrap_p_positive},
