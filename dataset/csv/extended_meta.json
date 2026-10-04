@@ -1,9 +1,9 @@
 {
- "built_utc": "2026-10-03T23:18:36.234480+00:00",
- "today": "2026-10-03",
- "near_term_last_date": "2026-10-09",
- "extended_from": "2026-10-10",
- "extended_to": "2026-11-02",
+ "built_utc": "2026-10-04T07:40:47.162528+00:00",
+ "today": "2026-10-04",
+ "near_term_last_date": "2026-10-10",
+ "extended_from": "2026-10-11",
+ "extended_to": "2026-11-03",
  "horizon_days": 30,
  "extended_rows": 216,
  "extended_score_rows": 1392,
@@ -97,7 +97,7 @@
    "shapefile": "cpc/seastemp/lead1_OND_temp.shp"
   }
  },
- "model_horizon_last_date": "2026-10-18",
+ "model_horizon_last_date": "2026-10-19",
  "tiers": [
   {
    "tier": 1,

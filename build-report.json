@@ -1,9 +1,11 @@
 {
   "ok": true,
-  "local_date": "2026-10-03",
+  "local_date": "2026-10-04",
   "promoted": true,
   "source_summary": {
-    "fresh": 41,
-    "failed": 2
+    "fresh": 35,
+    "failed": 1,
+    "delayed": 2,
+    "not_due": 6
   }
 }

@@ -1,28 +1,28 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-04T06:32:16Z",
-  "as_of": "2026-10-03",
+  "generated_utc": "2026-10-04T07:41:31Z",
+  "as_of": "2026-10-04",
   "label_version": "L1",
   "method": "rolling-origin walk-forward over as-issued ledger records",
   "ledger": {
-    "issuances": 2,
-    "forecast_rows": 3596,
+    "issuances": 3,
+    "forecast_rows": 5394,
     "first_issue": "2026-08-28",
-    "last_issue": "2026-10-03"
+    "last_issue": "2026-10-04"
   },
   "labels": {
     "rows": 1528,
     "labelled": 828,
-    "final": 785,
-    "provisional": 43,
+    "final": 801,
+    "provisional": 27,
     "insufficient_effort": 88,
     "effort_adjusted_zero": 98,
     "first_fishing_date": "2026-08-14",
     "last_fishing_date": "2026-10-03",
     "median_publication_lag_days": 26.0,
-    "median_publication_lag_days_live": null,
+    "median_publication_lag_days_live": 2.0,
     "median_reporting_lag_days": 0.0,
-    "backfilled": 828
+    "backfilled": 785
   },
   "pairs": {
     "total": 494,
@@ -39,103 +39,103 @@
   ],
   "headline": [
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_30d",
       "dimension": "overall",
       "stratum": "all",
       "model_id": "baseline_climatology",
-      "n_pairs": 392,
-      "n_target_dates": 24,
+      "n_pairs": 374,
+      "n_target_dates": 23,
       "n_issuances": 1,
       "sample_flag": "insufficient",
-      "exact_hit": 0.1097,
-      "within_one": 0.3316,
-      "mae": 33.41,
-      "brier": 0.258,
-      "n_obs_good": 240,
-      "n_fcst_good": 349,
-      "obs_good_rate": 0.6122,
-      "precision_good": 0.5759,
-      "recall_good": 0.8375,
-      "mean_forecast_score": 64.4,
-      "mean_observed_score": 62.8,
+      "exact_hit": 0.1123,
+      "within_one": 0.3262,
+      "mae": 33.59,
+      "brier": 0.2577,
+      "n_obs_good": 232,
+      "n_fcst_good": 332,
+      "obs_good_rate": 0.6203,
+      "precision_good": 0.5813,
+      "recall_good": 0.8319,
+      "mean_forecast_score": 64.3,
+      "mean_observed_score": 62.9,
       "brier_skill_vs_clim": 0.0,
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_30d",
       "dimension": "overall",
       "stratum": "all",
       "model_id": "baseline_enso",
-      "n_pairs": 392,
-      "n_target_dates": 24,
+      "n_pairs": 374,
+      "n_target_dates": 23,
       "n_issuances": 1,
       "sample_flag": "insufficient",
-      "exact_hit": 0.1071,
-      "within_one": 0.3571,
-      "mae": 31.85,
-      "brier": 0.2417,
-      "n_obs_good": 240,
-      "n_fcst_good": 356,
-      "obs_good_rate": 0.6122,
-      "precision_good": 0.6096,
-      "recall_good": 0.9042,
-      "mean_forecast_score": 67.5,
-      "mean_observed_score": 62.8,
-      "brier_skill_vs_clim": 0.0632,
-      "mae_skill_vs_clim": 0.0467
+      "exact_hit": 0.1096,
+      "within_one": 0.3529,
+      "mae": 31.98,
+      "brier": 0.2399,
+      "n_obs_good": 232,
+      "n_fcst_good": 339,
+      "obs_good_rate": 0.6203,
+      "precision_good": 0.6165,
+      "recall_good": 0.9009,
+      "mean_forecast_score": 67.4,
+      "mean_observed_score": 62.9,
+      "brier_skill_vs_clim": 0.0691,
+      "mae_skill_vs_clim": 0.0479
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_30d",
       "dimension": "overall",
       "stratum": "all",
       "model_id": "v1",
-      "n_pairs": 392,
-      "n_target_dates": 24,
+      "n_pairs": 374,
+      "n_target_dates": 23,
       "n_issuances": 1,
       "sample_flag": "insufficient",
-      "exact_hit": 0.2653,
-      "within_one": 0.5536,
-      "mae": 31.03,
-      "brier": 0.2532,
-      "n_obs_good": 240,
-      "n_fcst_good": 380,
-      "obs_good_rate": 0.6122,
-      "precision_good": 0.6158,
-      "recall_good": 0.975,
-      "mean_forecast_score": 85.2,
-      "mean_observed_score": 62.8,
-      "brier_skill_vs_clim": 0.0186,
-      "mae_skill_vs_clim": 0.0712
+      "exact_hit": 0.2727,
+      "within_one": 0.5535,
+      "mae": 31.05,
+      "brier": 0.248,
+      "n_obs_good": 232,
+      "n_fcst_good": 365,
+      "obs_good_rate": 0.6203,
+      "precision_good": 0.6219,
+      "recall_good": 0.9784,
+      "mean_forecast_score": 85.6,
+      "mean_observed_score": 62.9,
+      "brier_skill_vs_clim": 0.0376,
+      "mae_skill_vs_clim": 0.0756
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_30d",
       "dimension": "overall",
       "stratum": "all",
       "model_id": "v1.1-cal",
-      "n_pairs": 392,
-      "n_target_dates": 24,
+      "n_pairs": 374,
+      "n_target_dates": 23,
       "n_issuances": 1,
       "sample_flag": "insufficient",
-      "exact_hit": 0.2653,
-      "within_one": 0.5536,
-      "mae": 31.03,
-      "brier": 0.2532,
-      "n_obs_good": 240,
-      "n_fcst_good": 380,
-      "obs_good_rate": 0.6122,
-      "precision_good": 0.6158,
-      "recall_good": 0.975,
-      "mean_forecast_score": 85.2,
-      "mean_observed_score": 62.8,
-      "brier_skill_vs_clim": 0.0186,
-      "mae_skill_vs_clim": 0.0712
+      "exact_hit": 0.2727,
+      "within_one": 0.5535,
+      "mae": 31.05,
+      "brier": 0.248,
+      "n_obs_good": 232,
+      "n_fcst_good": 365,
+      "obs_good_rate": 0.6203,
+      "precision_good": 0.6219,
+      "recall_good": 0.9784,
+      "mean_forecast_score": 85.6,
+      "mean_observed_score": 62.9,
+      "brier_skill_vs_clim": 0.0376,
+      "mae_skill_vs_clim": 0.0756
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_30d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -159,7 +159,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_30d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -183,7 +183,7 @@
       "mae_skill_vs_clim": 0.0479
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_30d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -207,7 +207,7 @@
       "mae_skill_vs_clim": 0.0756
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_30d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -231,103 +231,7 @@
       "mae_skill_vs_clim": 0.0756
     },
     {
-      "as_of": "2026-10-03",
-      "window": "rolling_30d",
-      "dimension": "horizon_group",
-      "stratum": "short_0_7",
-      "model_id": "baseline_climatology",
-      "n_pairs": 18,
-      "n_target_dates": 1,
-      "n_issuances": 1,
-      "sample_flag": "insufficient",
-      "exact_hit": 0.0556,
-      "within_one": 0.4444,
-      "mae": 29.72,
-      "brier": 0.265,
-      "n_obs_good": 8,
-      "n_fcst_good": 17,
-      "obs_good_rate": 0.4444,
-      "precision_good": 0.4706,
-      "recall_good": null,
-      "mean_forecast_score": 65.1,
-      "mean_observed_score": 60.5,
-      "brier_skill_vs_clim": 0.0,
-      "mae_skill_vs_clim": 0.0
-    },
-    {
-      "as_of": "2026-10-03",
-      "window": "rolling_30d",
-      "dimension": "horizon_group",
-      "stratum": "short_0_7",
-      "model_id": "baseline_enso",
-      "n_pairs": 18,
-      "n_target_dates": 1,
-      "n_issuances": 1,
-      "sample_flag": "insufficient",
-      "exact_hit": 0.0556,
-      "within_one": 0.4444,
-      "mae": 29.28,
-      "brier": 0.2786,
-      "n_obs_good": 8,
-      "n_fcst_good": 17,
-      "obs_good_rate": 0.4444,
-      "precision_good": 0.4706,
-      "recall_good": null,
-      "mean_forecast_score": 68.4,
-      "mean_observed_score": 60.5,
-      "brier_skill_vs_clim": -0.0513,
-      "mae_skill_vs_clim": 0.0148
-    },
-    {
-      "as_of": "2026-10-03",
-      "window": "rolling_30d",
-      "dimension": "horizon_group",
-      "stratum": "short_0_7",
-      "model_id": "v1",
-      "n_pairs": 18,
-      "n_target_dates": 1,
-      "n_issuances": 1,
-      "sample_flag": "insufficient",
-      "exact_hit": 0.1111,
-      "within_one": 0.5556,
-      "mae": 30.63,
-      "brier": 0.3609,
-      "n_obs_good": 8,
-      "n_fcst_good": 15,
-      "obs_good_rate": 0.4444,
-      "precision_good": 0.4667,
-      "recall_good": null,
-      "mean_forecast_score": 75.2,
-      "mean_observed_score": 60.5,
-      "brier_skill_vs_clim": -0.3619,
-      "mae_skill_vs_clim": -0.0306
-    },
-    {
-      "as_of": "2026-10-03",
-      "window": "rolling_30d",
-      "dimension": "horizon_group",
-      "stratum": "short_0_7",
-      "model_id": "v1.1-cal",
-      "n_pairs": 18,
-      "n_target_dates": 1,
-      "n_issuances": 1,
-      "sample_flag": "insufficient",
-      "exact_hit": 0.1111,
-      "within_one": 0.5556,
-      "mae": 30.63,
-      "brier": 0.3609,
-      "n_obs_good": 8,
-      "n_fcst_good": 15,
-      "obs_good_rate": 0.4444,
-      "precision_good": 0.4667,
-      "recall_good": null,
-      "mean_forecast_score": 75.2,
-      "mean_observed_score": 60.5,
-      "brier_skill_vs_clim": -0.3619,
-      "mae_skill_vs_clim": -0.0306
-    },
-    {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_90d",
       "dimension": "overall",
       "stratum": "all",
@@ -351,7 +255,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_90d",
       "dimension": "overall",
       "stratum": "all",
@@ -375,7 +279,7 @@
       "mae_skill_vs_clim": 0.0389
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_90d",
       "dimension": "overall",
       "stratum": "all",
@@ -399,7 +303,7 @@
       "mae_skill_vs_clim": 0.0669
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_90d",
       "dimension": "overall",
       "stratum": "all",
@@ -423,7 +327,7 @@
       "mae_skill_vs_clim": 0.0669
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -447,7 +351,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -471,7 +375,7 @@
       "mae_skill_vs_clim": 0.0479
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -495,7 +399,7 @@
       "mae_skill_vs_clim": 0.0756
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -519,7 +423,7 @@
       "mae_skill_vs_clim": 0.0756
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -543,7 +447,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -567,7 +471,7 @@
       "mae_skill_vs_clim": 0.0094
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -591,7 +495,7 @@
       "mae_skill_vs_clim": 0.0391
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -615,7 +519,7 @@
       "mae_skill_vs_clim": 0.0391
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "season_to_date",
       "dimension": "overall",
       "stratum": "all",
@@ -639,7 +543,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "season_to_date",
       "dimension": "overall",
       "stratum": "all",
@@ -663,7 +567,7 @@
       "mae_skill_vs_clim": 0.0389
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "season_to_date",
       "dimension": "overall",
       "stratum": "all",
@@ -687,7 +591,7 @@
       "mae_skill_vs_clim": 0.0669
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "season_to_date",
       "dimension": "overall",
       "stratum": "all",
@@ -711,7 +615,7 @@
       "mae_skill_vs_clim": 0.0669
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -735,7 +639,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -759,7 +663,7 @@
       "mae_skill_vs_clim": 0.0479
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -783,7 +687,7 @@
       "mae_skill_vs_clim": 0.0756
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -807,7 +711,7 @@
       "mae_skill_vs_clim": 0.0756
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -831,7 +735,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -855,7 +759,7 @@
       "mae_skill_vs_clim": 0.0094
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -879,7 +783,7 @@
       "mae_skill_vs_clim": 0.0391
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -903,7 +807,7 @@
       "mae_skill_vs_clim": 0.0391
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "overall",
       "stratum": "all",
@@ -927,7 +831,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "overall",
       "stratum": "all",
@@ -951,7 +855,7 @@
       "mae_skill_vs_clim": 0.0389
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "overall",
       "stratum": "all",
@@ -975,7 +879,7 @@
       "mae_skill_vs_clim": 0.0669
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "overall",
       "stratum": "all",
@@ -999,7 +903,7 @@
       "mae_skill_vs_clim": 0.0669
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -1023,7 +927,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -1047,7 +951,7 @@
       "mae_skill_vs_clim": 0.0479
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -1071,7 +975,7 @@
       "mae_skill_vs_clim": 0.0756
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -1095,7 +999,7 @@
       "mae_skill_vs_clim": 0.0756
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -1119,7 +1023,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -1143,7 +1047,7 @@
       "mae_skill_vs_clim": 0.0094
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -1167,7 +1071,7 @@
       "mae_skill_vs_clim": 0.0391
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -1193,7 +1097,7 @@
   ],
   "by_lead": [
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "0-3",
@@ -1217,7 +1121,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "0-3",
@@ -1241,7 +1145,7 @@
       "mae_skill_vs_clim": -0.0151
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "0-3",
@@ -1265,7 +1169,7 @@
       "mae_skill_vs_clim": 0.1626
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "0-3",
@@ -1289,7 +1193,7 @@
       "mae_skill_vs_clim": 0.1626
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "15-30",
@@ -1313,7 +1217,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "15-30",
@@ -1337,7 +1241,7 @@
       "mae_skill_vs_clim": 0.0541
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "15-30",
@@ -1361,7 +1265,7 @@
       "mae_skill_vs_clim": 0.1246
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "15-30",
@@ -1385,7 +1289,7 @@
       "mae_skill_vs_clim": 0.1246
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "4-7",
@@ -1409,7 +1313,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "4-7",
@@ -1433,7 +1337,7 @@
       "mae_skill_vs_clim": 0.0301
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "4-7",
@@ -1457,7 +1361,7 @@
       "mae_skill_vs_clim": -0.0654
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "4-7",
@@ -1481,7 +1385,7 @@
       "mae_skill_vs_clim": -0.0654
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "8-14",
@@ -1505,7 +1409,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "8-14",
@@ -1529,7 +1433,7 @@
       "mae_skill_vs_clim": 0.0332
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "8-14",
@@ -1553,7 +1457,7 @@
       "mae_skill_vs_clim": -0.0449
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "8-14",
@@ -1579,7 +1483,7 @@
   ],
   "strata": [
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "barracuda",
@@ -1603,7 +1507,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "barracuda",
@@ -1627,7 +1531,7 @@
       "mae_skill_vs_clim": 0.0758
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "barracuda",
@@ -1651,7 +1555,7 @@
       "mae_skill_vs_clim": 0.2789
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "barracuda",
@@ -1675,7 +1579,7 @@
       "mae_skill_vs_clim": 0.2789
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bluefin_tuna",
@@ -1699,7 +1603,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bluefin_tuna",
@@ -1723,7 +1627,7 @@
       "mae_skill_vs_clim": 0.0024
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bluefin_tuna",
@@ -1747,7 +1651,7 @@
       "mae_skill_vs_clim": -0.1374
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bluefin_tuna",
@@ -1771,7 +1675,7 @@
       "mae_skill_vs_clim": -0.1374
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bonito",
@@ -1795,7 +1699,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bonito",
@@ -1819,7 +1723,7 @@
       "mae_skill_vs_clim": 0.0272
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bonito",
@@ -1843,7 +1747,7 @@
       "mae_skill_vs_clim": 0.1003
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bonito",
@@ -1867,7 +1771,7 @@
       "mae_skill_vs_clim": 0.1003
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "calico_bass",
@@ -1891,7 +1795,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "calico_bass",
@@ -1915,7 +1819,7 @@
       "mae_skill_vs_clim": 0.0497
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "calico_bass",
@@ -1939,7 +1843,7 @@
       "mae_skill_vs_clim": -0.1609
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "calico_bass",
@@ -1963,7 +1867,7 @@
       "mae_skill_vs_clim": -0.1609
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "dorado",
@@ -1987,7 +1891,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "dorado",
@@ -2011,7 +1915,7 @@
       "mae_skill_vs_clim": 0.0713
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "dorado",
@@ -2035,7 +1939,7 @@
       "mae_skill_vs_clim": 0.3943
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "dorado",
@@ -2059,7 +1963,7 @@
       "mae_skill_vs_clim": 0.3943
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "rockfish",
@@ -2083,7 +1987,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "rockfish",
@@ -2107,7 +2011,7 @@
       "mae_skill_vs_clim": 0.0545
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "rockfish",
@@ -2131,7 +2035,7 @@
       "mae_skill_vs_clim": -0.048
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "rockfish",
@@ -2155,7 +2059,7 @@
       "mae_skill_vs_clim": -0.048
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sand_bass",
@@ -2179,7 +2083,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sand_bass",
@@ -2203,7 +2107,7 @@
       "mae_skill_vs_clim": 0.0768
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sand_bass",
@@ -2227,7 +2131,7 @@
       "mae_skill_vs_clim": 0.2416
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sand_bass",
@@ -2251,7 +2155,7 @@
       "mae_skill_vs_clim": 0.2416
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sheephead",
@@ -2275,7 +2179,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sheephead",
@@ -2299,7 +2203,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sheephead",
@@ -2323,7 +2227,7 @@
       "mae_skill_vs_clim": -0.2338
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sheephead",
@@ -2347,7 +2251,7 @@
       "mae_skill_vs_clim": -0.2338
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowfin_tuna",
@@ -2371,7 +2275,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowfin_tuna",
@@ -2395,7 +2299,7 @@
       "mae_skill_vs_clim": 0.1585
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowfin_tuna",
@@ -2419,7 +2323,7 @@
       "mae_skill_vs_clim": 0.5159
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowfin_tuna",
@@ -2443,7 +2347,7 @@
       "mae_skill_vs_clim": 0.5159
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowtail",
@@ -2467,7 +2371,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowtail",
@@ -2491,7 +2395,7 @@
       "mae_skill_vs_clim": -0.0436
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowtail",
@@ -2515,7 +2419,7 @@
       "mae_skill_vs_clim": -0.2379
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowtail",
@@ -2539,7 +2443,7 @@
       "mae_skill_vs_clim": -0.2379
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "coronados",
@@ -2563,7 +2467,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "coronados",
@@ -2587,7 +2491,7 @@
       "mae_skill_vs_clim": 0.0022
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "coronados",
@@ -2611,7 +2515,7 @@
       "mae_skill_vs_clim": 0.2296
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "coronados",
@@ -2635,7 +2539,7 @@
       "mae_skill_vs_clim": 0.2296
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "extended_offshore",
@@ -2659,7 +2563,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "extended_offshore",
@@ -2683,7 +2587,7 @@
       "mae_skill_vs_clim": 0.0271
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "extended_offshore",
@@ -2707,7 +2611,7 @@
       "mae_skill_vs_clim": 0.0887
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "extended_offshore",
@@ -2731,7 +2635,7 @@
       "mae_skill_vs_clim": 0.0887
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "kelp_nearshore",
@@ -2755,7 +2659,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "kelp_nearshore",
@@ -2779,7 +2683,7 @@
       "mae_skill_vs_clim": 0.0826
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "kelp_nearshore",
@@ -2803,7 +2707,7 @@
       "mae_skill_vs_clim": 0.1844
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "kelp_nearshore",
@@ -2827,7 +2731,7 @@
       "mae_skill_vs_clim": 0.1844
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "offshore_banks",
@@ -2851,7 +2755,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "offshore_banks",
@@ -2875,7 +2779,7 @@
       "mae_skill_vs_clim": 0.0092
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "offshore_banks",
@@ -2899,7 +2803,7 @@
       "mae_skill_vs_clim": -0.1075
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "region_id",
       "stratum": "offshore_banks",
@@ -2923,7 +2827,7 @@
       "mae_skill_vs_clim": -0.1075
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "month",
       "stratum": "08",
@@ -2947,7 +2851,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "month",
       "stratum": "08",
@@ -2971,7 +2875,7 @@
       "mae_skill_vs_clim": -0.0151
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "month",
       "stratum": "08",
@@ -2995,7 +2899,7 @@
       "mae_skill_vs_clim": 0.1626
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "month",
       "stratum": "08",
@@ -3019,7 +2923,7 @@
       "mae_skill_vs_clim": 0.1626
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "month",
       "stratum": "09",
@@ -3043,7 +2947,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "month",
       "stratum": "09",
@@ -3067,7 +2971,7 @@
       "mae_skill_vs_clim": 0.0453
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "month",
       "stratum": "09",
@@ -3091,7 +2995,7 @@
       "mae_skill_vs_clim": 0.0556
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "month",
       "stratum": "09",
@@ -3115,7 +3019,7 @@
       "mae_skill_vs_clim": 0.0556
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "season",
       "stratum": "JJA",
@@ -3139,7 +3043,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "season",
       "stratum": "JJA",
@@ -3163,7 +3067,7 @@
       "mae_skill_vs_clim": -0.0151
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "season",
       "stratum": "JJA",
@@ -3187,7 +3091,7 @@
       "mae_skill_vs_clim": 0.1626
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "season",
       "stratum": "JJA",
@@ -3211,7 +3115,7 @@
       "mae_skill_vs_clim": 0.1626
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "season",
       "stratum": "SON",
@@ -3235,7 +3139,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "season",
       "stratum": "SON",
@@ -3259,7 +3163,7 @@
       "mae_skill_vs_clim": 0.0453
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "season",
       "stratum": "SON",
@@ -3283,7 +3187,7 @@
       "mae_skill_vs_clim": 0.0556
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "season",
       "stratum": "SON",
@@ -3307,7 +3211,7 @@
       "mae_skill_vs_clim": 0.0556
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "enso_regime",
       "stratum": "El Nino",
@@ -3331,7 +3235,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "enso_regime",
       "stratum": "El Nino",
@@ -3355,7 +3259,7 @@
       "mae_skill_vs_clim": 0.0389
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "enso_regime",
       "stratum": "El Nino",
@@ -3379,7 +3283,7 @@
       "mae_skill_vs_clim": 0.0669
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "enso_regime",
       "stratum": "El Nino",
@@ -3403,7 +3307,7 @@
       "mae_skill_vs_clim": 0.0669
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "label_status",
       "stratum": "final",
@@ -3427,7 +3331,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "label_status",
       "stratum": "final",
@@ -3451,7 +3355,7 @@
       "mae_skill_vs_clim": 0.0389
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "label_status",
       "stratum": "final",
@@ -3475,7 +3379,7 @@
       "mae_skill_vs_clim": 0.0669
     },
     {
-      "as_of": "2026-10-03",
+      "as_of": "2026-10-04",
       "window": "all",
       "dimension": "label_status",
       "stratum": "final",
