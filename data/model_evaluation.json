@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-05T23:42:46Z",
+  "generated_utc": "2026-10-05T23:51:51Z",
   "as_of": "2026-10-05",
   "label_version": "L1",
   "method": "rolling-origin walk-forward over as-issued ledger records",
   "ledger": {
-    "issuances": 4,
-    "forecast_rows": 7192,
+    "issuances": 5,
+    "forecast_rows": 8990,
     "first_issue": "2026-08-28",
     "last_issue": "2026-10-05"
   },
@@ -26,7 +26,7 @@
   },
   "pairs": {
     "total": 548,
-    "excluded_late_lead0_rows": 174,
+    "excluded_late_lead0_rows": 232,
     "target_dates": 32,
     "issuances": 3,
     "final_label_share": 0.901

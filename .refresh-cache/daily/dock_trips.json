@@ -1,9 +1,9 @@
 {
- "collected_at_utc": "2026-10-05T23:36:53Z",
+ "collected_at_utc": "2026-10-05T23:48:30Z",
  "fetches": [
   {
    "report_date": "2026-10-02",
-   "fetched_at_utc": "2026-10-05T23:42:09Z",
+   "fetched_at_utc": "2026-10-05T23:51:17Z",
    "ok": true,
    "trips": [
     {
@@ -387,7 +387,7 @@
   },
   {
    "report_date": "2026-10-03",
-   "fetched_at_utc": "2026-10-05T23:42:10Z",
+   "fetched_at_utc": "2026-10-05T23:51:18Z",
    "ok": true,
    "trips": [
     {
@@ -771,7 +771,7 @@
   },
   {
    "report_date": "2026-10-04",
-   "fetched_at_utc": "2026-10-05T23:42:12Z",
+   "fetched_at_utc": "2026-10-05T23:51:19Z",
    "ok": true,
    "trips": [
     {
@@ -1260,7 +1260,7 @@
   },
   {
    "report_date": "2026-10-05",
-   "fetched_at_utc": "2026-10-05T23:42:13Z",
+   "fetched_at_utc": "2026-10-05T23:51:21Z",
    "ok": true,
    "trips": [
     {
