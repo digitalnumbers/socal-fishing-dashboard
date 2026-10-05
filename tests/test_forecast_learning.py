@@ -38,7 +38,13 @@ class LedgerTests(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.tmp, ignore_errors=True)
 
-    def _issue(self, when="2026-10-03T23:30:00Z", ref="run:test"):
+    def _issue(self, when=None, ref="run:test"):
+        if when is None:
+            status = json.loads((CSV / "source_status.json").read_text())
+            when = (
+                pd.Timestamp(status["build_started_at_utc"])
+                + pd.Timedelta(minutes=15)
+            ).isoformat().replace("+00:00", "Z")
         rows, meta = build_issuance(CSV, issue_utc=when, data_cutoff_utc=when, origin="live_daily_refresh",
                                     source_ref=ref)
         return append_issuance(self.tmp, rows, meta), rows
