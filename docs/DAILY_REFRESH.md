@@ -6,7 +6,7 @@ The dashboard uses one transactional Python command and GitHub Actions to fetch 
 
 ```mermaid
 flowchart LR
-  A[Two UTC cron candidates] --> B[Pacific schedule gate]
+  A[Hourly UTC candidates] --> B[Pacific schedule and state gate]
   B --> C[Local-day idempotency check]
   C --> D[Fresh dated staging tree]
   D --> E[Bounded source fetches]
@@ -56,12 +56,12 @@ python -m unittest discover -s tests -v
 
 ## Pacific schedule and DST
 
-GitHub runs two candidate schedules:
+GitHub runs hourly candidates with `30 15-23 * * *`:
 
-- `30 15 * * *`, which is 08:30 during PDT and 07:30 during PST.
-- `30 16 * * *`, which is 09:30 during PDT and 08:30 during PST.
+- During PDT, candidates span 08:30 through 16:30 Pacific.
+- During PST, candidates span 07:30 through 15:30 Pacific; the 07:30 candidate is rejected by the local-time gate.
 
-At job start, `pipeline/schedule_gate.py` converts the actual UTC time with `zoneinfo.ZoneInfo("America/Los_Angeles")`. A scheduled candidate continues only at or after 08:15 local time and only when `.refresh-cache/daily_state.json` does not already record a successful refresh for that Pacific date. During PST the 07:30 candidate normally exits and the 08:30 candidate runs. During PDT the 08:30 candidate runs and the 09:30 candidate exits cheaply after seeing the first run's persisted success. If GitHub queues either candidate late, it remains eligible for the rest of that local day instead of being discarded by a narrow time window. `workflow_dispatch` bypasses the schedule gate, while the orchestrator still honors same-day idempotency unless `force=true` is selected.
+At job start, `pipeline/schedule_gate.py` converts the actual UTC time with `zoneinfo.ZoneInfo("America/Los_Angeles")`. A scheduled candidate continues only at or after 08:15 local time and only when `.refresh-cache/daily_state.json` does not already record a successful refresh for that Pacific date. The first eligible candidate targets 08:30 year-round. After a successful refresh commits state, later candidates exit before dependency installation. If a refresh fails or GitHub omits a trigger, later candidates provide same-day retries; a queued candidate remains eligible for the rest of that local day instead of being discarded by a narrow time window. `workflow_dispatch` bypasses the schedule gate, while the orchestrator still honors same-day idempotency unless `force=true` is selected.
 
 The 08:30 target is an operational balance: it gives overnight dock totals and morning NOAA/NWS/Open-Meteo products more time to appear while keeping the forecast useful for the current fishing day. MUR is allowed to use and disclose the latest prior valid daily field because same-day analysis can still be unpublished in the morning. `.refresh-cache/daily_state.json` remains a second idempotency check inside the orchestrator, and workflow concurrency prevents overlapping runs.
 
@@ -130,12 +130,12 @@ No Worker, Durable Object, database, paid add-on, or always-on service is needed
 ## Rollback, pause, and diagnostics
 
 - **Rollback:** revert the generated-data bot commit to a known-good commit, then manually run the workflow with `dry_run=false` only if a new fetch is desired. For an immediate site rollback, redeploy the `app/` artifact from a known-good revision through Pages.
-- **Pause:** disable the workflow from its Actions page or remove/comment the two `schedule` entries. Manual dispatch remains available if only the cron entries are removed.
+- **Pause:** disable the workflow from its Actions page or remove/comment the `schedule` entry. Manual dispatch remains available if only the cron entry is removed.
 - **Diagnostics:** failures retain the previous live site and upload `build-report.json` plus `source_status.json` for seven days. Non-sensitive errors are capped in the status artifact.
 - **Idempotency reset:** use `force=true` for a deliberate same-day rerun. Do not delete historical CSVs to force refresh.
 
 ## Cost and terms
 
-Expected recurring cost is **$0/month** for a low-traffic public repository using standard GitHub-hosted Actions and GitHub Pages within free quotas. Cloudflare Pages Free is the preferred static alternative when private-source Pages is unavailable. Costs can arise from exceeding private-repository Actions minutes/storage, enabling paid Pages/Cloudflare features, unusually large Git history, or adding paid APIs. Avoid those features, retain diagnostics for only seven days, and monitor repository growth.
+Expected recurring cost is **$0/month** for a low-traffic public repository using standard GitHub-hosted Actions and GitHub Pages within free quotas. Hourly retry candidates exit before dependency installation after the first successful local-day run. Cloudflare Pages Free is the preferred static alternative when private-source Pages is unavailable. Costs can arise from exceeding private-repository Actions minutes/storage, enabling paid Pages/Cloudflare features, unusually large Git history, or adding paid APIs. Avoid those features, retain diagnostics for only seven days, and monitor repository growth.
 
 Continue to display NOAA/NASA/Open-Meteo/CPC attribution and the dock source's non-commercial-use framing. Public data availability does not remove source-specific attribution, access, or usage obligations.

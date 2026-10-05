@@ -2,10 +2,9 @@ name: Daily dashboard refresh
 
 on:
   schedule:
-    # 08:30 PDT and 08:30 PST candidates. schedule_gate.py rejects candidates
-    # before 08:15 Pacific but accepts delayed jobs later that local day.
-    - cron: "30 15 * * *"
-    - cron: "30 16 * * *"
+    # Hourly candidates provide same-day retries. The gate rejects times before
+    # 08:15 Pacific and exits cheaply after the first successful local-day run.
+    - cron: "30 15-23 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
