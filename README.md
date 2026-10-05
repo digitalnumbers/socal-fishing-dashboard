@@ -34,7 +34,7 @@ Validate the current clean-clone snapshot without network access or repository c
 python pipeline/run_daily_refresh.py --dry-run
 ```
 
-GitHub Actions evaluates UTC candidates for both PST and PDT, gates them with `America/Los_Angeles`, and runs once per successful Pacific calendar date around 06:30. It fetches only bounded recent or due source windows, retains last-known-good data for honest degraded operation, validates a complete staged generation, commits meaningful state, and deploys `app/` only after every gate passes. See [Daily Refresh Operations](docs/DAILY_REFRESH.md) and [Pipeline Safety Audit](docs/PIPELINE_AUDIT.md).
+GitHub Actions evaluates 08:30 Pacific UTC candidates for both PST and PDT, gates them with `America/Los_Angeles`, and runs once per successful Pacific calendar date. Delayed GitHub jobs may catch up later the same day instead of being rejected by a narrow clock window. The refresh fetches only bounded recent or due source windows, retains last-known-good data for honest degraded operation, validates a complete staged generation, commits meaningful state, and deploys `app/` only after every gate passes. See [Daily Refresh Operations](docs/DAILY_REFRESH.md) and [Pipeline Safety Audit](docs/PIPELINE_AUDIT.md).
 
 ## Forecast learning and accuracy
 

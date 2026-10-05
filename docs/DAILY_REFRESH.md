@@ -58,12 +58,12 @@ python -m unittest discover -s tests -v
 
 GitHub runs two candidate schedules:
 
-- `30 13 * * *`, which is 06:30 during PDT.
-- `30 14 * * *`, which is 06:30 during PST.
+- `30 15 * * *`, which is 08:30 during PDT and 07:30 during PST.
+- `30 16 * * *`, which is 09:30 during PDT and 08:30 during PST.
 
-At job start, `pipeline/schedule_gate.py` converts the actual UTC time with `zoneinfo.ZoneInfo("America/Los_Angeles")`. A scheduled candidate continues only between 06:20 and 06:50 local time; the other candidate exits without installing dependencies or fetching. `workflow_dispatch` bypasses the time gate.
+At job start, `pipeline/schedule_gate.py` converts the actual UTC time with `zoneinfo.ZoneInfo("America/Los_Angeles")`. A scheduled candidate continues only at or after 08:15 local time and only when `.refresh-cache/daily_state.json` does not already record a successful refresh for that Pacific date. During PST the 07:30 candidate normally exits and the 08:30 candidate runs. During PDT the 08:30 candidate runs and the 09:30 candidate exits cheaply after seeing the first run's persisted success. If GitHub queues either candidate late, it remains eligible for the rest of that local day instead of being discarded by a narrow time window. `workflow_dispatch` bypasses the schedule gate, while the orchestrator still honors same-day idempotency unless `force=true` is selected.
 
-GitHub schedules can queue late. The 30-minute gate tolerates ordinary delay while rejecting the wrong DST candidate, which arrives one hour away. `.refresh-cache/daily_state.json` records the last successful Pacific date, and the orchestrator skips another success for that date unless `--force` is used. Workflow concurrency also prevents overlapping runs.
+The 08:30 target is an operational balance: it gives overnight dock totals and morning NOAA/NWS/Open-Meteo products more time to appear while keeping the forecast useful for the current fishing day. MUR is allowed to use and disclose the latest prior valid daily field because same-day analysis can still be unpublished in the morning. `.refresh-cache/daily_state.json` remains a second idempotency check inside the orchestrator, and workflow concurrency prevents overlapping runs.
 
 ## Source cadence and stale-data behavior
 

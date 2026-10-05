@@ -16,22 +16,48 @@ import build_dataset as build_dataset_module  # noqa: E402
 
 
 class ScheduleGateTests(unittest.TestCase):
-    def gate(self, when):
-        out = subprocess.check_output(
-            [sys.executable, str(ROOT / "pipeline/schedule_gate.py"),
-             "--event", "schedule", "--now-utc", when],
-            text=True,
-        )
+    def gate(self, when, state=None, event="schedule"):
+        with tempfile.TemporaryDirectory() as tmp:
+            state_path = Path(tmp) / "daily_state.json"
+            if state is not None:
+                state_path.write_text(json.dumps(state))
+            args = [
+                sys.executable, str(ROOT / "pipeline/schedule_gate.py"),
+                "--event", event, "--now-utc", when,
+                "--state-file", str(state_path),
+            ]
+            out = subprocess.check_output(args, text=True)
         return json.loads(out)
 
     def test_pdt_candidate_is_allowed(self):
-        self.assertTrue(self.gate("2026-08-28T13:30:00+00:00")["allowed"])
+        self.assertTrue(self.gate("2026-08-28T15:30:00+00:00")["allowed"])
 
     def test_pst_candidate_is_allowed(self):
-        self.assertTrue(self.gate("2026-01-15T14:30:00+00:00")["allowed"])
+        self.assertTrue(self.gate("2026-01-15T16:30:00+00:00")["allowed"])
 
-    def test_wrong_dst_candidate_is_rejected(self):
-        self.assertFalse(self.gate("2026-08-28T14:30:00+00:00")["allowed"])
+    def test_early_dst_candidate_is_rejected(self):
+        self.assertFalse(self.gate("2026-01-15T15:30:00+00:00")["allowed"])
+
+    def test_late_queued_candidate_is_allowed(self):
+        result = self.gate("2026-08-28T22:30:00+00:00")
+        self.assertTrue(result["allowed"])
+        self.assertIn("at or after", result["reason"])
+
+    def test_completed_local_day_is_rejected(self):
+        result = self.gate(
+            "2026-08-28T16:30:00+00:00",
+            {"last_successful_local_date": "2026-08-28"},
+        )
+        self.assertFalse(result["allowed"])
+        self.assertTrue(result["already_completed"])
+
+    def test_manual_dispatch_bypasses_time_and_state(self):
+        result = self.gate(
+            "2026-08-28T12:00:00+00:00",
+            {"last_successful_local_date": "2026-08-28"},
+            event="workflow_dispatch",
+        )
+        self.assertTrue(result["allowed"])
 
 
 class FreshnessStateTests(unittest.TestCase):
