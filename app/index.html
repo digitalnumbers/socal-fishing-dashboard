@@ -49,6 +49,7 @@ header{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 8
 .badge b{color:var(--text);font-weight:600}
 .badge.status-warn{border-color:color-mix(in srgb,var(--warn) 55%,var(--line));color:var(--warn)}
 .badge.status-bad{border-color:color-mix(in srgb,var(--bad) 55%,var(--line));color:var(--bad)}
+.badge.next-refresh .dot{background:var(--sky)}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);flex:none}
 .iconbtn{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--surface);
   color:var(--text-2);cursor:pointer;display:grid;place-items:center;font-size:13px}
@@ -278,6 +279,7 @@ td.np,.np{color:var(--text-3);font-style:italic}
       <span class="badge" id="badge-enso"><span class="dot"></span><span></span></span>
       <span class="badge" id="badge-sources" aria-label="Source freshness"></span>
       <span class="badge" id="badge-run"></span>
+      <span class="badge next-refresh" id="badge-next" aria-label="Next scheduled refresh"></span>
       <button class="iconbtn" id="theme" title="Toggle light / dark" aria-label="Toggle theme">◐</button>
     </div>
   </div>

@@ -40,6 +40,50 @@ const doyOf = ds => { const dt = new Date(ds + 'T12:00:00Z'); return Math.floor(
 const dLabel = ds => new Date(ds + 'T12:00:00Z').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' });
 const isFcst = ds => ds > TODAY;
 
+/* ---------- refresh schedule ----------
+   The production workflow runs at minute 30 of UTC hours 15–23. Candidates
+   before 08:15 America/Los_Angeles are gated out, and a successful Pacific
+   local date suppresses later candidates for that date. */
+const ptParts = value => Object.fromEntries(
+  new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit',
+    day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+  }).formatToParts(value).filter(p => p.type !== 'literal').map(p => [p.type, p.value])
+);
+function nextScheduledRefresh(now = new Date()) {
+  const successfulDate = (D.source_status || {}).build_local_date || null;
+  const cursor = new Date(now);
+  cursor.setUTCSeconds(0, 0);
+  cursor.setUTCMinutes(cursor.getUTCMinutes() < 30 ? 30 : 90);
+  for (let i = 0; i < 72; i++, cursor.setUTCHours(cursor.getUTCHours() + 1)) {
+    const hour = cursor.getUTCHours();
+    if (hour < 15 || hour > 23) continue;
+    const p = ptParts(cursor);
+    const localDate = `${p.year}-${p.month}-${p.day}`;
+    const localMinute = Number(p.hour) * 60 + Number(p.minute);
+    if (localMinute < 8 * 60 + 15 || localDate === successfulDate) continue;
+    return new Date(cursor);
+  }
+  return null;
+}
+function renderNextRefresh() {
+  const badge = $('#badge-next');
+  const next = nextScheduledRefresh();
+  if (!next) {
+    badge.textContent = 'Next refresh unavailable';
+    badge.classList.add('status-warn');
+    return;
+  }
+  const iso = next.toISOString();
+  const label = next.toLocaleString('en-US', {
+    timeZone: 'America/Los_Angeles', weekday: 'short', month: 'short', day: 'numeric',
+    hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
+  });
+  badge.classList.remove('status-warn');
+  badge.innerHTML = `<span class="dot"></span><span>Next <time datetime="${iso}">${label}</time></span>`;
+  badge.title = 'Next automatic refresh attempt in America/Los_Angeles';
+}
+
 /* ---------- score color ---------- */
 function scoreColor(v, alpha = 1) {
   if (v === null || v === undefined || Number.isNaN(v)) return 'rgba(120,140,150,.25)';
@@ -1346,6 +1390,8 @@ function boot() {
     timeZone: 'America/Los_Angeles', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
     timeZoneName: 'short'
   }) + ' · static snapshot';
+  renderNextRefresh();
+  window.setInterval(renderNextRefresh, 60_000);
   $('#hd-sub').textContent = `${D.zones.length} zones · ${D.species.length} species · ${D.meta.dates.length}-day window`;
   $('#foot').innerHTML = `<b>SoCal Fishing Intelligence</b> — built for San Diego inshore, nearshore and offshore waters.
     Model scores are decision support, not a guarantee: they combine public environmental feeds with published
