@@ -1,6 +1,6 @@
 product,kind,cat,prob,signal_f,confidence,issued,valid_from,valid_to,valid_label,shapefile
-cpc_814_temp,temperature,Above,50.0,0.401,0.25,2026-10-07,2026-10-15,2026-10-21,,cpc/814temp/814temp_20261007.shp
-cpc_814_prcp,precipitation,Normal,36.0,0.0,0.0,2026-10-07,2026-10-15,2026-10-21,,cpc/814prcp/814prcp_20261007.shp
+cpc_814_temp,temperature,Above,60.0,0.64,0.4,2026-10-08,2026-10-16,2026-10-22,,cpc/814temp/814temp_20261008.shp
+cpc_814_prcp,precipitation,Normal,36.0,0.0,0.0,2026-10-08,2026-10-16,2026-10-22,,cpc/814prcp/814prcp_20261008.shp
 cpc_wk34_temp,temperature,Above,60.0,0.44,0.4,2026-10-02,2026-10-17,2026-10-30,,cpc/wk34temp/wk34temp_20261002.shp
 cpc_wk34_prcp,precipitation,Above,40.0,0.0,0.1,2026-10-02,2026-10-17,2026-10-30,,cpc/wk34prcp/wk34prcp_20261002.shp
 cpc_month_temp,temperature,Above,33.0,0.0,0.0,2026-09-17,,,Oct 2026,cpc/seastemp/lead14_Oct_temp.shp

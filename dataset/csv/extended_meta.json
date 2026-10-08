@@ -1,9 +1,9 @@
 {
- "built_utc": "2026-10-07T21:27:05.337183+00:00",
- "today": "2026-10-07",
- "near_term_last_date": "2026-10-13",
- "extended_from": "2026-10-14",
- "extended_to": "2026-11-06",
+ "built_utc": "2026-10-08T20:50:28.987404+00:00",
+ "today": "2026-10-08",
+ "near_term_last_date": "2026-10-14",
+ "extended_from": "2026-10-15",
+ "extended_to": "2026-11-07",
  "horizon_days": 30,
  "extended_rows": 216,
  "extended_score_rows": 1392,
@@ -22,14 +22,14 @@
    "product": "cpc_814_temp",
    "kind": "temperature",
    "cat": "Above",
-   "prob": 50.0,
-   "signal_f": 0.401,
-   "confidence": 0.25,
-   "issued": "2026-10-07",
-   "valid_from": "2026-10-15",
-   "valid_to": "2026-10-21",
+   "prob": 60.0,
+   "signal_f": 0.64,
+   "confidence": 0.4,
+   "issued": "2026-10-08",
+   "valid_from": "2026-10-16",
+   "valid_to": "2026-10-22",
    "valid_label": "",
-   "shapefile": "cpc/814temp/814temp_20261007.shp"
+   "shapefile": "cpc/814temp/814temp_20261008.shp"
   },
   "cpc_814_prcp": {
    "product": "cpc_814_prcp",
@@ -38,11 +38,11 @@
    "prob": 36.0,
    "signal_f": 0.0,
    "confidence": 0.0,
-   "issued": "2026-10-07",
-   "valid_from": "2026-10-15",
-   "valid_to": "2026-10-21",
+   "issued": "2026-10-08",
+   "valid_from": "2026-10-16",
+   "valid_to": "2026-10-22",
    "valid_label": "",
-   "shapefile": "cpc/814prcp/814prcp_20261007.shp"
+   "shapefile": "cpc/814prcp/814prcp_20261008.shp"
   },
   "cpc_wk34_temp": {
    "product": "cpc_wk34_temp",
@@ -97,7 +97,7 @@
    "shapefile": "cpc/seastemp/lead1_OND_temp.shp"
   }
  },
- "model_horizon_last_date": "2026-10-22",
+ "model_horizon_last_date": "2026-10-23",
  "tiers": [
   {
    "tier": 1,
