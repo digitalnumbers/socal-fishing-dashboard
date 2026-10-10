@@ -1,9 +1,9 @@
 {
- "built_utc": "2026-10-09T20:13:36.610587+00:00",
- "today": "2026-10-09",
- "near_term_last_date": "2026-10-15",
- "extended_from": "2026-10-16",
- "extended_to": "2026-11-08",
+ "built_utc": "2026-10-10T19:27:43.172287+00:00",
+ "today": "2026-10-10",
+ "near_term_last_date": "2026-10-16",
+ "extended_from": "2026-10-17",
+ "extended_to": "2026-11-09",
  "horizon_days": 30,
  "extended_rows": 216,
  "extended_score_rows": 1392,
@@ -22,14 +22,14 @@
    "product": "cpc_814_temp",
    "kind": "temperature",
    "cat": "Above",
-   "prob": 70.0,
-   "signal_f": 0.88,
-   "confidence": 0.55,
-   "issued": "2026-10-09",
-   "valid_from": "2026-10-17",
-   "valid_to": "2026-10-23",
+   "prob": 60.0,
+   "signal_f": 0.64,
+   "confidence": 0.4,
+   "issued": "2026-10-10",
+   "valid_from": "2026-10-18",
+   "valid_to": "2026-10-24",
    "valid_label": "",
-   "shapefile": "cpc/814temp/814temp_20261009.shp"
+   "shapefile": "cpc/814temp/814temp_20261010.shp"
   },
   "cpc_814_prcp": {
    "product": "cpc_814_prcp",
@@ -38,37 +38,37 @@
    "prob": 36.0,
    "signal_f": 0.0,
    "confidence": 0.0,
-   "issued": "2026-10-09",
-   "valid_from": "2026-10-17",
-   "valid_to": "2026-10-23",
+   "issued": "2026-10-10",
+   "valid_from": "2026-10-18",
+   "valid_to": "2026-10-24",
    "valid_label": "",
-   "shapefile": "cpc/814prcp/814prcp_20261009.shp"
+   "shapefile": "cpc/814prcp/814prcp_20261010.shp"
   },
   "cpc_wk34_temp": {
    "product": "cpc_wk34_temp",
    "kind": "temperature",
    "cat": "Above",
-   "prob": 60.0,
-   "signal_f": 0.44,
-   "confidence": 0.4,
-   "issued": "2026-10-02",
-   "valid_from": "2026-10-17",
-   "valid_to": "2026-10-30",
+   "prob": 50.0,
+   "signal_f": 0.275,
+   "confidence": 0.25,
+   "issued": "2026-10-09",
+   "valid_from": "2026-10-24",
+   "valid_to": "2026-11-06",
    "valid_label": "",
-   "shapefile": "cpc/wk34temp/wk34temp_20261002.shp"
+   "shapefile": "cpc/wk34temp/wk34temp_20261009.shp"
   },
   "cpc_wk34_prcp": {
    "product": "cpc_wk34_prcp",
    "kind": "precipitation",
    "cat": "Above",
-   "prob": 40.0,
+   "prob": 33.0,
    "signal_f": 0.0,
-   "confidence": 0.1,
-   "issued": "2026-10-02",
-   "valid_from": "2026-10-17",
-   "valid_to": "2026-10-30",
+   "confidence": 0.0,
+   "issued": "2026-10-09",
+   "valid_from": "2026-10-24",
+   "valid_to": "2026-11-06",
    "valid_label": "",
-   "shapefile": "cpc/wk34prcp/wk34prcp_20261002.shp"
+   "shapefile": "cpc/wk34prcp/wk34prcp_20261009.shp"
   },
   "cpc_month_temp": {
    "product": "cpc_month_temp",
@@ -97,7 +97,7 @@
    "shapefile": "cpc/seastemp/lead1_OND_temp.shp"
   }
  },
- "model_horizon_last_date": "2026-10-24",
+ "model_horizon_last_date": "2026-10-25",
  "tiers": [
   {
    "tier": 1,
