@@ -243,26 +243,26 @@
       },
       "changes": "Initial production model, preserved unchanged as champion Model v1.",
       "latest_performance_summary": {
-        "as_of": "2026-10-12",
+        "as_of": "2026-10-13",
         "short_0_7": {
-          "n_pairs": 628,
+          "n_pairs": 677,
           "n_target_dates": 15,
           "sample_flag": "preliminary",
-          "exact_hit": 0.199,
-          "within_one": 0.6194,
-          "mae": 29.65,
-          "brier": 0.2452,
-          "brier_skill_vs_clim": 0.1976
+          "exact_hit": 0.2083,
+          "within_one": 0.6278,
+          "mae": 29.34,
+          "brier": 0.2381,
+          "brier_skill_vs_clim": 0.205
         },
         "outlook_8_30": {
-          "n_pairs": 382,
+          "n_pairs": 396,
           "n_target_dates": 24,
           "sample_flag": "preliminary",
-          "exact_hit": 0.2775,
-          "within_one": 0.5524,
-          "mae": 31.07,
-          "brier": 0.2474,
-          "brier_skill_vs_clim": 0.044
+          "exact_hit": 0.2828,
+          "within_one": 0.5556,
+          "mae": 31.03,
+          "brier": 0.2451,
+          "brier_skill_vs_clim": 0.0489
         }
       },
       "promotion_decision": {
@@ -323,25 +323,25 @@
       },
       "changes": "Reference baseline.",
       "latest_performance_summary": {
-        "as_of": "2026-10-12",
+        "as_of": "2026-10-13",
         "short_0_7": {
-          "n_pairs": 628,
+          "n_pairs": 677,
           "n_target_dates": 15,
           "sample_flag": "preliminary",
-          "exact_hit": 0.086,
-          "within_one": 0.3392,
-          "mae": 35.08,
-          "brier": 0.3056,
+          "exact_hit": 0.0901,
+          "within_one": 0.3353,
+          "mae": 34.91,
+          "brier": 0.2995,
           "brier_skill_vs_clim": 0.0
         },
         "outlook_8_30": {
-          "n_pairs": 382,
+          "n_pairs": 396,
           "n_target_dates": 24,
           "sample_flag": "preliminary",
-          "exact_hit": 0.1099,
-          "within_one": 0.3246,
-          "mae": 33.69,
-          "brier": 0.2588,
+          "exact_hit": 0.1111,
+          "within_one": 0.3232,
+          "mae": 33.66,
+          "brier": 0.2577,
           "brier_skill_vs_clim": 0.0
         }
       },
@@ -401,26 +401,26 @@
       },
       "changes": "Reference baseline.",
       "latest_performance_summary": {
-        "as_of": "2026-10-12",
+        "as_of": "2026-10-13",
         "short_0_7": {
-          "n_pairs": 628,
+          "n_pairs": 677,
           "n_target_dates": 15,
           "sample_flag": "preliminary",
-          "exact_hit": 0.086,
-          "within_one": 0.3678,
-          "mae": 34.08,
-          "brier": 0.2875,
-          "brier_skill_vs_clim": 0.0592
+          "exact_hit": 0.0901,
+          "within_one": 0.3619,
+          "mae": 33.95,
+          "brier": 0.2817,
+          "brier_skill_vs_clim": 0.0594
         },
         "outlook_8_30": {
-          "n_pairs": 382,
+          "n_pairs": 396,
           "n_target_dates": 24,
           "sample_flag": "preliminary",
-          "exact_hit": 0.1073,
-          "within_one": 0.3508,
-          "mae": 32.05,
-          "brier": 0.2405,
-          "brier_skill_vs_clim": 0.0707
+          "exact_hit": 0.1086,
+          "within_one": 0.3485,
+          "mae": 32.06,
+          "brier": 0.2396,
+          "brier_skill_vs_clim": 0.0702
         }
       },
       "promotion_decision": {
@@ -475,26 +475,26 @@
       },
       "changes": "Recalibrates v1's score scale (v1 runs high: Good-or-better is over-called in late summer).",
       "latest_performance_summary": {
-        "as_of": "2026-10-12",
+        "as_of": "2026-10-13",
         "short_0_7": {
-          "n_pairs": 628,
+          "n_pairs": 677,
           "n_target_dates": 15,
           "sample_flag": "preliminary",
-          "exact_hit": 0.1385,
-          "within_one": 0.492,
-          "mae": 30.15,
-          "brier": 0.2198,
-          "brier_skill_vs_clim": 0.2808
+          "exact_hit": 0.1374,
+          "within_one": 0.483,
+          "mae": 30.1,
+          "brier": 0.2168,
+          "brier_skill_vs_clim": 0.2761
         },
         "outlook_8_30": {
-          "n_pairs": 382,
+          "n_pairs": 396,
           "n_target_dates": 24,
           "sample_flag": "preliminary",
-          "exact_hit": 0.2723,
-          "within_one": 0.5524,
-          "mae": 31.06,
-          "brier": 0.2471,
-          "brier_skill_vs_clim": 0.0452
+          "exact_hit": 0.2727,
+          "within_one": 0.5556,
+          "mae": 30.99,
+          "brier": 0.2447,
+          "brier_skill_vs_clim": 0.0504
         }
       },
       "promotion_decision": {
