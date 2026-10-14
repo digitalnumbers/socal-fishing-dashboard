@@ -1,85 +1,103 @@
 {
-  "collected_at_utc": "2026-10-13T20:45:15Z",
+  "collected_at_utc": "2026-10-14T19:32:10Z",
   "sources": [
     {
-      "url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-13",
+      "url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-14",
       "name": "San Diego Fish Reports dock totals",
       "fetched_ok": true,
-      "notes": "parsed as report date 2026-10-12"
+      "notes": "parsed as report date 2026-10-13"
     }
   ],
   "reports": [
     {
-      "date": "2026-10-12",
+      "date": "2026-10-13",
       "landing": "Fishermans",
       "boat": "Dolphin Fisherman's Landing San Diego, CA",
       "trip_type": "three_quarter_day",
       "trip_type_raw": "3/4 Day",
-      "anglers": 30,
+      "anglers": 24,
       "zone_hint": "offshore",
       "catch": {
-        "sand_bass": 63,
-        "california_halibut": 1,
-        "sheephead": 14,
-        "yellowtail": 18,
-        "calico_bass": 41,
-        "bonito": 54
+        "sand_bass": 28,
+        "sheephead": 11,
+        "yellowtail": 5,
+        "calico_bass": 40,
+        "bonito": 38
       },
       "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-13",
-      "raw_text": "Dolphin Fisherman's Landing San Diego, CA | 30 Anglers 3/4 Day | 63 Sand Bass, 1 Halibut, 6 Sculpin, 14 Sheephead, 18 Yellowtail, 41 Calico Bass, 54 Bonito"
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-14",
+      "raw_text": "Dolphin Fisherman's Landing San Diego, CA | 24 Anglers 3/4 Day | 28 Sand Bass, 6 Sculpin, 11 Sheephead, 5 Yellowtail, 40 Calico Bass, 38 Bonito"
     },
     {
-      "date": "2026-10-12",
-      "landing": "H&M",
-      "boat": "Premier",
-      "trip_type": "half_day",
-      "trip_type_raw": "1/2 Day AM",
-      "anglers": 28,
-      "zone_hint": "offshore",
-      "catch": {
-        "yellowtail": 1,
-        "calico_bass": 36,
-        "bonito": 15
-      },
-      "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-13",
-      "raw_text": "Premier H&M Landing San Diego, CA | 28 Anglers 1/2 Day AM | 2 Sculpin, 1 Yellowtail, 36 Calico Bass, 15 Bonito"
-    },
-    {
-      "date": "2026-10-12",
+      "date": "2026-10-13",
       "landing": "H&M",
       "boat": "Premier",
       "trip_type": "half_day",
       "trip_type_raw": "1/2 Day PM",
-      "anglers": 15,
+      "anglers": 14,
       "zone_hint": "offshore",
       "catch": {
+        "sand_bass": 42,
         "calico_bass": 28,
-        "bonito": 19
+        "bonito": 1
       },
       "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-13",
-      "raw_text": "Premier H&M Landing San Diego, CA | 15 Anglers 1/2 Day PM | 1 Sculpin, 28 Calico Bass, 19 Bonito"
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-14",
+      "raw_text": "Premier H&M Landing San Diego, CA | 14 Anglers 1/2 Day PM | 42 Sand Bass, 28 Calico Bass, 1 Bonito"
     },
     {
-      "date": "2026-10-12",
+      "date": "2026-10-13",
       "landing": "H&M",
-      "boat": "Old Glory",
-      "trip_type": "overnight",
-      "trip_type_raw": "Overnight",
-      "anglers": 16,
+      "boat": "Ocean Odyssey",
+      "trip_type": "1.5_day",
+      "trip_type_raw": "1.5 Day",
+      "anglers": 27,
       "zone_hint": "offshore",
       "catch": {
-        "dorado": 2,
-        "yellowfin_tuna": 70
+        "dorado": 35
       },
       "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-13",
-      "raw_text": "Old Glory H&M Landing San Diego, CA | 16 Anglers Overnight | 80 Bullet Tuna, 2 Dorado, 5 Skipjack Tuna, 70 Yellowfin Tuna"
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-14",
+      "raw_text": "Ocean Odyssey H&M Landing San Diego, CA | 27 Anglers 1.5 Day | 35 Dorado, 3 Wahoo"
     },
     {
-      "date": "2026-10-12",
+      "date": "2026-10-13",
+      "landing": "H&M",
+      "boat": "Ranger 85",
+      "trip_type": "2.5_day",
+      "trip_type_raw": "2.5 Day",
+      "anglers": 23,
+      "zone_hint": "offshore",
+      "catch": {
+        "california_halibut": 2,
+        "yellowtail": 4,
+        "yellowfin_tuna": 54
+      },
+      "released": {},
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-14",
+      "raw_text": "Ranger 85 H&M Landing San Diego, CA | 23 Anglers 2.5 Day | 2 Halibut, 4 Yellowtail, 7 Skipjack Tuna, 54 Yellowfin Tuna"
+    },
+    {
+      "date": "2026-10-13",
+      "landing": "Point Loma",
+      "boat": "Mission Belle",
+      "trip_type": "full_day",
+      "trip_type_raw": "Full Day",
+      "anglers": 18,
+      "zone_hint": "point loma kelp",
+      "catch": {
+        "sheephead": 2,
+        "yellowtail": 12,
+        "calico_bass": 15,
+        "bonito": 19,
+        "rockfish": 2
+      },
+      "released": {},
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-14",
+      "raw_text": "Mission Belle Point Loma Sportfishing San Diego, CA | 18 Anglers Full Day | 2 Sheephead, 12 Yellowtail, 15 Calico Bass, 19 Bonito, 2 Rockfish"
+    },
+    {
+      "date": "2026-10-13",
       "landing": "Seaforth",
       "boat": "New",
       "trip_type": "half_day",
@@ -87,50 +105,99 @@
       "anglers": 34,
       "zone_hint": "offshore",
       "catch": {
-        "sand_bass": 4,
-        "yellowtail": 1,
-        "calico_bass": 2,
-        "bonito": 35,
-        "white_seabass": 1
+        "sand_bass": 23,
+        "barracuda": 20,
+        "yellowtail": 6,
+        "calico_bass": 10,
+        "bonito": 8
       },
       "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-13",
-      "raw_text": "New Seaforth Seaforth Sportfishing San Diego, CA | 34 Anglers 1/2 Day AM | 4 Sand Bass, 1 Yellowtail, 2 Calico Bass, 35 Bonito, 1 White Seabass"
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-14",
+      "raw_text": "New Seaforth Seaforth Sportfishing San Diego, CA | 34 Anglers 1/2 Day AM | 23 Sand Bass, 20 Barracuda, 6 Yellowtail, 10 Calico Bass, 1 Whitefish, 8 Bonito"
     },
     {
-      "date": "2026-10-12",
+      "date": "2026-10-13",
       "landing": "Seaforth",
       "boat": "New",
       "trip_type": "half_day",
       "trip_type_raw": "1/2 Day PM",
-      "anglers": 37,
+      "anglers": 29,
       "zone_hint": "offshore",
       "catch": {
-        "sand_bass": 15,
-        "yellowtail": 5,
-        "bonito": 8,
-        "white_seabass": 1
+        "sand_bass": 12,
+        "sheephead": 2,
+        "yellowtail": 4,
+        "calico_bass": 19
       },
-      "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-13",
-      "raw_text": "New Seaforth Seaforth Sportfishing San Diego, CA | 37 Anglers 1/2 Day PM | 15 Sand Bass, 5 Yellowtail, 8 Bonito, 1 White Seabass"
+      "released": {
+        "calico_bass": 100
+      },
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-14",
+      "raw_text": "New Seaforth Seaforth Sportfishing San Diego, CA | 29 Anglers 1/2 Day PM | 12 Sand Bass, 2 Sculpin, 2 Sheephead, 4 Yellowtail, 19 Calico Bass, 4 Whitefish, 100 Calico Bass Released"
     },
     {
-      "date": "2026-10-12",
+      "date": "2026-10-13",
       "landing": "Seaforth",
-      "boat": "Aztec",
-      "trip_type": "overnight",
-      "trip_type_raw": "Overnight",
-      "anglers": 27,
-      "zone_hint": "offshore",
+      "boat": "San Diego",
+      "trip_type": "full_day",
+      "trip_type_raw": "Full Day",
+      "anglers": 35,
+      "zone_hint": "point loma kelp",
       "catch": {
-        "yellowtail": 52,
-        "dorado": 1,
-        "yellowfin_tuna": 86
+        "dorado": 5,
+        "yellowfin_tuna": 17
       },
       "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-13",
-      "raw_text": "Aztec Seaforth Sportfishing San Diego, CA | 27 Anglers Overnight | 6 Bullet Tuna, 52 Yellowtail, 1 Dorado, 6 Skipjack Tuna, 86 Yellowfin Tuna"
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-14",
+      "raw_text": "San Diego Seaforth Sportfishing San Diego, CA | 35 Anglers Full Day | 5 Dorado, 11 Skipjack Tuna, 17 Yellowfin Tuna"
+    },
+    {
+      "date": "2026-10-13",
+      "landing": "Seaforth",
+      "boat": "Pacifica",
+      "trip_type": "1.5_day",
+      "trip_type_raw": "1.5 Day",
+      "anglers": 20,
+      "zone_hint": "offshore",
+      "catch": {
+        "yellowtail": 5
+      },
+      "released": {},
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-14",
+      "raw_text": "Pacifica Seaforth Sportfishing San Diego, CA | 20 Anglers 1.5 Day | 5 Yellowtail"
+    },
+    {
+      "date": "2026-10-13",
+      "landing": "Seaforth",
+      "boat": "Voyager",
+      "trip_type": "1.5_day",
+      "trip_type_raw": "1.5 Day",
+      "anglers": 13,
+      "zone_hint": "offshore",
+      "catch": {
+        "yellowtail": 12,
+        "dorado": 1,
+        "yellowfin_tuna": 70
+      },
+      "released": {},
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-14",
+      "raw_text": "Voyager Seaforth Sportfishing San Diego, CA | 13 Anglers 1.5 Day | 12 Yellowtail, 1 Dorado, 70 Yellowfin Tuna"
+    },
+    {
+      "date": "2026-10-13",
+      "landing": "Seaforth",
+      "boat": "Highliner",
+      "trip_type": "2_day",
+      "trip_type_raw": "2 Day",
+      "anglers": 16,
+      "zone_hint": "offshore",
+      "catch": {
+        "yellowtail": 15,
+        "dorado": 1
+      },
+      "released": {},
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-10-14",
+      "raw_text": "Highliner Seaforth Sportfishing San Diego, CA | 16 Anglers 2 Day | 15 Yellowtail, 1 Dorado"
     }
   ],
   "coverage_notes": "This raw cache contains only the successfully parsed report date. The builder replaces that date and preserves all prior canonical rows."
