@@ -1,12 +1,12 @@
 {
  "cat": "Above",
- "prob": 50.0,
+ "prob": 60.0,
  "record": {
-  "Fcst_Date": "2026-10-09",
-  "Start_Date": "2026-10-24",
-  "End_Date": "2026-11-06",
-  "Prob": 50.0,
+  "Fcst_Date": "2026-10-16",
+  "Start_Date": "2026-10-31",
+  "End_Date": "2026-11-13",
+  "Prob": 60.0,
   "Cat": "Above"
  },
- "shapefile": "cpc/wk34temp/wk34temp_20261009.shp"
+ "shapefile": "cpc/wk34temp/wk34temp_20261016.shp"
 }

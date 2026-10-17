@@ -1,9 +1,9 @@
 {
- "built_utc": "2026-10-16T18:56:07.405481+00:00",
- "today": "2026-10-16",
- "near_term_last_date": "2026-10-22",
- "extended_from": "2026-10-23",
- "extended_to": "2026-11-15",
+ "built_utc": "2026-10-17T17:59:03.161889+00:00",
+ "today": "2026-10-17",
+ "near_term_last_date": "2026-10-23",
+ "extended_from": "2026-10-24",
+ "extended_to": "2026-11-16",
  "horizon_days": 30,
  "extended_rows": 216,
  "extended_score_rows": 1392,
@@ -25,50 +25,50 @@
    "prob": 40.0,
    "signal_f": 0.161,
    "confidence": 0.1,
-   "issued": "2026-10-15",
-   "valid_from": "2026-10-23",
-   "valid_to": "2026-10-29",
+   "issued": "2026-10-16",
+   "valid_from": "2026-10-24",
+   "valid_to": "2026-10-30",
    "valid_label": "",
-   "shapefile": "cpc/814temp/814temp_20261015.shp"
+   "shapefile": "cpc/814temp/814temp_20261016.shp"
   },
   "cpc_814_prcp": {
    "product": "cpc_814_prcp",
    "kind": "precipitation",
-   "cat": "Normal",
-   "prob": 36.0,
+   "cat": "Above",
+   "prob": 40.0,
    "signal_f": 0.0,
-   "confidence": 0.0,
-   "issued": "2026-10-15",
-   "valid_from": "2026-10-23",
-   "valid_to": "2026-10-29",
+   "confidence": 0.1,
+   "issued": "2026-10-16",
+   "valid_from": "2026-10-24",
+   "valid_to": "2026-10-30",
    "valid_label": "",
-   "shapefile": "cpc/814prcp/814prcp_20261015.shp"
+   "shapefile": "cpc/814prcp/814prcp_20261016.shp"
   },
   "cpc_wk34_temp": {
    "product": "cpc_wk34_temp",
    "kind": "temperature",
    "cat": "Above",
-   "prob": 50.0,
-   "signal_f": 0.275,
-   "confidence": 0.25,
-   "issued": "2026-10-09",
-   "valid_from": "2026-10-24",
-   "valid_to": "2026-11-06",
+   "prob": 60.0,
+   "signal_f": 0.44,
+   "confidence": 0.4,
+   "issued": "2026-10-16",
+   "valid_from": "2026-10-31",
+   "valid_to": "2026-11-13",
    "valid_label": "",
-   "shapefile": "cpc/wk34temp/wk34temp_20261009.shp"
+   "shapefile": "cpc/wk34temp/wk34temp_20261016.shp"
   },
   "cpc_wk34_prcp": {
    "product": "cpc_wk34_prcp",
    "kind": "precipitation",
-   "cat": "Above",
+   "cat": "EC",
    "prob": 33.0,
    "signal_f": 0.0,
    "confidence": 0.0,
-   "issued": "2026-10-09",
-   "valid_from": "2026-10-24",
-   "valid_to": "2026-11-06",
+   "issued": "2026-10-16",
+   "valid_from": "2026-10-31",
+   "valid_to": "2026-11-13",
    "valid_label": "",
-   "shapefile": "cpc/wk34prcp/wk34prcp_20261009.shp"
+   "shapefile": "cpc/wk34prcp/wk34prcp_20261016.shp"
   },
   "cpc_month_temp": {
    "product": "cpc_month_temp",
@@ -97,7 +97,7 @@
    "shapefile": "cpc/seastemp/lead1_OND_temp.shp"
   }
  },
- "model_horizon_last_date": "2026-10-31",
+ "model_horizon_last_date": "2026-11-01",
  "tiers": [
   {
    "tier": 1,
