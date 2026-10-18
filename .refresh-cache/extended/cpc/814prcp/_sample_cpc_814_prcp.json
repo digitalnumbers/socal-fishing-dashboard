@@ -1,12 +1,12 @@
 {
  "cat": "Above",
- "prob": 40.0,
+ "prob": 50.0,
  "record": {
-  "Fcst_Date": "2026-10-16",
-  "Start_Date": "2026-10-24",
-  "End_Date": "2026-10-30",
-  "Prob": 40.0,
+  "Fcst_Date": "2026-10-17",
+  "Start_Date": "2026-10-25",
+  "End_Date": "2026-10-31",
+  "Prob": 50.0,
   "Cat": "Above"
  },
- "shapefile": "cpc/814prcp/814prcp_20261016.shp"
+ "shapefile": "cpc/814prcp/814prcp_20261017.shp"
 }
