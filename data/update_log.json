@@ -858,6 +858,38 @@
       },
       "forecast_changes": 1740,
       "live_model_changed": false
+    },
+    {
+      "run_utc": "2026-10-29T20:37:11Z",
+      "local_date": "2026-10-29",
+      "mode": "live",
+      "warnings": [],
+      "outcomes_ingest": {
+        "pages": 4,
+        "pages_ok": 3,
+        "new_trip_versions": 9
+      },
+      "issuance": {
+        "issuance_id": "2026-10-29T1337PT_v1",
+        "issue_utc": "2026-10-29T20:37:11Z",
+        "n_rows": 1798,
+        "file": "2026-10/2026-10-29T1337PT_v1.csv.gz"
+      },
+      "labels": {
+        "rows": 2143,
+        "labelled": 1198,
+        "final": 1171,
+        "provisional": 27
+      },
+      "evaluation": {
+        "pairs": 5282,
+        "issuances": 28,
+        "challengers": {
+          "v1.1-cal": "insufficient_data"
+        }
+      },
+      "forecast_changes": 1740,
+      "live_model_changed": false
     }
   ]
 }
