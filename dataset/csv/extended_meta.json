@@ -1,9 +1,9 @@
 {
- "built_utc": "2026-10-31T19:29:37.159525+00:00",
- "today": "2026-10-31",
- "near_term_last_date": "2026-11-06",
- "extended_from": "2026-11-07",
- "extended_to": "2026-11-30",
+ "built_utc": "2026-11-01T19:54:30.249789+00:00",
+ "today": "2026-11-01",
+ "near_term_last_date": "2026-11-07",
+ "extended_from": "2026-11-08",
+ "extended_to": "2026-12-01",
  "horizon_days": 30,
  "extended_rows": 216,
  "extended_score_rows": 1392,
@@ -13,8 +13,8 @@
   1982,
   1997,
   2023,
-  2015,
   1972,
+  2015,
   1965
  ],
  "cpc_products": {
@@ -97,7 +97,7 @@
    "shapefile": "cpc/seastemp/lead1_NDJ_temp.shp"
   }
  },
- "model_horizon_last_date": "2026-11-15",
+ "model_horizon_last_date": "2026-11-16",
  "tiers": [
   {
    "tier": 1,
