@@ -2062,3 +2062,10 @@ date,landing,boat,trip_type,anglers,species_id,kept,released,zone_hint,source_ur
 2026-10-31,Seaforth,Aztec,2_day,19,yellowtail,5,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-01,2.0,0.2631578947368421,0.13157894736842105
 2026-10-31,Seaforth,Aztec,2_day,19,bonito,7,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-01,2.0,0.3684210526315789,0.18421052631578946
 2026-10-31,Seaforth,Aztec,2_day,19,yellowfin_tuna,37,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-01,2.0,1.9473684210526316,0.9736842105263158
+2026-11-02,H&M,Premier,half_day,15,sand_bass,4,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-02,0.5,0.26666666666666666,0.5333333333333333
+2026-11-02,H&M,Premier,half_day,15,barracuda,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-02,0.5,0.06666666666666667,0.13333333333333333
+2026-11-02,H&M,Premier,half_day,15,yellowtail,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-02,0.5,0.06666666666666667,0.13333333333333333
+2026-11-02,H&M,Premier,half_day,15,bonito,4,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-02,0.5,0.26666666666666666,0.5333333333333333
+2026-11-02,H&M,Premier,half_day,15,rockfish,38,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-02,0.5,2.533333333333333,5.066666666666666
+2026-11-02,H&M,Premier,half_day,15,yellowfin_tuna,25,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-02,0.5,1.6666666666666667,3.3333333333333335
+2026-11-02,Seaforth,New,half_day,42,yellowfin_tuna,16,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-02,0.5,0.38095238095238093,0.7619047619047619
