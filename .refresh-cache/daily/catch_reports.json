@@ -1,8 +1,8 @@
 {
-  "collected_at_utc": "2026-11-02T23:09:32Z",
+  "collected_at_utc": "2026-11-03T21:10:24Z",
   "sources": [
     {
-      "url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-02",
+      "url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-03",
       "name": "San Diego Fish Reports dock totals",
       "fetched_ok": true,
       "notes": "parsed as report date 2026-11-02"
@@ -26,8 +26,43 @@
         "yellowfin_tuna": 25
       },
       "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-02",
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-03",
       "raw_text": "Premier H&M Landing San Diego, CA | 15 Anglers 1/2 Day AM | 4 Sand Bass, 1 Barracuda, 1 Yellowtail, 4 Bonito, 38 Rockfish, 30 Skipjack Tuna, 25 Yellowfin Tuna"
+    },
+    {
+      "date": "2026-11-02",
+      "landing": "H&M",
+      "boat": "Grande",
+      "trip_type": "full_day",
+      "trip_type_raw": "Full Day Offshore",
+      "anglers": 18,
+      "zone_hint": "offshore",
+      "catch": {
+        "yellowfin_tuna": 6
+      },
+      "released": {},
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-03",
+      "raw_text": "Grande H&M Landing San Diego, CA | 18 Anglers Full Day Offshore | 54 Skipjack Tuna, 6 Yellowfin Tuna"
+    },
+    {
+      "date": "2026-11-02",
+      "landing": "H&M",
+      "boat": "Southern Cal Oceanside Sea Center Oceanside, CA",
+      "trip_type": "half_day",
+      "trip_type_raw": "1/2 Day AM",
+      "anglers": 19,
+      "zone_hint": "offshore",
+      "catch": {
+        "sand_bass": 2,
+        "calico_bass": 4,
+        "yellowfin_tuna": 10
+      },
+      "released": {
+        "sand_bass": 10,
+        "calico_bass": 20
+      },
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-03",
+      "raw_text": "Southern Cal Oceanside Sea Center Oceanside, CA | 19 Anglers 1/2 Day AM | 2 Sand Bass, 4 Calico Bass, 15 Skipjack Tuna, 10 Yellowfin Tuna, 10 Sand Bass Released , 20 Calico Bass Released"
     },
     {
       "date": "2026-11-02",
@@ -41,8 +76,53 @@
         "yellowfin_tuna": 16
       },
       "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-02",
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-03",
       "raw_text": "New Seaforth Seaforth Sportfishing San Diego, CA | 42 Anglers 1/2 Day AM | 4 Bullet Tuna, 13 Skipjack Tuna, 16 Yellowfin Tuna"
+    },
+    {
+      "date": "2026-11-02",
+      "landing": "Seaforth",
+      "boat": "New",
+      "trip_type": "half_day",
+      "trip_type_raw": "1/2 Day PM",
+      "anglers": 38,
+      "zone_hint": "offshore",
+      "catch": {
+        "yellowfin_tuna": 75
+      },
+      "released": {},
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-03",
+      "raw_text": "New Seaforth Seaforth Sportfishing San Diego, CA | 38 Anglers 1/2 Day PM | 29 Skipjack Tuna, 75 Yellowfin Tuna"
+    },
+    {
+      "date": "2026-11-02",
+      "landing": "Seaforth",
+      "boat": "Sea Watch",
+      "trip_type": "three_quarter_day",
+      "trip_type_raw": "3/4 Day",
+      "anglers": 31,
+      "zone_hint": "offshore",
+      "catch": {
+        "yellowfin_tuna": 42
+      },
+      "released": {},
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-03",
+      "raw_text": "Sea Watch Seaforth Sportfishing San Diego, CA | 31 Anglers 3/4 Day | 40 Skipjack Tuna, 42 Yellowfin Tuna"
+    },
+    {
+      "date": "2026-11-02",
+      "landing": "Seaforth",
+      "boat": "San Diego",
+      "trip_type": "full_day",
+      "trip_type_raw": "Full Day Offshore",
+      "anglers": 35,
+      "zone_hint": "offshore",
+      "catch": {
+        "yellowfin_tuna": 72
+      },
+      "released": {},
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-03",
+      "raw_text": "San Diego Seaforth Sportfishing San Diego, CA | 35 Anglers Full Day Offshore | 123 Skipjack Tuna, 72 Yellowfin Tuna"
     }
   ],
   "coverage_notes": "This raw cache contains only the successfully parsed report date. The builder replaces that date and preserves all prior canonical rows."
