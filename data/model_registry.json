@@ -237,32 +237,32 @@
       "training_window": "none - expert/literature-specified weights and response curves; not fitted to catch data",
       "evaluation_window": {
         "target_dates_from": "2026-08-14",
-        "target_dates_to": "2026-11-03",
-        "issuances": 32,
+        "target_dates_to": "2026-11-04",
+        "issuances": 33,
         "method": "rolling-origin walk-forward over as-issued ledger records"
       },
       "changes": "Initial production model, preserved unchanged as champion Model v1.",
       "latest_performance_summary": {
-        "as_of": "2026-11-04",
+        "as_of": "2026-11-05",
         "short_0_7": {
-          "n_pairs": 3067,
-          "n_target_dates": 37,
+          "n_pairs": 3116,
+          "n_target_dates": 38,
           "sample_flag": "reportable",
-          "exact_hit": 0.2061,
-          "within_one": 0.5491,
-          "mae": 36.06,
-          "brier": 0.3072,
-          "brier_skill_vs_clim": 0.0516
+          "exact_hit": 0.2064,
+          "within_one": 0.5472,
+          "mae": 36.09,
+          "brier": 0.31,
+          "brier_skill_vs_clim": 0.0408
         },
         "outlook_8_30": {
-          "n_pairs": 4717,
-          "n_target_dates": 46,
+          "n_pairs": 4878,
+          "n_target_dates": 47,
           "sample_flag": "reportable",
-          "exact_hit": 0.1539,
-          "within_one": 0.3877,
-          "mae": 44.21,
-          "brier": 0.3579,
-          "brier_skill_vs_clim": -0.2282
+          "exact_hit": 0.1521,
+          "within_one": 0.3838,
+          "mae": 44.13,
+          "brier": 0.3592,
+          "brier_skill_vs_clim": -0.2369
         }
       },
       "promotion_decision": {
@@ -317,31 +317,31 @@
       "training_window": "MUR 2015-2026, CO-OPS 2015-2026, NDBC 2003-2026 climatologies",
       "evaluation_window": {
         "target_dates_from": "2026-08-14",
-        "target_dates_to": "2026-11-03",
-        "issuances": 32,
+        "target_dates_to": "2026-11-04",
+        "issuances": 33,
         "method": "rolling-origin walk-forward over as-issued ledger records"
       },
       "changes": "Reference baseline.",
       "latest_performance_summary": {
-        "as_of": "2026-11-04",
+        "as_of": "2026-11-05",
         "short_0_7": {
-          "n_pairs": 3067,
-          "n_target_dates": 37,
+          "n_pairs": 3116,
+          "n_target_dates": 38,
           "sample_flag": "reportable",
-          "exact_hit": 0.1213,
-          "within_one": 0.404,
-          "mae": 38.08,
-          "brier": 0.3239,
+          "exact_hit": 0.1216,
+          "within_one": 0.4044,
+          "mae": 37.95,
+          "brier": 0.3232,
           "brier_skill_vs_clim": 0.0
         },
         "outlook_8_30": {
-          "n_pairs": 4717,
-          "n_target_dates": 46,
+          "n_pairs": 4878,
+          "n_target_dates": 47,
           "sample_flag": "reportable",
-          "exact_hit": 0.1378,
-          "within_one": 0.4412,
-          "mae": 39.01,
-          "brier": 0.2914,
+          "exact_hit": 0.138,
+          "within_one": 0.4408,
+          "mae": 38.71,
+          "brier": 0.2904,
           "brier_skill_vs_clim": 0.0
         }
       },
@@ -395,31 +395,31 @@
       "training_window": "ENSO composites 2015-2026 MUR anomalies",
       "evaluation_window": {
         "target_dates_from": "2026-08-14",
-        "target_dates_to": "2026-11-03",
-        "issuances": 32,
+        "target_dates_to": "2026-11-04",
+        "issuances": 33,
         "method": "rolling-origin walk-forward over as-issued ledger records"
       },
       "changes": "Reference baseline.",
       "latest_performance_summary": {
-        "as_of": "2026-11-04",
+        "as_of": "2026-11-05",
         "short_0_7": {
-          "n_pairs": 3067,
-          "n_target_dates": 37,
+          "n_pairs": 3116,
+          "n_target_dates": 38,
           "sample_flag": "reportable",
-          "exact_hit": 0.1184,
-          "within_one": 0.4125,
-          "mae": 37.84,
-          "brier": 0.3205,
-          "brier_skill_vs_clim": 0.0105
+          "exact_hit": 0.1187,
+          "within_one": 0.4143,
+          "mae": 37.7,
+          "brier": 0.3197,
+          "brier_skill_vs_clim": 0.0108
         },
         "outlook_8_30": {
-          "n_pairs": 4717,
-          "n_target_dates": 46,
+          "n_pairs": 4878,
+          "n_target_dates": 47,
           "sample_flag": "reportable",
-          "exact_hit": 0.1293,
-          "within_one": 0.4289,
-          "mae": 38.91,
-          "brier": 0.2895,
+          "exact_hit": 0.1298,
+          "within_one": 0.4336,
+          "mae": 38.58,
+          "brier": 0.2885,
           "brier_skill_vs_clim": 0.0065
         }
       },
@@ -469,31 +469,31 @@
       "training_window": "expanding window of labels available before each issuance",
       "evaluation_window": {
         "target_dates_from": "2026-08-14",
-        "target_dates_to": "2026-11-03",
-        "issuances": 32,
+        "target_dates_to": "2026-11-04",
+        "issuances": 33,
         "method": "rolling-origin walk-forward over as-issued ledger records"
       },
       "changes": "Recalibrates v1's score scale (v1 runs high: Good-or-better is over-called in late summer).",
       "latest_performance_summary": {
-        "as_of": "2026-11-04",
+        "as_of": "2026-11-05",
         "short_0_7": {
-          "n_pairs": 3067,
-          "n_target_dates": 37,
+          "n_pairs": 3116,
+          "n_target_dates": 38,
           "sample_flag": "reportable",
-          "exact_hit": 0.1826,
-          "within_one": 0.5725,
-          "mae": 33.35,
-          "brier": 0.2543,
-          "brier_skill_vs_clim": 0.2149
+          "exact_hit": 0.1839,
+          "within_one": 0.5716,
+          "mae": 33.25,
+          "brier": 0.2558,
+          "brier_skill_vs_clim": 0.2085
         },
         "outlook_8_30": {
-          "n_pairs": 4717,
-          "n_target_dates": 46,
+          "n_pairs": 4878,
+          "n_target_dates": 47,
           "sample_flag": "reportable",
-          "exact_hit": 0.1961,
-          "within_one": 0.5438,
-          "mae": 36.71,
-          "brier": 0.2626,
+          "exact_hit": 0.1941,
+          "within_one": 0.5515,
+          "mae": 36.47,
+          "brier": 0.2617,
           "brier_skill_vs_clim": 0.0988
         }
       },

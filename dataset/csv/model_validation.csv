@@ -1,11 +1,11 @@
 species_id,species,n_days,spearman_rho,pearson_r,spearman_rho_raw_cpue,mean_cpue_per_angler_day,mean_score,total_fish,total_anglers
-sheephead,California Sheephead,8,0.69,0.829,0.571,0.264,80.9,68,492
-barracuda,California Barracuda,10,0.65,0.506,0.723,1.129,90.5,293,415
-bonito,Pacific Bonito,11,0.636,0.125,0.728,0.57,98.4,395,666
-yellowtail,California Yellowtail,11,0.597,0.565,0.651,0.223,95.2,269,1137
-calico_bass,Calico Bass (Kelp Bass),10,0.297,0.412,0.297,1.69,94.2,996,1079
-sand_bass,Barred Sand Bass,11,0.218,0.41,0.255,1.264,93.1,762,1128
-california_halibut,California Halibut,8,0.072,-0.1,0.12,0.128,31.0,18,287
-yellowfin_tuna,Yellowfin Tuna,11,-0.051,0.251,-0.335,2.159,96.3,5336,2257
-dorado,Dorado (Mahi-Mahi),7,-0.185,0.077,-0.185,0.148,97.5,95,323
-rockfish,Rockfish Complex,5,-0.8,-0.878,-0.6,2.223,46.9,164,146
+sheephead,California Sheephead,7,0.714,0.772,0.607,0.289,81.7,67,469
+barracuda,California Barracuda,10,0.578,0.499,0.638,1.07,88.7,292,463
+bonito,Pacific Bonito,11,0.534,0.041,0.696,0.604,97.9,381,668
+calico_bass,Calico Bass (Kelp Bass),10,0.517,0.51,0.517,1.506,94.1,916,1091
+sand_bass,Barred Sand Bass,11,0.5,0.626,0.536,1.077,91.8,674,1086
+yellowtail,California Yellowtail,11,0.241,-0.244,0.305,0.27,93.5,257,1080
+california_halibut,California Halibut,7,0.143,-0.144,0.107,0.13,31.3,17,270
+yellowfin_tuna,Yellowfin Tuna,11,-0.13,-0.039,0.074,2.182,97.6,5421,2420
+dorado,Dorado (Mahi-Mahi),8,-0.268,0.176,-0.439,0.138,96.4,96,329
+rockfish,Rockfish Complex,5,-0.8,-0.849,-0.6,2.223,46.8,164,146
