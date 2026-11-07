@@ -1,9 +1,9 @@
 {
- "built_utc": "2026-11-06T21:01:01.272275+00:00",
- "today": "2026-11-06",
- "near_term_last_date": "2026-11-12",
- "extended_from": "2026-11-13",
- "extended_to": "2026-12-06",
+ "built_utc": "2026-11-07T19:36:17.972734+00:00",
+ "today": "2026-11-07",
+ "near_term_last_date": "2026-11-13",
+ "extended_from": "2026-11-14",
+ "extended_to": "2026-12-07",
  "horizon_days": 30,
  "extended_rows": 216,
  "extended_score_rows": 1392,
@@ -48,27 +48,27 @@
    "product": "cpc_wk34_temp",
    "kind": "temperature",
    "cat": "Above",
-   "prob": 40.0,
-   "signal_f": 0.11,
-   "confidence": 0.1,
-   "issued": "2026-10-30",
-   "valid_from": "2026-11-14",
-   "valid_to": "2026-11-27",
+   "prob": 33.0,
+   "signal_f": 0.0,
+   "confidence": 0.0,
+   "issued": "2026-11-06",
+   "valid_from": "2026-11-21",
+   "valid_to": "2026-12-04",
    "valid_label": "",
-   "shapefile": "cpc/wk34temp/wk34temp_20261030.shp"
+   "shapefile": "cpc/wk34temp/wk34temp_20261106.shp"
   },
   "cpc_wk34_prcp": {
    "product": "cpc_wk34_prcp",
    "kind": "precipitation",
-   "cat": "EC",
-   "prob": 33.0,
+   "cat": "Above",
+   "prob": 40.0,
    "signal_f": 0.0,
-   "confidence": 0.0,
-   "issued": "2026-10-30",
-   "valid_from": "2026-11-14",
-   "valid_to": "2026-11-27",
+   "confidence": 0.1,
+   "issued": "2026-11-06",
+   "valid_from": "2026-11-21",
+   "valid_to": "2026-12-04",
    "valid_label": "",
-   "shapefile": "cpc/wk34prcp/wk34prcp_20261030.shp"
+   "shapefile": "cpc/wk34prcp/wk34prcp_20261106.shp"
   },
   "cpc_month_temp": {
    "product": "cpc_month_temp",
@@ -97,7 +97,7 @@
    "shapefile": "cpc/seastemp/lead1_NDJ_temp.shp"
   }
  },
- "model_horizon_last_date": "2026-11-21",
+ "model_horizon_last_date": "2026-11-22",
  "tiers": [
   {
    "tier": 1,
