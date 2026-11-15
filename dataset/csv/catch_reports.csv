@@ -2393,3 +2393,16 @@ date,landing,boat,trip_type,anglers,species_id,kept,released,zone_hint,source_ur
 2026-11-13,Seaforth,Cortez,2.5_day,14,yellowtail,8,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-14,2.5,0.5714285714285714,0.22857142857142856
 2026-11-13,Seaforth,Cortez,2.5_day,14,bluefin_tuna,9,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-14,2.5,0.6428571428571429,0.2571428571428571
 2026-11-13,Seaforth,Cortez,2.5_day,14,yellowfin_tuna,111,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-14,2.5,7.928571428571429,3.1714285714285713
+2026-11-14,H&M,Premier,half_day,52,sand_bass,9,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,0.5,0.17307692307692307,0.34615384615384615
+2026-11-14,H&M,Premier,half_day,52,barracuda,4,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,0.5,0.07692307692307693,0.15384615384615385
+2026-11-14,H&M,Premier,half_day,52,bonito,11,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,0.5,0.21153846153846154,0.4230769230769231
+2026-11-14,H&M,Premier,half_day,52,rockfish,2,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,0.5,0.038461538461538464,0.07692307692307693
+2026-11-14,H&M,Premier,half_day,52,yellowfin_tuna,8,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,0.5,0.15384615384615385,0.3076923076923077
+2026-11-14,H&M,Electra,2_day,23,dorado,61,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,2.0,2.652173913043478,1.326086956521739
+2026-11-14,H&M,Electra,2_day,23,yellowfin_tuna,11,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,2.0,0.4782608695652174,0.2391304347826087
+2026-11-14,H&M,Little G,3.5_day,6,california_halibut,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,3.5,0.16666666666666666,0.047619047619047616
+2026-11-14,H&M,Little G,3.5_day,6,yellowtail,41,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,3.5,6.833333333333333,1.9523809523809523
+2026-11-14,H&M,Little G,3.5_day,6,dorado,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,3.5,0.16666666666666666,0.047619047619047616
+2026-11-14,H&M,Little G,3.5_day,6,yellowfin_tuna,33,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,3.5,5.5,1.5714285714285714
+2026-11-14,Point Loma,Daily Double,half_day,29,sand_bass,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,0.5,0.034482758620689655,0.06896551724137931
+2026-11-14,Point Loma,Daily Double,half_day,29,yellowfin_tuna,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,0.5,0.034482758620689655,0.06896551724137931
