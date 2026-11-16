@@ -2406,3 +2406,10 @@ date,landing,boat,trip_type,anglers,species_id,kept,released,zone_hint,source_ur
 2026-11-14,H&M,Little G,3.5_day,6,yellowfin_tuna,33,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,3.5,5.5,1.5714285714285714
 2026-11-14,Point Loma,Daily Double,half_day,29,sand_bass,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,0.5,0.034482758620689655,0.06896551724137931
 2026-11-14,Point Loma,Daily Double,half_day,29,yellowfin_tuna,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-15,0.5,0.034482758620689655,0.06896551724137931
+2026-11-16,Point Loma,New Lo-An,3_day,17,yellowtail,65,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-16,3.0,3.823529411764706,1.2745098039215685
+2026-11-16,Point Loma,New Lo-An,3_day,17,yellowfin_tuna,86,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-16,3.0,5.0588235294117645,1.6862745098039216
+2026-11-16,Seaforth,Sea Watch,half_day,25,calico_bass,22,75,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-16,0.5,0.88,1.76
+2026-11-16,Seaforth,Sea Watch,half_day,25,bonito,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-16,0.5,0.04,0.08
+2026-11-16,Seaforth,Pacific Voyager,4_day,16,yellowtail,24,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-16,4.0,1.5,0.375
+2026-11-16,Seaforth,Pacific Voyager,4_day,16,dorado,2,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-16,4.0,0.125,0.03125
+2026-11-16,Seaforth,Pacific Voyager,4_day,16,yellowfin_tuna,126,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-16,4.0,7.875,1.96875
