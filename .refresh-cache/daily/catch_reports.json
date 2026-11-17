@@ -1,8 +1,8 @@
 {
-  "collected_at_utc": "2026-11-16T23:47:16Z",
+  "collected_at_utc": "2026-11-17T23:01:49Z",
   "sources": [
     {
-      "url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-16",
+      "url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-17",
       "name": "San Diego Fish Reports dock totals",
       "fetched_ok": true,
       "notes": "parsed as report date 2026-11-16"
@@ -22,7 +22,7 @@
         "yellowfin_tuna": 86
       },
       "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-16",
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-17",
       "raw_text": "New Lo-An Point Loma Sportfishing San Diego, CA | 17 Anglers 3 Day | 1 Blue Marlin, 65 Yellowtail, 1 Wahoo, 86 Yellowfin Tuna (up to 80 pounds)"
     },
     {
@@ -40,7 +40,7 @@
       "released": {
         "calico_bass": 75
       },
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-16",
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-17",
       "raw_text": "Sea Watch Seaforth Sportfishing San Diego, CA | 25 Anglers 1/2 Day AM | 22 Calico Bass, 1 Whitefish, 1 Bonito, 1 Skipjack Tuna, 75 Calico Bass Released"
     },
     {
@@ -57,7 +57,7 @@
         "yellowfin_tuna": 126
       },
       "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-16",
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-17",
       "raw_text": "Pacific Voyager Seaforth Sportfishing San Diego, CA | 16 Anglers 4 Day | 24 Yellowtail, 2 Dorado, 4 Wahoo, 126 Yellowfin Tuna"
     }
   ],
