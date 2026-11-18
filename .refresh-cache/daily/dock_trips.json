@@ -1,108 +1,9 @@
 {
- "collected_at_utc": "2026-11-17T23:01:49Z",
+ "collected_at_utc": "2026-11-18T22:38:56Z",
  "fetches": [
   {
-   "report_date": "2026-11-14",
-   "fetched_at_utc": "2026-11-17T23:04:35Z",
-   "ok": true,
-   "trips": [
-    {
-     "report_date": "2026-11-14",
-     "landing": "H&M",
-     "boat": "Premier",
-     "trip_type": "half_day",
-     "trip_type_raw": "1/2 Day AM",
-     "trip_days": 0.5,
-     "anglers": 52,
-     "kept_json": "{\"barracuda\": 4, \"bonito\": 11, \"rockfish\": 2, \"sand_bass\": 9, \"yellowfin_tuna\": 8}",
-     "released_json": "{}",
-     "tracked_fish": 34,
-     "raw_text": "Premier H&M Landing San Diego, CA | 52 Anglers 1/2 Day AM | 9 Sand Bass, 4 Barracuda, 11 Bonito, 2 Rockfish, 6 Skipjack Tuna, 8 Yellowfin Tuna",
-     "source": "San Diego Fish Reports dock totals",
-     "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-14"
-    },
-    {
-     "report_date": "2026-11-14",
-     "landing": "H&M",
-     "boat": "Patriot (SD)",
-     "trip_type": "twilight",
-     "trip_type_raw": "1/2 Day Twilight",
-     "trip_days": 0.4,
-     "anglers": 9,
-     "kept_json": "{}",
-     "released_json": "{}",
-     "tracked_fish": 0,
-     "raw_text": "Patriot (SD) H&M Landing San Diego, CA | 9 Anglers 1/2 Day Twilight | 27 Spiny Lobster, 93 Spiny Lobster Released",
-     "source": "San Diego Fish Reports dock totals",
-     "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-14"
-    },
-    {
-     "report_date": "2026-11-14",
-     "landing": "H&M",
-     "boat": "Tradition",
-     "trip_type": "twilight",
-     "trip_type_raw": "1/2 Day Twilight",
-     "trip_days": 0.4,
-     "anglers": 10,
-     "kept_json": "{}",
-     "released_json": "{}",
-     "tracked_fish": 0,
-     "raw_text": "Tradition H&M Landing San Diego, CA | 10 Anglers 1/2 Day Twilight | 43 Spiny Lobster, 1 Rock Crab, 219 Spiny Lobster Released",
-     "source": "San Diego Fish Reports dock totals",
-     "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-14"
-    },
-    {
-     "report_date": "2026-11-14",
-     "landing": "H&M",
-     "boat": "Electra",
-     "trip_type": "2_day",
-     "trip_type_raw": "2 Day",
-     "trip_days": 2.0,
-     "anglers": 23,
-     "kept_json": "{\"dorado\": 61, \"yellowfin_tuna\": 11}",
-     "released_json": "{}",
-     "tracked_fish": 72,
-     "raw_text": "Electra H&M Landing San Diego, CA | 23 Anglers 2 Day | 61 Dorado, 6 Skipjack Tuna, 11 Yellowfin Tuna",
-     "source": "San Diego Fish Reports dock totals",
-     "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-14"
-    },
-    {
-     "report_date": "2026-11-14",
-     "landing": "H&M",
-     "boat": "Little G",
-     "trip_type": "3.5_day",
-     "trip_type_raw": "3.5 Day",
-     "trip_days": 3.5,
-     "anglers": 6,
-     "kept_json": "{\"california_halibut\": 1, \"dorado\": 1, \"yellowfin_tuna\": 33, \"yellowtail\": 41}",
-     "released_json": "{}",
-     "tracked_fish": 76,
-     "raw_text": "Little G H&M Landing San Diego, CA | 6 Anglers 3.5 Day | 1 Halibut, 41 Yellowtail, 1 Dorado, 2 Wahoo, 33 Yellowfin Tuna",
-     "source": "San Diego Fish Reports dock totals",
-     "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-14"
-    },
-    {
-     "report_date": "2026-11-14",
-     "landing": "Point Loma",
-     "boat": "Daily Double",
-     "trip_type": "half_day",
-     "trip_type_raw": "1/2 Day AM",
-     "trip_days": 0.5,
-     "anglers": 29,
-     "kept_json": "{\"sand_bass\": 1, \"yellowfin_tuna\": 1}",
-     "released_json": "{}",
-     "tracked_fish": 2,
-     "raw_text": "Daily Double Point Loma Sportfishing San Diego, CA | 29 Anglers 1/2 Day AM | 1 Barred Sand Bass, 21 Whitefish, 1 Skipjack Tuna, 1 Yellowfin Tuna",
-     "source": "San Diego Fish Reports dock totals",
-     "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-14"
-    }
-   ],
-   "error": null,
-   "method": "daily_refresh"
-  },
-  {
    "report_date": "2026-11-15",
-   "fetched_at_utc": "2026-11-17T23:04:36Z",
+   "fetched_at_utc": "2026-11-18T22:43:48Z",
    "ok": true,
    "trips": [
     {
@@ -261,7 +162,7 @@
   },
   {
    "report_date": "2026-11-16",
-   "fetched_at_utc": "2026-11-17T23:04:38Z",
+   "fetched_at_utc": "2026-11-18T22:43:50Z",
    "ok": true,
    "trips": [
     {
@@ -330,10 +231,49 @@
   },
   {
    "report_date": "2026-11-17",
-   "fetched_at_utc": "2026-11-17T23:04:39Z",
+   "fetched_at_utc": "2026-11-18T22:43:51Z",
    "ok": false,
    "trips": [],
    "error": "ValueError: requested 2026-11-17 but page reported 2026-11-16",
+   "method": "daily_refresh"
+  },
+  {
+   "report_date": "2026-11-18",
+   "fetched_at_utc": "2026-11-18T22:43:53Z",
+   "ok": true,
+   "trips": [
+    {
+     "report_date": "2026-11-18",
+     "landing": "H&M",
+     "boat": "Tradition",
+     "trip_type": "twilight",
+     "trip_type_raw": "1/2 Day Twilight",
+     "trip_days": 0.4,
+     "anglers": 10,
+     "kept_json": "{}",
+     "released_json": "{}",
+     "tracked_fish": 0,
+     "raw_text": "Tradition H&M Landing San Diego, CA | 10 Anglers 1/2 Day Twilight | 34 Spiny Lobster, 3 Rock Crab, 254 Spiny Lobster Released",
+     "source": "San Diego Fish Reports dock totals",
+     "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-18"
+    },
+    {
+     "report_date": "2026-11-18",
+     "landing": "Seaforth",
+     "boat": "Sea Watch",
+     "trip_type": "half_day",
+     "trip_type_raw": "1/2 Day AM",
+     "trip_days": 0.5,
+     "anglers": 22,
+     "kept_json": "{\"calico_bass\": 27, \"sand_bass\": 3, \"yellowtail\": 1}",
+     "released_json": "{\"calico_bass\": 75}",
+     "tracked_fish": 106,
+     "raw_text": "Sea Watch Seaforth Sportfishing San Diego, CA | 22 Anglers 1/2 Day AM | 3 Sand Bass, 1 Yellowtail, 27 Calico Bass, 75 Calico Bass Released",
+     "source": "San Diego Fish Reports dock totals",
+     "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-18"
+    }
+   ],
+   "error": null,
    "method": "daily_refresh"
   }
  ]

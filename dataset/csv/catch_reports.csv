@@ -2413,3 +2413,6 @@ date,landing,boat,trip_type,anglers,species_id,kept,released,zone_hint,source_ur
 2026-11-16,Seaforth,Pacific Voyager,4_day,16,yellowtail,24,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-17,4.0,1.5,0.375
 2026-11-16,Seaforth,Pacific Voyager,4_day,16,dorado,2,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-17,4.0,0.125,0.03125
 2026-11-16,Seaforth,Pacific Voyager,4_day,16,yellowfin_tuna,126,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-17,4.0,7.875,1.96875
+2026-11-18,Seaforth,Sea Watch,half_day,22,sand_bass,3,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-18,0.5,0.13636363636363635,0.2727272727272727
+2026-11-18,Seaforth,Sea Watch,half_day,22,yellowtail,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-18,0.5,0.045454545454545456,0.09090909090909091
+2026-11-18,Seaforth,Sea Watch,half_day,22,calico_bass,27,75,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-18,0.5,1.2272727272727273,2.4545454545454546
