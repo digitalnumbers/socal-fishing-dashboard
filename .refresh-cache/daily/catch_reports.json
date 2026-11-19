@@ -1,32 +1,48 @@
 {
-  "collected_at_utc": "2026-11-18T22:38:56Z",
+  "collected_at_utc": "2026-11-19T22:42:54Z",
   "sources": [
     {
-      "url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-18",
+      "url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-19",
       "name": "San Diego Fish Reports dock totals",
       "fetched_ok": true,
-      "notes": "parsed as report date 2026-11-18"
+      "notes": "parsed as report date 2026-11-19"
     }
   ],
   "reports": [
     {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "landing": "Seaforth",
       "boat": "Sea Watch",
       "trip_type": "half_day",
       "trip_type_raw": "1/2 Day AM",
-      "anglers": 22,
+      "anglers": 27,
       "zone_hint": "offshore",
       "catch": {
         "sand_bass": 3,
+        "barracuda": 7,
+        "bonito": 6,
+        "yellowfin_tuna": 6
+      },
+      "released": {},
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-19",
+      "raw_text": "Sea Watch Seaforth Sportfishing San Diego, CA | 27 Anglers 1/2 Day AM | 3 Sand Bass, 7 Barracuda, 1 Whitefish, 6 Bonito, 6 Yellowfin Tuna"
+    },
+    {
+      "date": "2026-11-19",
+      "landing": "Seaforth",
+      "boat": "Pacific Voyager",
+      "trip_type": "3_day",
+      "trip_type_raw": "3 Day",
+      "anglers": 13,
+      "zone_hint": "offshore",
+      "catch": {
         "yellowtail": 1,
-        "calico_bass": 27
+        "dorado": 70,
+        "yellowfin_tuna": 92
       },
-      "released": {
-        "calico_bass": 75
-      },
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-18",
-      "raw_text": "Sea Watch Seaforth Sportfishing San Diego, CA | 22 Anglers 1/2 Day AM | 3 Sand Bass, 1 Yellowtail, 27 Calico Bass, 75 Calico Bass Released"
+      "released": {},
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-19",
+      "raw_text": "Pacific Voyager Seaforth Sportfishing San Diego, CA | 13 Anglers 3 Day | 1 Swordfish, 1 Yellowtail, 70 Dorado, 3 Wahoo, 92 Yellowfin Tuna"
     }
   ],
   "coverage_notes": "This raw cache contains only the successfully parsed report date. The builder replaces that date and preserves all prior canonical rows."

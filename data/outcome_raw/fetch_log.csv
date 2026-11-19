@@ -233,3 +233,7 @@ report_date,fetched_at_utc,ingest_method,ok,n_trips,raw_ids,error
 2026-11-16,2026-11-18T22:43:50Z,daily_refresh,True,4,1fb3336f148389bd;0a13c33ee7c59d3c;83e650b9be200b46;79f5e6bd2c72d1a4,
 2026-11-17,2026-11-18T22:43:51Z,daily_refresh,False,0,,ValueError: requested 2026-11-17 but page reported 2026-11-16
 2026-11-18,2026-11-18T22:43:53Z,daily_refresh,True,2,1253f0324124bef8;84a6eef373e50734,
+2026-11-16,2026-11-19T22:44:06Z,daily_refresh,True,4,1fb3336f148389bd;0a13c33ee7c59d3c;83e650b9be200b46;79f5e6bd2c72d1a4,
+2026-11-17,2026-11-19T22:44:07Z,daily_refresh,False,0,,ValueError: requested 2026-11-17 but page reported 2026-11-16
+2026-11-18,2026-11-19T22:44:08Z,daily_refresh,True,7,36e92da0ebea7491;204352c19d11bb17;1253f0324124bef8;1e8478b884f24066;73e1ad2231dac515;e618dcb6fd3dd61f;84a6eef373e50734,
+2026-11-19,2026-11-19T22:44:10Z,daily_refresh,True,4,fa41f908610c58d9;c515c6ae04dd8eb3;52292f5e24f6af87;f1b9048719d5d7f4,
