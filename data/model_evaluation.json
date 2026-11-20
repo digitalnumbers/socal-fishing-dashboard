@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-11-19T22:45:09Z",
-  "as_of": "2026-11-19",
+  "generated_utc": "2026-11-20T22:22:28Z",
+  "as_of": "2026-11-20",
   "label_version": "L1",
   "method": "rolling-origin walk-forward over as-issued ledger records",
   "ledger": {
-    "issuances": 49,
-    "forecast_rows": 88102,
+    "issuances": 50,
+    "forecast_rows": 89900,
     "first_issue": "2026-08-28",
-    "last_issue": "2026-11-19"
+    "last_issue": "2026-11-20"
   },
   "labels": {
     "rows": 2586,
@@ -26,7 +26,7 @@
   },
   "pairs": {
     "total": 12065,
-    "excluded_late_lead0_rows": 2320,
+    "excluded_late_lead0_rows": 2378,
     "target_dates": 73,
     "issuances": 47,
     "final_label_share": 0.983
@@ -39,295 +39,295 @@
   ],
   "headline": [
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_30d",
       "dimension": "overall",
       "stratum": "all",
       "model_id": "baseline_climatology",
-      "n_pairs": 9171,
-      "n_target_dates": 27,
+      "n_pairs": 8883,
+      "n_target_dates": 26,
       "n_issuances": 46,
       "sample_flag": "preliminary",
-      "exact_hit": 0.1566,
-      "within_one": 0.4779,
-      "mae": 38.89,
-      "brier": 0.3123,
-      "n_obs_good": 3847,
-      "n_fcst_good": 4872,
-      "obs_good_rate": 0.4195,
-      "precision_good": 0.336,
-      "recall_good": 0.4255,
-      "mean_forecast_score": 54.4,
-      "mean_observed_score": 44.1,
-      "brier_skill_vs_clim": 0.0,
-      "mae_skill_vs_clim": 0.0
-    },
-    {
-      "as_of": "2026-11-19",
-      "window": "rolling_30d",
-      "dimension": "overall",
-      "stratum": "all",
-      "model_id": "baseline_enso",
-      "n_pairs": 9171,
-      "n_target_dates": 27,
-      "n_issuances": 46,
-      "sample_flag": "preliminary",
-      "exact_hit": 0.1512,
-      "within_one": 0.4701,
-      "mae": 38.69,
-      "brier": 0.3101,
-      "n_obs_good": 3847,
-      "n_fcst_good": 5765,
-      "obs_good_rate": 0.4195,
-      "precision_good": 0.3655,
-      "recall_good": 0.5477,
-      "mean_forecast_score": 56.0,
-      "mean_observed_score": 44.1,
-      "brier_skill_vs_clim": 0.007,
-      "mae_skill_vs_clim": 0.0051
-    },
-    {
-      "as_of": "2026-11-19",
-      "window": "rolling_30d",
-      "dimension": "overall",
-      "stratum": "all",
-      "model_id": "v1",
-      "n_pairs": 9171,
-      "n_target_dates": 27,
-      "n_issuances": 46,
-      "sample_flag": "preliminary",
-      "exact_hit": 0.1612,
-      "within_one": 0.428,
-      "mae": 42.27,
-      "brier": 0.3442,
-      "n_obs_good": 3847,
-      "n_fcst_good": 7423,
-      "obs_good_rate": 0.4195,
-      "precision_good": 0.433,
-      "recall_good": 0.8355,
-      "mean_forecast_score": 74.3,
-      "mean_observed_score": 44.1,
-      "brier_skill_vs_clim": -0.1021,
-      "mae_skill_vs_clim": -0.0869
-    },
-    {
-      "as_of": "2026-11-19",
-      "window": "rolling_30d",
-      "dimension": "overall",
-      "stratum": "all",
-      "model_id": "v1.1-cal",
-      "n_pairs": 9171,
-      "n_target_dates": 27,
-      "n_issuances": 46,
-      "sample_flag": "preliminary",
-      "exact_hit": 0.2143,
-      "within_one": 0.5999,
-      "mae": 35.48,
-      "brier": 0.2666,
-      "n_obs_good": 3847,
-      "n_fcst_good": 4350,
-      "obs_good_rate": 0.4195,
-      "precision_good": 0.4922,
-      "recall_good": 0.5565,
-      "mean_forecast_score": 56.6,
-      "mean_observed_score": 44.1,
-      "brier_skill_vs_clim": 0.1463,
-      "mae_skill_vs_clim": 0.0877
-    },
-    {
-      "as_of": "2026-11-19",
-      "window": "rolling_30d",
-      "dimension": "horizon_group",
-      "stratum": "outlook_8_30",
-      "model_id": "baseline_climatology",
-      "n_pairs": 6722,
-      "n_target_dates": 27,
-      "n_issuances": 39,
-      "sample_flag": "preliminary",
-      "exact_hit": 0.1568,
-      "within_one": 0.4805,
-      "mae": 38.9,
-      "brier": 0.303,
-      "n_obs_good": 2813,
-      "n_fcst_good": 3521,
-      "obs_good_rate": 0.4185,
-      "precision_good": 0.332,
-      "recall_good": 0.4156,
+      "exact_hit": 0.1556,
+      "within_one": 0.4813,
+      "mae": 38.72,
+      "brier": 0.3137,
+      "n_obs_good": 3757,
+      "n_fcst_good": 4674,
+      "obs_good_rate": 0.4229,
+      "precision_good": 0.3348,
+      "recall_good": 0.4166,
       "mean_forecast_score": 54.2,
-      "mean_observed_score": 44.1,
+      "mean_observed_score": 44.4,
       "brier_skill_vs_clim": 0.0,
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_30d",
-      "dimension": "horizon_group",
-      "stratum": "outlook_8_30",
+      "dimension": "overall",
+      "stratum": "all",
       "model_id": "baseline_enso",
-      "n_pairs": 6722,
-      "n_target_dates": 27,
-      "n_issuances": 39,
+      "n_pairs": 8883,
+      "n_target_dates": 26,
+      "n_issuances": 46,
       "sample_flag": "preliminary",
-      "exact_hit": 0.1517,
-      "within_one": 0.4741,
-      "mae": 38.66,
-      "brier": 0.2998,
-      "n_obs_good": 2813,
-      "n_fcst_good": 4248,
-      "obs_good_rate": 0.4185,
-      "precision_good": 0.3698,
-      "recall_good": 0.5585,
-      "mean_forecast_score": 55.9,
-      "mean_observed_score": 44.1,
-      "brier_skill_vs_clim": 0.0106,
+      "exact_hit": 0.1521,
+      "within_one": 0.4738,
+      "mae": 38.48,
+      "brier": 0.311,
+      "n_obs_good": 3757,
+      "n_fcst_good": 5561,
+      "obs_good_rate": 0.4229,
+      "precision_good": 0.3659,
+      "recall_good": 0.5417,
+      "mean_forecast_score": 55.8,
+      "mean_observed_score": 44.4,
+      "brier_skill_vs_clim": 0.0086,
       "mae_skill_vs_clim": 0.0062
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_30d",
-      "dimension": "horizon_group",
-      "stratum": "outlook_8_30",
+      "dimension": "overall",
+      "stratum": "all",
       "model_id": "v1",
-      "n_pairs": 6722,
-      "n_target_dates": 27,
-      "n_issuances": 39,
+      "n_pairs": 8883,
+      "n_target_dates": 26,
+      "n_issuances": 46,
       "sample_flag": "preliminary",
-      "exact_hit": 0.1389,
-      "within_one": 0.385,
-      "mae": 44.11,
-      "brier": 0.3558,
-      "n_obs_good": 2813,
-      "n_fcst_good": 5703,
-      "obs_good_rate": 0.4185,
-      "precision_good": 0.4068,
-      "recall_good": 0.8247,
-      "mean_forecast_score": 75.7,
-      "mean_observed_score": 44.1,
-      "brier_skill_vs_clim": -0.1743,
-      "mae_skill_vs_clim": -0.1339
+      "exact_hit": 0.1632,
+      "within_one": 0.4288,
+      "mae": 41.97,
+      "brier": 0.3422,
+      "n_obs_good": 3757,
+      "n_fcst_good": 7176,
+      "obs_good_rate": 0.4229,
+      "precision_good": 0.4356,
+      "recall_good": 0.832,
+      "mean_forecast_score": 74.1,
+      "mean_observed_score": 44.4,
+      "brier_skill_vs_clim": -0.0909,
+      "mae_skill_vs_clim": -0.0839
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
+      "window": "rolling_30d",
+      "dimension": "overall",
+      "stratum": "all",
+      "model_id": "v1.1-cal",
+      "n_pairs": 8883,
+      "n_target_dates": 26,
+      "n_issuances": 46,
+      "sample_flag": "preliminary",
+      "exact_hit": 0.2164,
+      "within_one": 0.6033,
+      "mae": 35.2,
+      "brier": 0.2659,
+      "n_obs_good": 3757,
+      "n_fcst_good": 4176,
+      "obs_good_rate": 0.4229,
+      "precision_good": 0.495,
+      "recall_good": 0.5502,
+      "mean_forecast_score": 56.3,
+      "mean_observed_score": 44.4,
+      "brier_skill_vs_clim": 0.1524,
+      "mae_skill_vs_clim": 0.0909
+    },
+    {
+      "as_of": "2026-11-20",
       "window": "rolling_30d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
-      "model_id": "v1.1-cal",
-      "n_pairs": 6722,
-      "n_target_dates": 27,
-      "n_issuances": 39,
-      "sample_flag": "preliminary",
-      "exact_hit": 0.1903,
-      "within_one": 0.5878,
-      "mae": 36.58,
-      "brier": 0.2698,
-      "n_obs_good": 2813,
-      "n_fcst_good": 3038,
-      "obs_good_rate": 0.4185,
-      "precision_good": 0.4664,
-      "recall_good": 0.5037,
-      "mean_forecast_score": 56.1,
-      "mean_observed_score": 44.1,
-      "brier_skill_vs_clim": 0.1096,
-      "mae_skill_vs_clim": 0.0596
-    },
-    {
-      "as_of": "2026-11-19",
-      "window": "rolling_30d",
-      "dimension": "horizon_group",
-      "stratum": "short_0_7",
       "model_id": "baseline_climatology",
-      "n_pairs": 2449,
-      "n_target_dates": 27,
-      "n_issuances": 35,
+      "n_pairs": 6546,
+      "n_target_dates": 26,
+      "n_issuances": 39,
       "sample_flag": "preliminary",
       "exact_hit": 0.156,
-      "within_one": 0.4708,
-      "mae": 38.87,
-      "brier": 0.3376,
-      "n_obs_good": 1034,
-      "n_fcst_good": 1351,
-      "obs_good_rate": 0.4222,
-      "precision_good": 0.3464,
-      "recall_good": 0.4526,
-      "mean_forecast_score": 54.9,
-      "mean_observed_score": 44.2,
+      "within_one": 0.4833,
+      "mae": 38.76,
+      "brier": 0.3042,
+      "n_obs_good": 2758,
+      "n_fcst_good": 3400,
+      "obs_good_rate": 0.4213,
+      "precision_good": 0.3309,
+      "recall_good": 0.4079,
+      "mean_forecast_score": 54.1,
+      "mean_observed_score": 44.3,
       "brier_skill_vs_clim": 0.0,
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
+      "window": "rolling_30d",
+      "dimension": "horizon_group",
+      "stratum": "outlook_8_30",
+      "model_id": "baseline_enso",
+      "n_pairs": 6546,
+      "n_target_dates": 26,
+      "n_issuances": 39,
+      "sample_flag": "preliminary",
+      "exact_hit": 0.1525,
+      "within_one": 0.4777,
+      "mae": 38.49,
+      "brier": 0.3007,
+      "n_obs_good": 2758,
+      "n_fcst_good": 4121,
+      "obs_good_rate": 0.4213,
+      "precision_good": 0.3705,
+      "recall_good": 0.5537,
+      "mean_forecast_score": 55.8,
+      "mean_observed_score": 44.3,
+      "brier_skill_vs_clim": 0.0115,
+      "mae_skill_vs_clim": 0.007
+    },
+    {
+      "as_of": "2026-11-20",
+      "window": "rolling_30d",
+      "dimension": "horizon_group",
+      "stratum": "outlook_8_30",
+      "model_id": "v1",
+      "n_pairs": 6546,
+      "n_target_dates": 26,
+      "n_issuances": 39,
+      "sample_flag": "preliminary",
+      "exact_hit": 0.1408,
+      "within_one": 0.3851,
+      "mae": 43.86,
+      "brier": 0.3542,
+      "n_obs_good": 2758,
+      "n_fcst_good": 5543,
+      "obs_good_rate": 0.4213,
+      "precision_good": 0.4088,
+      "recall_good": 0.8216,
+      "mean_forecast_score": 75.5,
+      "mean_observed_score": 44.3,
+      "brier_skill_vs_clim": -0.1644,
+      "mae_skill_vs_clim": -0.1316
+    },
+    {
+      "as_of": "2026-11-20",
+      "window": "rolling_30d",
+      "dimension": "horizon_group",
+      "stratum": "outlook_8_30",
+      "model_id": "v1.1-cal",
+      "n_pairs": 6546,
+      "n_target_dates": 26,
+      "n_issuances": 39,
+      "sample_flag": "preliminary",
+      "exact_hit": 0.1905,
+      "within_one": 0.5907,
+      "mae": 36.37,
+      "brier": 0.2698,
+      "n_obs_good": 2758,
+      "n_fcst_good": 2941,
+      "obs_good_rate": 0.4213,
+      "precision_good": 0.4679,
+      "recall_good": 0.4989,
+      "mean_forecast_score": 56.0,
+      "mean_observed_score": 44.3,
+      "brier_skill_vs_clim": 0.1131,
+      "mae_skill_vs_clim": 0.0617
+    },
+    {
+      "as_of": "2026-11-20",
+      "window": "rolling_30d",
+      "dimension": "horizon_group",
+      "stratum": "short_0_7",
+      "model_id": "baseline_climatology",
+      "n_pairs": 2337,
+      "n_target_dates": 26,
+      "n_issuances": 34,
+      "sample_flag": "preliminary",
+      "exact_hit": 0.1545,
+      "within_one": 0.4754,
+      "mae": 38.61,
+      "brier": 0.3402,
+      "n_obs_good": 999,
+      "n_fcst_good": 1274,
+      "obs_good_rate": 0.4275,
+      "precision_good": 0.3454,
+      "recall_good": 0.4404,
+      "mean_forecast_score": 54.7,
+      "mean_observed_score": 44.6,
+      "brier_skill_vs_clim": 0.0,
+      "mae_skill_vs_clim": 0.0
+    },
+    {
+      "as_of": "2026-11-20",
       "window": "rolling_30d",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
       "model_id": "baseline_enso",
-      "n_pairs": 2449,
-      "n_target_dates": 27,
-      "n_issuances": 35,
+      "n_pairs": 2337,
+      "n_target_dates": 26,
+      "n_issuances": 34,
       "sample_flag": "preliminary",
-      "exact_hit": 0.1499,
-      "within_one": 0.459,
-      "mae": 38.75,
-      "brier": 0.3381,
-      "n_obs_good": 1034,
-      "n_fcst_good": 1517,
-      "obs_good_rate": 0.4222,
-      "precision_good": 0.3533,
-      "recall_good": 0.5184,
-      "mean_forecast_score": 56.2,
-      "mean_observed_score": 44.2,
-      "brier_skill_vs_clim": -0.0015,
-      "mae_skill_vs_clim": 0.0031
+      "exact_hit": 0.151,
+      "within_one": 0.463,
+      "mae": 38.45,
+      "brier": 0.34,
+      "n_obs_good": 999,
+      "n_fcst_good": 1440,
+      "obs_good_rate": 0.4275,
+      "precision_good": 0.3528,
+      "recall_good": 0.5085,
+      "mean_forecast_score": 56.1,
+      "mean_observed_score": 44.6,
+      "brier_skill_vs_clim": 0.0006,
+      "mae_skill_vs_clim": 0.0041
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_30d",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
       "model_id": "v1",
-      "n_pairs": 2449,
-      "n_target_dates": 27,
-      "n_issuances": 35,
+      "n_pairs": 2337,
+      "n_target_dates": 26,
+      "n_issuances": 34,
       "sample_flag": "preliminary",
-      "exact_hit": 0.2221,
-      "within_one": 0.5459,
-      "mae": 37.21,
-      "brier": 0.3124,
-      "n_obs_good": 1034,
-      "n_fcst_good": 1720,
-      "obs_good_rate": 0.4222,
-      "precision_good": 0.5198,
-      "recall_good": 0.8646,
-      "mean_forecast_score": 70.4,
-      "mean_observed_score": 44.2,
-      "brier_skill_vs_clim": 0.0746,
-      "mae_skill_vs_clim": 0.0427
+      "exact_hit": 0.2259,
+      "within_one": 0.5511,
+      "mae": 36.68,
+      "brier": 0.3086,
+      "n_obs_good": 999,
+      "n_fcst_good": 1633,
+      "obs_good_rate": 0.4275,
+      "precision_good": 0.5266,
+      "recall_good": 0.8609,
+      "mean_forecast_score": 70.1,
+      "mean_observed_score": 44.6,
+      "brier_skill_vs_clim": 0.0929,
+      "mae_skill_vs_clim": 0.05
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_30d",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
       "model_id": "v1.1-cal",
-      "n_pairs": 2449,
-      "n_target_dates": 27,
-      "n_issuances": 35,
+      "n_pairs": 2337,
+      "n_target_dates": 26,
+      "n_issuances": 34,
       "sample_flag": "preliminary",
-      "exact_hit": 0.2801,
-      "within_one": 0.6333,
-      "mae": 32.47,
-      "brier": 0.2579,
-      "n_obs_good": 1034,
-      "n_fcst_good": 1312,
-      "obs_good_rate": 0.4222,
-      "precision_good": 0.5518,
-      "recall_good": 0.7002,
-      "mean_forecast_score": 57.8,
-      "mean_observed_score": 44.2,
-      "brier_skill_vs_clim": 0.2361,
-      "mae_skill_vs_clim": 0.1647
+      "exact_hit": 0.2888,
+      "within_one": 0.6384,
+      "mae": 31.89,
+      "brier": 0.255,
+      "n_obs_good": 999,
+      "n_fcst_good": 1235,
+      "obs_good_rate": 0.4275,
+      "precision_good": 0.5595,
+      "recall_good": 0.6917,
+      "mean_forecast_score": 57.2,
+      "mean_observed_score": 44.6,
+      "brier_skill_vs_clim": 0.2504,
+      "mae_skill_vs_clim": 0.174
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_90d",
       "dimension": "overall",
       "stratum": "all",
@@ -338,7 +338,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1424,
       "within_one": 0.4473,
-      "mae": 38.27,
+      "mae": 38.26,
       "brier": 0.3109,
       "n_obs_good": 5521,
       "n_fcst_good": 7089,
@@ -351,7 +351,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_90d",
       "dimension": "overall",
       "stratum": "all",
@@ -372,10 +372,10 @@
       "mean_forecast_score": 57.4,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": 0.0145,
-      "mae_skill_vs_clim": 0.0084
+      "mae_skill_vs_clim": 0.0081
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_90d",
       "dimension": "overall",
       "stratum": "all",
@@ -396,10 +396,10 @@
       "mean_forecast_score": 76.2,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": -0.0621,
-      "mae_skill_vs_clim": -0.0502
+      "mae_skill_vs_clim": -0.0504
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_90d",
       "dimension": "overall",
       "stratum": "all",
@@ -420,10 +420,10 @@
       "mean_forecast_score": 59.9,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": 0.1547,
-      "mae_skill_vs_clim": 0.0922
+      "mae_skill_vs_clim": 0.092
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -447,7 +447,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -471,7 +471,7 @@
       "mae_skill_vs_clim": 0.0083
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -495,7 +495,7 @@
       "mae_skill_vs_clim": -0.1095
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -519,7 +519,7 @@
       "mae_skill_vs_clim": 0.064
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -543,7 +543,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -567,7 +567,7 @@
       "mae_skill_vs_clim": 0.0079
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -591,7 +591,7 @@
       "mae_skill_vs_clim": 0.0667
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "rolling_90d",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -615,7 +615,7 @@
       "mae_skill_vs_clim": 0.1477
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "season_to_date",
       "dimension": "overall",
       "stratum": "all",
@@ -626,7 +626,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1424,
       "within_one": 0.4473,
-      "mae": 38.27,
+      "mae": 38.26,
       "brier": 0.3109,
       "n_obs_good": 5521,
       "n_fcst_good": 7089,
@@ -639,7 +639,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "season_to_date",
       "dimension": "overall",
       "stratum": "all",
@@ -660,10 +660,10 @@
       "mean_forecast_score": 57.4,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": 0.0145,
-      "mae_skill_vs_clim": 0.0084
+      "mae_skill_vs_clim": 0.0081
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "season_to_date",
       "dimension": "overall",
       "stratum": "all",
@@ -684,10 +684,10 @@
       "mean_forecast_score": 76.2,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": -0.0621,
-      "mae_skill_vs_clim": -0.0502
+      "mae_skill_vs_clim": -0.0504
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "season_to_date",
       "dimension": "overall",
       "stratum": "all",
@@ -708,10 +708,10 @@
       "mean_forecast_score": 59.9,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": 0.1547,
-      "mae_skill_vs_clim": 0.0922
+      "mae_skill_vs_clim": 0.092
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -735,7 +735,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -759,7 +759,7 @@
       "mae_skill_vs_clim": 0.0083
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -783,7 +783,7 @@
       "mae_skill_vs_clim": -0.1095
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -807,7 +807,7 @@
       "mae_skill_vs_clim": 0.064
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -831,7 +831,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -855,7 +855,7 @@
       "mae_skill_vs_clim": 0.0079
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -879,7 +879,7 @@
       "mae_skill_vs_clim": 0.0667
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "season_to_date",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -903,7 +903,7 @@
       "mae_skill_vs_clim": 0.1477
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "overall",
       "stratum": "all",
@@ -914,7 +914,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1424,
       "within_one": 0.4473,
-      "mae": 38.27,
+      "mae": 38.26,
       "brier": 0.3109,
       "n_obs_good": 5521,
       "n_fcst_good": 7089,
@@ -927,7 +927,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "overall",
       "stratum": "all",
@@ -948,10 +948,10 @@
       "mean_forecast_score": 57.4,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": 0.0145,
-      "mae_skill_vs_clim": 0.0084
+      "mae_skill_vs_clim": 0.0081
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "overall",
       "stratum": "all",
@@ -972,10 +972,10 @@
       "mean_forecast_score": 76.2,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": -0.0621,
-      "mae_skill_vs_clim": -0.0502
+      "mae_skill_vs_clim": -0.0504
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "overall",
       "stratum": "all",
@@ -996,10 +996,10 @@
       "mean_forecast_score": 59.9,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": 0.1547,
-      "mae_skill_vs_clim": 0.0922
+      "mae_skill_vs_clim": 0.092
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -1023,7 +1023,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -1047,7 +1047,7 @@
       "mae_skill_vs_clim": 0.0083
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -1071,7 +1071,7 @@
       "mae_skill_vs_clim": -0.1095
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "outlook_8_30",
@@ -1095,7 +1095,7 @@
       "mae_skill_vs_clim": 0.064
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -1119,7 +1119,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -1143,7 +1143,7 @@
       "mae_skill_vs_clim": 0.0079
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -1167,7 +1167,7 @@
       "mae_skill_vs_clim": 0.0667
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "horizon_group",
       "stratum": "short_0_7",
@@ -1193,7 +1193,7 @@
   ],
   "by_lead": [
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "0-3",
@@ -1217,7 +1217,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "0-3",
@@ -1241,7 +1241,7 @@
       "mae_skill_vs_clim": 0.0077
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "0-3",
@@ -1265,7 +1265,7 @@
       "mae_skill_vs_clim": 0.0897
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "0-3",
@@ -1276,7 +1276,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.2312,
       "within_one": 0.6013,
-      "mae": 31.49,
+      "mae": 31.48,
       "brier": 0.2468,
       "n_obs_good": 963,
       "n_fcst_good": 1187,
@@ -1286,10 +1286,10 @@
       "mean_forecast_score": 61.7,
       "mean_observed_score": 51.3,
       "brier_skill_vs_clim": 0.2655,
-      "mae_skill_vs_clim": 0.1647
+      "mae_skill_vs_clim": 0.165
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "15-30",
@@ -1300,7 +1300,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1526,
       "within_one": 0.4702,
-      "mae": 38.57,
+      "mae": 38.56,
       "brier": 0.2952,
       "n_obs_good": 2036,
       "n_fcst_good": 2511,
@@ -1313,7 +1313,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "15-30",
@@ -1334,10 +1334,10 @@
       "mean_forecast_score": 56.4,
       "mean_observed_score": 45.5,
       "brier_skill_vs_clim": 0.0152,
-      "mae_skill_vs_clim": 0.0096
+      "mae_skill_vs_clim": 0.0093
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "15-30",
@@ -1358,10 +1358,10 @@
       "mean_forecast_score": 74.3,
       "mean_observed_score": 45.5,
       "brier_skill_vs_clim": -0.1457,
-      "mae_skill_vs_clim": -0.1174
+      "mae_skill_vs_clim": -0.1177
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "15-30",
@@ -1382,10 +1382,10 @@
       "mean_forecast_score": 56.2,
       "mean_observed_score": 45.5,
       "brier_skill_vs_clim": 0.081,
-      "mae_skill_vs_clim": 0.0529
+      "mae_skill_vs_clim": 0.0526
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "4-7",
@@ -1396,7 +1396,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1338,
       "within_one": 0.4287,
-      "mae": 38.12,
+      "mae": 38.11,
       "brier": 0.3249,
       "n_obs_good": 1032,
       "n_fcst_good": 1359,
@@ -1409,7 +1409,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "4-7",
@@ -1430,10 +1430,10 @@
       "mean_forecast_score": 58.2,
       "mean_observed_score": 49.6,
       "brier_skill_vs_clim": 0.0139,
-      "mae_skill_vs_clim": 0.0081
+      "mae_skill_vs_clim": 0.0079
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "4-7",
@@ -1444,7 +1444,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.2023,
       "within_one": 0.5407,
-      "mae": 36.35,
+      "mae": 36.34,
       "brier": 0.307,
       "n_obs_good": 1032,
       "n_fcst_good": 1664,
@@ -1457,7 +1457,7 @@
       "mae_skill_vs_clim": 0.0464
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "4-7",
@@ -1478,10 +1478,10 @@
       "mean_forecast_score": 63.5,
       "mean_observed_score": 49.6,
       "brier_skill_vs_clim": 0.1998,
-      "mae_skill_vs_clim": 0.1325
+      "mae_skill_vs_clim": 0.1322
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "8-14",
@@ -1492,7 +1492,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1405,
       "within_one": 0.4437,
-      "mae": 38.27,
+      "mae": 38.26,
       "brier": 0.3094,
       "n_obs_good": 1490,
       "n_fcst_good": 1983,
@@ -1505,7 +1505,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "8-14",
@@ -1526,10 +1526,10 @@
       "mean_forecast_score": 57.7,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": 0.0136,
-      "mae_skill_vs_clim": 0.0071
+      "mae_skill_vs_clim": 0.0068
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "8-14",
@@ -1550,10 +1550,10 @@
       "mean_forecast_score": 81.1,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": -0.1519,
-      "mae_skill_vs_clim": -0.0972
+      "mae_skill_vs_clim": -0.0975
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "lead_bucket",
       "stratum": "8-14",
@@ -1574,12 +1574,12 @@
       "mean_forecast_score": 61.8,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": 0.1535,
-      "mae_skill_vs_clim": 0.0807
+      "mae_skill_vs_clim": 0.0805
     }
   ],
   "strata": [
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "barracuda",
@@ -1603,7 +1603,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "barracuda",
@@ -1627,7 +1627,7 @@
       "mae_skill_vs_clim": 0.0217
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "barracuda",
@@ -1651,7 +1651,7 @@
       "mae_skill_vs_clim": 0.1957
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "barracuda",
@@ -1675,7 +1675,7 @@
       "mae_skill_vs_clim": 0.0368
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bluefin_tuna",
@@ -1699,7 +1699,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bluefin_tuna",
@@ -1723,7 +1723,7 @@
       "mae_skill_vs_clim": -0.0224
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bluefin_tuna",
@@ -1747,7 +1747,7 @@
       "mae_skill_vs_clim": -0.1371
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bluefin_tuna",
@@ -1771,7 +1771,7 @@
       "mae_skill_vs_clim": 0.055
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bonito",
@@ -1795,7 +1795,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bonito",
@@ -1806,7 +1806,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1499,
       "within_one": 0.3862,
-      "mae": 40.57,
+      "mae": 40.56,
       "brier": 0.3143,
       "n_obs_good": 468,
       "n_fcst_good": 1464,
@@ -1816,10 +1816,10 @@
       "mean_forecast_score": 66.0,
       "mean_observed_score": 34.3,
       "brier_skill_vs_clim": -0.1106,
-      "mae_skill_vs_clim": -0.0371
+      "mae_skill_vs_clim": -0.0368
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bonito",
@@ -1843,7 +1843,7 @@
       "mae_skill_vs_clim": -0.5112
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "bonito",
@@ -1867,7 +1867,7 @@
       "mae_skill_vs_clim": -0.1431
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "calico_bass",
@@ -1878,7 +1878,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.2587,
       "within_one": 0.5338,
-      "mae": 22.68,
+      "mae": 22.66,
       "brier": 0.2259,
       "n_obs_good": 587,
       "n_fcst_good": 916,
@@ -1886,12 +1886,12 @@
       "precision_good": 0.6408,
       "recall_good": 1.0,
       "mean_forecast_score": 62.6,
-      "mean_observed_score": 62.0,
+      "mean_observed_score": 61.9,
       "brier_skill_vs_clim": 0.0,
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "calico_bass",
@@ -1902,7 +1902,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.2587,
       "within_one": 0.5338,
-      "mae": 22.6,
+      "mae": 22.59,
       "brier": 0.2245,
       "n_obs_good": 587,
       "n_fcst_good": 916,
@@ -1910,12 +1910,12 @@
       "precision_good": 0.6408,
       "recall_good": 1.0,
       "mean_forecast_score": 63.6,
-      "mean_observed_score": 62.0,
+      "mean_observed_score": 61.9,
       "brier_skill_vs_clim": 0.0062,
-      "mae_skill_vs_clim": 0.0035
+      "mae_skill_vs_clim": 0.0031
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "calico_bass",
@@ -1926,7 +1926,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.2009,
       "within_one": 0.5873,
-      "mae": 26.87,
+      "mae": 26.88,
       "brier": 0.2644,
       "n_obs_good": 587,
       "n_fcst_good": 916,
@@ -1934,12 +1934,12 @@
       "precision_good": 0.6408,
       "recall_good": 1.0,
       "mean_forecast_score": 85.1,
-      "mean_observed_score": 62.0,
+      "mean_observed_score": 61.9,
       "brier_skill_vs_clim": -0.1704,
-      "mae_skill_vs_clim": -0.1847
+      "mae_skill_vs_clim": -0.1862
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "calico_bass",
@@ -1950,7 +1950,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.2194,
       "within_one": 0.6408,
-      "mae": 22.5,
+      "mae": 22.49,
       "brier": 0.2322,
       "n_obs_good": 587,
       "n_fcst_good": 695,
@@ -1958,12 +1958,12 @@
       "precision_good": 0.6835,
       "recall_good": 0.8092,
       "mean_forecast_score": 66.6,
-      "mean_observed_score": 62.0,
+      "mean_observed_score": 61.9,
       "brier_skill_vs_clim": -0.0279,
-      "mae_skill_vs_clim": 0.0079
+      "mae_skill_vs_clim": 0.0075
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "dorado",
@@ -1987,7 +1987,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "dorado",
@@ -2011,7 +2011,7 @@
       "mae_skill_vs_clim": 0.0209
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "dorado",
@@ -2035,7 +2035,7 @@
       "mae_skill_vs_clim": 0.0587
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "dorado",
@@ -2059,7 +2059,7 @@
       "mae_skill_vs_clim": 0.0786
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "rockfish",
@@ -2070,7 +2070,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.0347,
       "within_one": 0.3037,
-      "mae": 52.28,
+      "mae": 52.29,
       "brier": 0.3204,
       "n_obs_good": 166,
       "n_fcst_good": 1285,
@@ -2083,7 +2083,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "rockfish",
@@ -2094,7 +2094,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.0347,
       "within_one": 0.4499,
-      "mae": 50.49,
+      "mae": 50.5,
       "brier": 0.2893,
       "n_obs_good": 166,
       "n_fcst_good": 961,
@@ -2107,7 +2107,7 @@
       "mae_skill_vs_clim": 0.0342
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "rockfish",
@@ -2118,7 +2118,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1714,
       "within_one": 0.4965,
-      "mae": 49.33,
+      "mae": 49.34,
       "brier": 0.2846,
       "n_obs_good": 166,
       "n_fcst_good": 756,
@@ -2131,7 +2131,7 @@
       "mae_skill_vs_clim": 0.0564
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "rockfish",
@@ -2152,10 +2152,10 @@
       "mean_forecast_score": 44.7,
       "mean_observed_score": 16.7,
       "brier_skill_vs_clim": 0.4635,
-      "mae_skill_vs_clim": 0.2422
+      "mae_skill_vs_clim": 0.2423
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sand_bass",
@@ -2166,7 +2166,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1201,
       "within_one": 0.6157,
-      "mae": 24.45,
+      "mae": 24.43,
       "brier": 0.283,
       "n_obs_good": 758,
       "n_fcst_good": 435,
@@ -2179,7 +2179,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sand_bass",
@@ -2190,7 +2190,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1201,
       "within_one": 0.6124,
-      "mae": 23.33,
+      "mae": 23.31,
       "brier": 0.2675,
       "n_obs_good": 758,
       "n_fcst_good": 432,
@@ -2203,7 +2203,7 @@
       "mae_skill_vs_clim": 0.0458
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sand_bass",
@@ -2214,7 +2214,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.393,
       "within_one": 0.8493,
-      "mae": 13.48,
+      "mae": 13.46,
       "brier": 0.1401,
       "n_obs_good": 758,
       "n_fcst_good": 912,
@@ -2224,10 +2224,10 @@
       "mean_forecast_score": 78.8,
       "mean_observed_score": 75.7,
       "brier_skill_vs_clim": 0.5049,
-      "mae_skill_vs_clim": 0.4487
+      "mae_skill_vs_clim": 0.449
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sand_bass",
@@ -2238,7 +2238,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1998,
       "within_one": 0.6015,
-      "mae": 20.78,
+      "mae": 20.76,
       "brier": 0.2237,
       "n_obs_good": 758,
       "n_fcst_good": 423,
@@ -2248,10 +2248,10 @@
       "mean_forecast_score": 61.4,
       "mean_observed_score": 75.7,
       "brier_skill_vs_clim": 0.2095,
-      "mae_skill_vs_clim": 0.1501
+      "mae_skill_vs_clim": 0.1502
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sheephead",
@@ -2275,7 +2275,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sheephead",
@@ -2299,7 +2299,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sheephead",
@@ -2323,7 +2323,7 @@
       "mae_skill_vs_clim": -0.3227
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "sheephead",
@@ -2347,7 +2347,7 @@
       "mae_skill_vs_clim": 0.0549
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowfin_tuna",
@@ -2371,7 +2371,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowfin_tuna",
@@ -2395,7 +2395,7 @@
       "mae_skill_vs_clim": 0.0713
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowfin_tuna",
@@ -2419,7 +2419,7 @@
       "mae_skill_vs_clim": 0.4191
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowfin_tuna",
@@ -2443,7 +2443,7 @@
       "mae_skill_vs_clim": 0.2853
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowtail",
@@ -2454,7 +2454,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1533,
       "within_one": 0.5053,
-      "mae": 32.46,
+      "mae": 32.45,
       "brier": 0.2497,
       "n_obs_good": 736,
       "n_fcst_good": 1863,
@@ -2467,7 +2467,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowtail",
@@ -2488,10 +2488,10 @@
       "mean_forecast_score": 64.7,
       "mean_observed_score": 40.8,
       "brier_skill_vs_clim": -0.1073,
-      "mae_skill_vs_clim": -0.0428
+      "mae_skill_vs_clim": -0.0431
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowtail",
@@ -2512,10 +2512,10 @@
       "mean_forecast_score": 82.1,
       "mean_observed_score": 40.8,
       "brier_skill_vs_clim": -0.5671,
-      "mae_skill_vs_clim": -0.313
+      "mae_skill_vs_clim": -0.3134
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "species_id",
       "stratum": "yellowtail",
@@ -2526,7 +2526,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.2028,
       "within_one": 0.6222,
-      "mae": 31.58,
+      "mae": 31.57,
       "brier": 0.2529,
       "n_obs_good": 736,
       "n_fcst_good": 1466,
@@ -2539,7 +2539,7 @@
       "mae_skill_vs_clim": 0.0271
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "coronados",
@@ -2563,7 +2563,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "coronados",
@@ -2587,7 +2587,7 @@
       "mae_skill_vs_clim": 0.0022
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "coronados",
@@ -2611,7 +2611,7 @@
       "mae_skill_vs_clim": 0.2296
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "coronados",
@@ -2635,7 +2635,7 @@
       "mae_skill_vs_clim": 0.2296
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "extended_offshore",
@@ -2659,7 +2659,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "extended_offshore",
@@ -2683,7 +2683,7 @@
       "mae_skill_vs_clim": 0.0041
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "extended_offshore",
@@ -2707,7 +2707,7 @@
       "mae_skill_vs_clim": 0.0623
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "extended_offshore",
@@ -2731,7 +2731,7 @@
       "mae_skill_vs_clim": 0.1309
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "kelp_nearshore",
@@ -2742,7 +2742,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1633,
       "within_one": 0.4602,
-      "mae": 30.93,
+      "mae": 30.92,
       "brier": 0.2725,
       "n_obs_good": 3300,
       "n_fcst_good": 5153,
@@ -2755,7 +2755,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "kelp_nearshore",
@@ -2776,10 +2776,10 @@
       "mean_forecast_score": 63.2,
       "mean_observed_score": 53.2,
       "brier_skill_vs_clim": 0.0356,
-      "mae_skill_vs_clim": 0.0194
+      "mae_skill_vs_clim": 0.0191
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "kelp_nearshore",
@@ -2800,10 +2800,10 @@
       "mean_forecast_score": 81.5,
       "mean_observed_score": 53.2,
       "brier_skill_vs_clim": -0.1046,
-      "mae_skill_vs_clim": -0.0921
+      "mae_skill_vs_clim": -0.0925
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "kelp_nearshore",
@@ -2824,10 +2824,10 @@
       "mean_forecast_score": 63.8,
       "mean_observed_score": 53.2,
       "brier_skill_vs_clim": 0.1215,
-      "mae_skill_vs_clim": 0.0812
+      "mae_skill_vs_clim": 0.0809
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "offshore_banks",
@@ -2851,7 +2851,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "offshore_banks",
@@ -2875,7 +2875,7 @@
       "mae_skill_vs_clim": -0.0069
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "offshore_banks",
@@ -2899,7 +2899,7 @@
       "mae_skill_vs_clim": -0.1509
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "region_id",
       "stratum": "offshore_banks",
@@ -2923,7 +2923,7 @@
       "mae_skill_vs_clim": 0.0508
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "08",
@@ -2947,7 +2947,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "08",
@@ -2971,7 +2971,7 @@
       "mae_skill_vs_clim": -0.0151
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "08",
@@ -2995,7 +2995,7 @@
       "mae_skill_vs_clim": 0.1626
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "08",
@@ -3019,7 +3019,7 @@
       "mae_skill_vs_clim": 0.1626
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "09",
@@ -3043,7 +3043,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "09",
@@ -3067,7 +3067,7 @@
       "mae_skill_vs_clim": 0.0453
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "09",
@@ -3091,7 +3091,7 @@
       "mae_skill_vs_clim": 0.0556
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "09",
@@ -3115,7 +3115,7 @@
       "mae_skill_vs_clim": 0.0556
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "10",
@@ -3139,7 +3139,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "10",
@@ -3163,7 +3163,7 @@
       "mae_skill_vs_clim": 0.0071
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "10",
@@ -3187,7 +3187,7 @@
       "mae_skill_vs_clim": -0.0316
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "10",
@@ -3211,7 +3211,7 @@
       "mae_skill_vs_clim": 0.0892
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "11",
@@ -3222,7 +3222,7 @@
       "sample_flag": "preliminary",
       "exact_hit": 0.1618,
       "within_one": 0.4994,
-      "mae": 39.01,
+      "mae": 39.0,
       "brier": 0.3159,
       "n_obs_good": 2259,
       "n_fcst_good": 2289,
@@ -3235,7 +3235,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "11",
@@ -3256,10 +3256,10 @@
       "mean_forecast_score": 54.3,
       "mean_observed_score": 43.4,
       "brier_skill_vs_clim": 0.0092,
-      "mae_skill_vs_clim": 0.0072
+      "mae_skill_vs_clim": 0.0069
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "11",
@@ -3270,7 +3270,7 @@
       "sample_flag": "preliminary",
       "exact_hit": 0.1537,
       "within_one": 0.4271,
-      "mae": 42.07,
+      "mae": 42.06,
       "brier": 0.3421,
       "n_obs_good": 2259,
       "n_fcst_good": 4288,
@@ -3280,10 +3280,10 @@
       "mean_forecast_score": 70.4,
       "mean_observed_score": 43.4,
       "brier_skill_vs_clim": -0.0829,
-      "mae_skill_vs_clim": -0.0784
+      "mae_skill_vs_clim": -0.0785
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "month",
       "stratum": "11",
@@ -3294,7 +3294,7 @@
       "sample_flag": "preliminary",
       "exact_hit": 0.2276,
       "within_one": 0.6258,
-      "mae": 35.23,
+      "mae": 35.22,
       "brier": 0.2653,
       "n_obs_good": 2259,
       "n_fcst_good": 2113,
@@ -3307,7 +3307,7 @@
       "mae_skill_vs_clim": 0.0969
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "season",
       "stratum": "JJA",
@@ -3331,7 +3331,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "season",
       "stratum": "JJA",
@@ -3355,7 +3355,7 @@
       "mae_skill_vs_clim": -0.0151
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "season",
       "stratum": "JJA",
@@ -3379,7 +3379,7 @@
       "mae_skill_vs_clim": 0.1626
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "season",
       "stratum": "JJA",
@@ -3403,7 +3403,7 @@
       "mae_skill_vs_clim": 0.1626
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "season",
       "stratum": "SON",
@@ -3414,7 +3414,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1428,
       "within_one": 0.4482,
-      "mae": 38.29,
+      "mae": 38.28,
       "brier": 0.311,
       "n_obs_good": 5489,
       "n_fcst_good": 7040,
@@ -3427,7 +3427,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "season",
       "stratum": "SON",
@@ -3438,7 +3438,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.141,
       "within_one": 0.4485,
-      "mae": 37.97,
+      "mae": 37.96,
       "brier": 0.3065,
       "n_obs_good": 5489,
       "n_fcst_good": 7897,
@@ -3451,7 +3451,7 @@
       "mae_skill_vs_clim": 0.0084
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "season",
       "stratum": "SON",
@@ -3472,10 +3472,10 @@
       "mean_forecast_score": 76.2,
       "mean_observed_score": 47.7,
       "brier_skill_vs_clim": -0.063,
-      "mae_skill_vs_clim": -0.0509
+      "mae_skill_vs_clim": -0.0512
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "season",
       "stratum": "SON",
@@ -3496,10 +3496,10 @@
       "mean_forecast_score": 59.9,
       "mean_observed_score": 47.7,
       "brier_skill_vs_clim": 0.1543,
-      "mae_skill_vs_clim": 0.0919
+      "mae_skill_vs_clim": 0.0917
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "enso_regime",
       "stratum": "El Nino",
@@ -3510,7 +3510,7 @@
       "sample_flag": "reportable",
       "exact_hit": 0.1424,
       "within_one": 0.4473,
-      "mae": 38.27,
+      "mae": 38.26,
       "brier": 0.3109,
       "n_obs_good": 5521,
       "n_fcst_good": 7089,
@@ -3523,7 +3523,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "enso_regime",
       "stratum": "El Nino",
@@ -3544,10 +3544,10 @@
       "mean_forecast_score": 57.4,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": 0.0145,
-      "mae_skill_vs_clim": 0.0084
+      "mae_skill_vs_clim": 0.0081
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "enso_regime",
       "stratum": "El Nino",
@@ -3568,10 +3568,10 @@
       "mean_forecast_score": 76.2,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": -0.0621,
-      "mae_skill_vs_clim": -0.0502
+      "mae_skill_vs_clim": -0.0504
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "enso_regime",
       "stratum": "El Nino",
@@ -3592,10 +3592,10 @@
       "mean_forecast_score": 59.9,
       "mean_observed_score": 47.8,
       "brier_skill_vs_clim": 0.1547,
-      "mae_skill_vs_clim": 0.0922
+      "mae_skill_vs_clim": 0.092
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "label_status",
       "stratum": "final",
@@ -3619,7 +3619,7 @@
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "label_status",
       "stratum": "final",
@@ -3643,7 +3643,7 @@
       "mae_skill_vs_clim": 0.0073
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "label_status",
       "stratum": "final",
@@ -3667,7 +3667,7 @@
       "mae_skill_vs_clim": -0.056
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "label_status",
       "stratum": "final",
@@ -3691,7 +3691,7 @@
       "mae_skill_vs_clim": 0.0925
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "label_status",
       "stratum": "provisional",
@@ -3702,7 +3702,7 @@
       "sample_flag": "insufficient",
       "exact_hit": 0.1429,
       "within_one": 0.4048,
-      "mae": 32.48,
+      "mae": 32.31,
       "brier": 0.303,
       "n_obs_good": 150,
       "n_fcst_good": 95,
@@ -3710,12 +3710,12 @@
       "precision_good": 0.6316,
       "recall_good": 0.4,
       "mean_forecast_score": 58.6,
-      "mean_observed_score": 68.8,
+      "mean_observed_score": 68.5,
       "brier_skill_vs_clim": 0.0,
       "mae_skill_vs_clim": 0.0
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "label_status",
       "stratum": "provisional",
@@ -3726,7 +3726,7 @@
       "sample_flag": "insufficient",
       "exact_hit": 0.1429,
       "within_one": 0.4048,
-      "mae": 30.41,
+      "mae": 30.24,
       "brier": 0.2685,
       "n_obs_good": 150,
       "n_fcst_good": 109,
@@ -3734,12 +3734,12 @@
       "precision_good": 0.6789,
       "recall_good": 0.4933,
       "mean_forecast_score": 59.8,
-      "mean_observed_score": 68.8,
+      "mean_observed_score": 68.5,
       "brier_skill_vs_clim": 0.1139,
-      "mae_skill_vs_clim": 0.0637
+      "mae_skill_vs_clim": 0.0641
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "label_status",
       "stratum": "provisional",
@@ -3750,7 +3750,7 @@
       "sample_flag": "insufficient",
       "exact_hit": 0.2381,
       "within_one": 0.7619,
-      "mae": 21.64,
+      "mae": 21.6,
       "brier": 0.14,
       "n_obs_good": 150,
       "n_fcst_good": 192,
@@ -3758,12 +3758,12 @@
       "precision_good": 0.7812,
       "recall_good": 1.0,
       "mean_forecast_score": 73.9,
-      "mean_observed_score": 68.8,
+      "mean_observed_score": 68.5,
       "brier_skill_vs_clim": 0.538,
-      "mae_skill_vs_clim": 0.3337
+      "mae_skill_vs_clim": 0.3315
     },
     {
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "window": "all",
       "dimension": "label_status",
       "stratum": "provisional",
@@ -3774,7 +3774,7 @@
       "sample_flag": "insufficient",
       "exact_hit": 0.1095,
       "within_one": 0.4286,
-      "mae": 30.22,
+      "mae": 29.98,
       "brier": 0.2521,
       "n_obs_good": 150,
       "n_fcst_good": 52,
@@ -3782,9 +3782,9 @@
       "precision_good": 0.9231,
       "recall_good": 0.32,
       "mean_forecast_score": 54.6,
-      "mean_observed_score": 68.8,
+      "mean_observed_score": 68.5,
       "brier_skill_vs_clim": 0.168,
-      "mae_skill_vs_clim": 0.0696
+      "mae_skill_vs_clim": 0.0721
     }
   ],
   "reliability": [
@@ -3860,198 +3860,6 @@
     }
   ],
   "timeline": [
-    {
-      "target_date": "2026-09-21",
-      "region_id": "extended_offshore",
-      "species_id": "bluefin_tuna",
-      "lead_days": 24,
-      "observed_score": 0.0,
-      "observed_class": "Poor",
-      "label_status": "final",
-      "bite_score": 77.8,
-      "baseline_clim_score": 60.5,
-      "baseline_enso_score": 63.5
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "extended_offshore",
-      "species_id": "dorado",
-      "lead_days": 24,
-      "observed_score": 100.0,
-      "observed_class": "Excellent",
-      "label_status": "final",
-      "bite_score": 70.8,
-      "baseline_clim_score": 37.0,
-      "baseline_enso_score": 40.8
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "extended_offshore",
-      "species_id": "rockfish",
-      "lead_days": 24,
-      "observed_score": 0.0,
-      "observed_class": "Poor",
-      "label_status": "final",
-      "bite_score": 65.8,
-      "baseline_clim_score": 62.0,
-      "baseline_enso_score": 59.0
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "extended_offshore",
-      "species_id": "yellowfin_tuna",
-      "lead_days": 24,
-      "observed_score": 100.0,
-      "observed_class": "Excellent",
-      "label_status": "final",
-      "bite_score": 85.5,
-      "baseline_clim_score": 57.6,
-      "baseline_enso_score": 63.7
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "extended_offshore",
-      "species_id": "yellowtail",
-      "lead_days": 24,
-      "observed_score": 13.7,
-      "observed_class": "Poor",
-      "label_status": "final",
-      "bite_score": 78.6,
-      "baseline_clim_score": 63.7,
-      "baseline_enso_score": 67.6
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "kelp_nearshore",
-      "species_id": "barracuda",
-      "lead_days": 24,
-      "observed_score": 100.0,
-      "observed_class": "Excellent",
-      "label_status": "final",
-      "bite_score": 91.8,
-      "baseline_clim_score": 67.4,
-      "baseline_enso_score": 70.6
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "kelp_nearshore",
-      "species_id": "bonito",
-      "lead_days": 24,
-      "observed_score": 98.2,
-      "observed_class": "Excellent",
-      "label_status": "final",
-      "bite_score": 97.8,
-      "baseline_clim_score": 68.8,
-      "baseline_enso_score": 74.2
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "kelp_nearshore",
-      "species_id": "calico_bass",
-      "lead_days": 24,
-      "observed_score": 80.1,
-      "observed_class": "Very Good",
-      "label_status": "final",
-      "bite_score": 90.2,
-      "baseline_clim_score": 68.8,
-      "baseline_enso_score": 70.9
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "kelp_nearshore",
-      "species_id": "rockfish",
-      "lead_days": 24,
-      "observed_score": 48.8,
-      "observed_class": "Fair",
-      "label_status": "final",
-      "bite_score": 80.0,
-      "baseline_clim_score": 67.8,
-      "baseline_enso_score": 63.6
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "kelp_nearshore",
-      "species_id": "sand_bass",
-      "lead_days": 24,
-      "observed_score": 92.4,
-      "observed_class": "Excellent",
-      "label_status": "final",
-      "bite_score": 86.4,
-      "baseline_clim_score": 65.3,
-      "baseline_enso_score": 68.3
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "kelp_nearshore",
-      "species_id": "sheephead",
-      "lead_days": 24,
-      "observed_score": 92.2,
-      "observed_class": "Excellent",
-      "label_status": "final",
-      "bite_score": 83.9,
-      "baseline_clim_score": 68.5,
-      "baseline_enso_score": 68.5
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "kelp_nearshore",
-      "species_id": "yellowtail",
-      "lead_days": 24,
-      "observed_score": 69.3,
-      "observed_class": "Good",
-      "label_status": "final",
-      "bite_score": 95.6,
-      "baseline_clim_score": 67.4,
-      "baseline_enso_score": 72.7
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "offshore_banks",
-      "species_id": "bonito",
-      "lead_days": 24,
-      "observed_score": 0.0,
-      "observed_class": "Poor",
-      "label_status": "final",
-      "bite_score": 95.2,
-      "baseline_clim_score": 68.5,
-      "baseline_enso_score": 71.8
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "offshore_banks",
-      "species_id": "dorado",
-      "lead_days": 24,
-      "observed_score": 100.0,
-      "observed_class": "Excellent",
-      "label_status": "final",
-      "bite_score": 97.2,
-      "baseline_clim_score": 60.6,
-      "baseline_enso_score": 67.1
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "offshore_banks",
-      "species_id": "yellowfin_tuna",
-      "lead_days": 24,
-      "observed_score": 100.0,
-      "observed_class": "Excellent",
-      "label_status": "final",
-      "bite_score": 98.1,
-      "baseline_clim_score": 68.2,
-      "baseline_enso_score": 74.2
-    },
-    {
-      "target_date": "2026-09-21",
-      "region_id": "offshore_banks",
-      "species_id": "yellowtail",
-      "lead_days": 24,
-      "observed_score": 2.0,
-      "observed_class": "Poor",
-      "label_status": "final",
-      "bite_score": 90.8,
-      "baseline_clim_score": 67.2,
-      "baseline_enso_score": 70.4
-    },
     {
       "target_date": "2026-09-22",
       "region_id": "extended_offshore",
@@ -5620,7 +5428,7 @@
       "observed_score": 0.0,
       "observed_class": "Poor",
       "label_status": "final",
-      "bite_score": 45.6,
+      "bite_score": 45.5,
       "baseline_clim_score": 60.9,
       "baseline_enso_score": 59.4
     },
@@ -12277,7 +12085,7 @@
       "region_id": "kelp_nearshore",
       "species_id": "bonito",
       "lead_days": 1,
-      "observed_score": 91.0,
+      "observed_score": 90.7,
       "observed_class": "Excellent",
       "label_status": "provisional",
       "bite_score": 70.6,
@@ -12289,7 +12097,7 @@
       "region_id": "kelp_nearshore",
       "species_id": "calico_bass",
       "lead_days": 1,
-      "observed_score": 66.6,
+      "observed_score": 66.2,
       "observed_class": "Good",
       "label_status": "provisional",
       "bite_score": 63.0,
@@ -12301,7 +12109,7 @@
       "region_id": "kelp_nearshore",
       "species_id": "rockfish",
       "lead_days": 1,
-      "observed_score": 47.0,
+      "observed_score": 46.5,
       "observed_class": "Fair",
       "label_status": "provisional",
       "bite_score": 20.1,
@@ -12313,7 +12121,7 @@
       "region_id": "kelp_nearshore",
       "species_id": "sand_bass",
       "lead_days": 1,
-      "observed_score": 77.8,
+      "observed_score": 77.2,
       "observed_class": "Very Good",
       "label_status": "provisional",
       "bite_score": 55.7,
@@ -12337,7 +12145,7 @@
       "region_id": "kelp_nearshore",
       "species_id": "yellowtail",
       "lead_days": 1,
-      "observed_score": 99.2,
+      "observed_score": 98.8,
       "observed_class": "Excellent",
       "label_status": "provisional",
       "bite_score": 61.1,

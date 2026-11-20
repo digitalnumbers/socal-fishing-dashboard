@@ -1,14 +1,32 @@
 {
-  "collected_at_utc": "2026-11-19T22:42:54Z",
+  "collected_at_utc": "2026-11-20T22:17:29Z",
   "sources": [
     {
-      "url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-19",
+      "url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-20",
       "name": "San Diego Fish Reports dock totals",
       "fetched_ok": true,
       "notes": "parsed as report date 2026-11-19"
     }
   ],
   "reports": [
+    {
+      "date": "2026-11-19",
+      "landing": "Fishermans",
+      "boat": "Dolphin Fisherman's Landing San Diego, CA",
+      "trip_type": "three_quarter_day",
+      "trip_type_raw": "3/4 Day",
+      "anglers": 12,
+      "zone_hint": "offshore",
+      "catch": {
+        "sand_bass": 4,
+        "yellowtail": 5,
+        "bonito": 40,
+        "yellowfin_tuna": 15
+      },
+      "released": {},
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-20",
+      "raw_text": "Dolphin Fisherman's Landing San Diego, CA | 12 Anglers 3/4 Day | 4 Sand Bass, 5 Yellowtail (up to 25 pounds), 40 Bonito, 4 Skipjack Tuna, 15 Yellowfin Tuna"
+    },
     {
       "date": "2026-11-19",
       "landing": "Seaforth",
@@ -24,7 +42,7 @@
         "yellowfin_tuna": 6
       },
       "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-19",
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-20",
       "raw_text": "Sea Watch Seaforth Sportfishing San Diego, CA | 27 Anglers 1/2 Day AM | 3 Sand Bass, 7 Barracuda, 1 Whitefish, 6 Bonito, 6 Yellowfin Tuna"
     },
     {
@@ -41,7 +59,7 @@
         "yellowfin_tuna": 92
       },
       "released": {},
-      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-19",
+      "source_url": "https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-20",
       "raw_text": "Pacific Voyager Seaforth Sportfishing San Diego, CA | 13 Anglers 3 Day | 1 Swordfish, 1 Yellowtail, 70 Dorado, 3 Wahoo, 92 Yellowfin Tuna"
     }
   ],
