@@ -1,1 +1,1 @@
-https://ftp.cpc.ncep.noaa.gov/GIS/us_tempprcpfcst/wk34temp_20261113.zip
+https://ftp.cpc.ncep.noaa.gov/GIS/us_tempprcpfcst/wk34temp_20261120.zip
