@@ -2519,3 +2519,12 @@ date,landing,boat,trip_type,anglers,species_id,kept,released,zone_hint,source_ur
 2026-11-23,Seaforth,Sea Watch,three_quarter_day,36,bonito,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-23,0.75,0.027777777777777776,0.037037037037037035
 2026-11-23,Seaforth,Sea Watch,three_quarter_day,36,yellowfin_tuna,115,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-23,0.75,3.1944444444444446,4.2592592592592595
 2026-11-23,Seaforth,San Diego,full_day,35,yellowfin_tuna,160,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-23,1.0,4.571428571428571,4.571428571428571
+2026-11-24,H&M,"Pronto Oceanside Sea Center Oceanside, CA",half_day,12,yellowfin_tuna,30,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-24,0.5,2.5,5.0
+2026-11-24,Point Loma,Daily Double,half_day,40,dorado,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-24,0.5,0.025,0.05
+2026-11-24,Point Loma,Daily Double,half_day,40,bonito,4,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-24,0.5,0.1,0.2
+2026-11-24,Point Loma,Daily Double,half_day,40,rockfish,12,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-24,0.5,0.3,0.6
+2026-11-24,Point Loma,Daily Double,half_day,40,yellowfin_tuna,4,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-24,0.5,0.1,0.2
+2026-11-24,Point Loma,,half_day,22,yellowfin_tuna,25,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-24,0.5,1.1363636363636365,2.272727272727273
+2026-11-24,Seaforth,New,half_day,54,bonito,11,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-24,0.5,0.2037037037037037,0.4074074074074074
+2026-11-24,Seaforth,New,half_day,54,yellowfin_tuna,85,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-24,0.5,1.5740740740740742,3.1481481481481484
+2026-11-24,Seaforth,Sea Watch,half_day,22,yellowfin_tuna,36,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-24,0.5,1.6363636363636365,3.272727272727273
