@@ -2548,3 +2548,16 @@ date,landing,boat,trip_type,anglers,species_id,kept,released,zone_hint,source_ur
 2026-11-25,Seaforth,Sea Watch,three_quarter_day,35,yellowfin_tuna,126,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-26,0.75,3.6,4.8
 2026-11-25,Seaforth,San Diego,full_day,36,dorado,1,0,point loma kelp,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-26,1.0,0.027777777777777776,0.027777777777777776
 2026-11-25,Seaforth,San Diego,full_day,36,yellowfin_tuna,150,0,point loma kelp,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-26,1.0,4.166666666666667,4.166666666666667
+2026-11-27,H&M,Premier,half_day,55,sand_bass,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,0.01818181818181818,0.03636363636363636
+2026-11-27,H&M,Premier,half_day,55,yellowtail,2,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,0.03636363636363636,0.07272727272727272
+2026-11-27,H&M,Premier,half_day,55,bonito,11,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,0.2,0.4
+2026-11-27,H&M,Premier,half_day,55,rockfish,5,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,0.09090909090909091,0.18181818181818182
+2026-11-27,H&M,"Pronto Oceanside Sea Center Oceanside, CA",half_day,7,sand_bass,8,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,1.1428571428571428,2.2857142857142856
+2026-11-27,H&M,"Pronto Oceanside Sea Center Oceanside, CA",half_day,7,barracuda,2,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,0.2857142857142857,0.5714285714285714
+2026-11-27,H&M,"Pronto Oceanside Sea Center Oceanside, CA",half_day,7,yellowtail,2,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,0.2857142857142857,0.5714285714285714
+2026-11-27,H&M,"Pronto Oceanside Sea Center Oceanside, CA",half_day,7,calico_bass,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,0.14285714285714285,0.2857142857142857
+2026-11-27,H&M,"Pronto Oceanside Sea Center Oceanside, CA",half_day,7,bonito,2,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,0.2857142857142857,0.5714285714285714
+2026-11-27,Seaforth,New,half_day,55,sand_bass,2,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,0.03636363636363636,0.07272727272727272
+2026-11-27,Seaforth,New,half_day,55,calico_bass,16,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,0.2909090909090909,0.5818181818181818
+2026-11-27,Seaforth,New,half_day,55,bonito,1,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,0.01818181818181818,0.03636363636363636
+2026-11-27,Seaforth,Sea Watch,half_day,24,yellowfin_tuna,11,0,offshore,https://www.sandiegofishreports.com/dock_totals/boats.php?date=2026-11-27,0.5,0.4583333333333333,0.9166666666666666
