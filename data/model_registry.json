@@ -243,14 +243,14 @@
       },
       "changes": "Initial production model, preserved unchanged as champion Model v1.",
       "latest_performance_summary": {
-        "as_of": "2026-11-25",
+        "as_of": "2026-11-26",
         "short_0_7": {
           "n_pairs": 4467,
           "n_target_dates": 56,
           "sample_flag": "reportable",
           "exact_hit": 0.2124,
           "within_one": 0.5422,
-          "mae": 35.77,
+          "mae": 35.72,
           "brier": 0.3169,
           "brier_skill_vs_clim": 0.04
         },
@@ -260,7 +260,7 @@
           "sample_flag": "reportable",
           "exact_hit": 0.1432,
           "within_one": 0.3906,
-          "mae": 43.04,
+          "mae": 42.95,
           "brier": 0.3604,
           "brier_skill_vs_clim": -0.1954
         }
@@ -323,14 +323,14 @@
       },
       "changes": "Reference baseline.",
       "latest_performance_summary": {
-        "as_of": "2026-11-25",
+        "as_of": "2026-11-26",
         "short_0_7": {
           "n_pairs": 4467,
           "n_target_dates": 56,
           "sample_flag": "reportable",
           "exact_hit": 0.1359,
-          "within_one": 0.4332,
-          "mae": 37.81,
+          "within_one": 0.4347,
+          "mae": 37.75,
           "brier": 0.3301,
           "brier_skill_vs_clim": 0.0
         },
@@ -339,8 +339,8 @@
           "n_target_dates": 65,
           "sample_flag": "reportable",
           "exact_hit": 0.1527,
-          "within_one": 0.4698,
-          "mae": 38.18,
+          "within_one": 0.4723,
+          "mae": 38.09,
           "brier": 0.3015,
           "brier_skill_vs_clim": 0.0
         }
@@ -401,14 +401,14 @@
       },
       "changes": "Reference baseline.",
       "latest_performance_summary": {
-        "as_of": "2026-11-25",
+        "as_of": "2026-11-26",
         "short_0_7": {
           "n_pairs": 4467,
           "n_target_dates": 56,
           "sample_flag": "reportable",
           "exact_hit": 0.1312,
-          "within_one": 0.4368,
-          "mae": 37.53,
+          "within_one": 0.4383,
+          "mae": 37.47,
           "brier": 0.3262,
           "brier_skill_vs_clim": 0.0118
         },
@@ -417,8 +417,8 @@
           "n_target_dates": 65,
           "sample_flag": "reportable",
           "exact_hit": 0.1433,
-          "within_one": 0.4598,
-          "mae": 37.9,
+          "within_one": 0.4622,
+          "mae": 37.81,
           "brier": 0.2979,
           "brier_skill_vs_clim": 0.0119
         }
@@ -475,14 +475,14 @@
       },
       "changes": "Recalibrates v1's score scale (v1 runs high: Good-or-better is over-called in late summer).",
       "latest_performance_summary": {
-        "as_of": "2026-11-25",
+        "as_of": "2026-11-26",
         "short_0_7": {
           "n_pairs": 4467,
           "n_target_dates": 56,
           "sample_flag": "reportable",
           "exact_hit": 0.2169,
-          "within_one": 0.5834,
-          "mae": 32.21,
+          "within_one": 0.585,
+          "mae": 32.15,
           "brier": 0.26,
           "brier_skill_vs_clim": 0.2124
         },
@@ -490,9 +490,9 @@
           "n_pairs": 9218,
           "n_target_dates": 65,
           "sample_flag": "reportable",
-          "exact_hit": 0.1929,
+          "exact_hit": 0.1954,
           "within_one": 0.592,
-          "mae": 35.36,
+          "mae": 35.27,
           "brier": 0.2639,
           "brier_skill_vs_clim": 0.1247
         }
